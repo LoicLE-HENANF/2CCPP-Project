@@ -3,7 +3,7 @@
 //
 
 #include "../headers/Board.h"
-#include "assert.h"
+#include <cassert>
 
 // Cell implementation
 Board::Cell::Cell()
@@ -28,12 +28,11 @@ Color Board::Cell::GetColor() const {
 }
 
 // Board implementation
-Board::Board(int windowX, int windowY, int width, int height, int cellSize, int padding)
+Board::Board(Vec2<int> screenPos, Vec2<int> size, int cellSize, int padding)
     :
-    windowX(windowX),
-    windowY(windowY),
-    width(width),
-    height(height),
+    screenPos(screenPos),
+    width(size.GetX()),
+    height(size.GetY()),
     cellSize(cellSize),
     padding(padding)
 {
@@ -42,27 +41,33 @@ Board::Board(int windowX, int windowY, int width, int height, int cellSize, int 
     cells.resize(width*height);
 }
 
-void Board::SetCell(int x, int y, Color c) {
-    assert(x >= 0 && y >= 0 && x<width && y < height); // If assertion triggers : x or y is out of bounds
-    cells[y * width + x].SetColor(c);
+void Board::SetCell(Vec2<int> position, Color c) {
+    assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
+    cells[position.GetY() * width + position.GetX()].SetColor(c);
 }
 
-void Board::DrawCell(int x, int y) const {
-    assert(x >= 0 && y >= 0 && x<width && y < height); // If assertion triggers : x or y is out of bounds
-    Color c = cells[y * width + x].GetColor();
-    // here can use DrawRectangleV with Vector2 from raylib or create our own class because Vec2 from raylib is very poor (just 2 float and that's it
-    DrawRectangle(windowX + x * cellSize + padding,
-                  windowY + y * cellSize + padding,
-                  cellSize - padding,
-                  cellSize - padding,
+void Board::DrawCell(Vec2<int> position) const {
+    assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
+    Color c = cells[position.GetY() * width + position.GetX()].GetColor();
+    Vec2<int> origin = screenPos + padding + (position * cellSize);
+    ray::DrawRectangle(origin,
+                  Vec2<int>{cellSize, cellSize} - padding,
                   c);
+}
+
+void Board::DrawBorder() const {
+    ray::DrawRectangleLinesEx(screenPos - (cellSize/2),
+                              Vec2{width*cellSize, height*cellSize} + cellSize,
+                              cellSize/2,
+                              WHITE);
 }
 
 void Board::Draw() const {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-            DrawCell(x, y);
+            DrawCell(Vec2<int>{x, y});
         }
     }
+    DrawBorder();
 
 }

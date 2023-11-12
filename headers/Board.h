@@ -5,8 +5,9 @@
 #ifndef INC_2CCPP_PROJECT_BOARD_H
 #define INC_2CCPP_PROJECT_BOARD_H
 
-#include "raylib.h"
-#include "vector"
+#include <vector>
+#include "raylibWrapper.h"
+#include "Vec2.h"
 
 class Board {
 private:
@@ -23,15 +24,15 @@ private:
             Color c;
             };
 public:
-    Board(int windowX, int windowY, int width, int height, int cellSize, int padding);
+    Board(Vec2<int> screenPos, Vec2<int> size, int cellSize, int padding);
 
-    void SetCell(int x, int y, Color c);
-    void DrawCell(int x, int y) const;
+    void SetCell(Vec2<int> position, Color c);
+    void DrawCell(Vec2<int> position) const;
+    void DrawBorder() const;
     void Draw() const;
 private:
     std::vector<Cell> cells;
-    int windowX;
-    int windowY;
+    Vec2<int> screenPos;
     const int width;
     const int height;
     const int padding;
