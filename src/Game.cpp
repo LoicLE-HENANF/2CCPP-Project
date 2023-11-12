@@ -8,14 +8,14 @@
 
 Game::Game(int width, int height, int fps, const std::string& title)
     :
-    board(200,200,10,20,15,2)
+    board(Vec2<int>{200, 200}, Vec2<int>{20, 20},15,2)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
     for (int y = 0; y < 20; ++y) {
-        for (int x = 0; x < 10; ++x) {
-            board.SetCell(x, y, RED);
+        for (int x = 0; x < 20; ++x) {
+            board.SetCell(Vec2<int>{x, y}, BROWN);
         }
     }
 
