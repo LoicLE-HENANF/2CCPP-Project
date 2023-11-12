@@ -8,7 +8,7 @@
 
 Game::Game(int width, int height, int fps, const std::string& title)
     :
-    board(200,200,10,20,15)
+    board(200,200,10,20,15,2)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(fps);
