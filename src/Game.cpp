@@ -13,12 +13,6 @@ Game::Game(int width, int height, int fps, const std::string& title)
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
-    for (int y = 0; y < 20; ++y) {
-        for (int x = 0; x < 20; ++x) {
-            board.SetCell(Vec2<int>{x, y}, BROWN);
-        }
-    }
-
 }
 
 Game::~Game() noexcept {

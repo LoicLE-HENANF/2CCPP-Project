@@ -16,9 +16,11 @@ private:
             {
         public:
             Cell();
+            void Remove();
             void SetColor(Color color);
             Color GetColor() const;
-            void Remove();
+            bool Exists() const;
+
         private:
             bool exists;
             Color c;
@@ -30,6 +32,7 @@ public:
     void DrawCell(Vec2<int> position) const;
     void DrawBorder() const;
     void Draw() const;
+    bool CellExists(Vec2<int> position) const;
 private:
     std::vector<Cell> cells;
     Vec2<int> screenPos;
