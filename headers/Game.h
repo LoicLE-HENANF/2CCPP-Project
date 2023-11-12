@@ -6,10 +6,11 @@
 #define INC_2CCPP_PROJECT_GAME_H
 
 #include <string>
+#include "Board.h"
 
 class Game {
 public:
-    Game(int width, int height, const std::string& title);
+    Game(int width, int height, int fps, const std::string& title);
     ~Game() noexcept; // noexcept to avoid stack unwinding
     Game(const Game& other) = delete; //copy constructor deleted
     Game& operator=(const Game& other) = delete; //copy assignment deleted
@@ -23,6 +24,8 @@ public:
 private:
     void Draw();
     void Update();
+
+    Board board;
 
 };
 
