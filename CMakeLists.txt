@@ -37,8 +37,12 @@ endif ()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} main.cpp src/Game.cpp src/ThreadHandler.cpp src/Board.cpp src/Player.cpp src/RaylibWrapper.cpp headers/IState.h headers/GameState.h src/GameStates.cpp)
+include_directories(${PROJECT_SOURCE_DIR}/headers/)
+add_subdirectory(src)
+
+add_executable(${PROJECT_NAME} main.cpp ${SRC})
 set(raylib_VERBOSE 1)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib -static) # -static to make the compiler add the missing dll libraries !!
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 

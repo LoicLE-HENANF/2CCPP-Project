@@ -3,8 +3,8 @@
 //
 
 #include "../headers/Board.h"
-#include "../headers/Settings.h"
-#include "../headers/raylibWrapper.h"
+using namespace settings;
+#include "RaylibWrapper.cpp"
 #include <cassert>
 
 using namespace GameEngine;
