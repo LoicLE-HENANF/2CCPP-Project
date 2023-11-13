@@ -27,8 +27,8 @@ endif()
 # Our Project
 
 add_executable(${PROJECT_NAME} main.cpp src/Game.cpp src/ThreadHandler.cpp src/Board.cpp src/Player.cpp src/RaylibWrapper.cpp)
-#set(raylib_VERBOSE 1)
-target_link_libraries(${PROJECT_NAME} raylib)
+set(raylib_VERBOSE 1)
+target_link_libraries(${PROJECT_NAME} raylib -static) # -static to make the compiler add the missing dll libraries !!
 
 # Web Configurations
 if (${PLATFORM} STREQUAL "Web")
