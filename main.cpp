@@ -1,8 +1,7 @@
-#include "headers/Game.h"
-#include "src/Game.cpp"
-
-#include "headers/Board.h"
 #include "headers/settings.h"
+#include "headers/Game.h"
+#include "headers/GameStates.h"
+
 
 int main()
 {

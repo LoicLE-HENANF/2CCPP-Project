@@ -14,7 +14,7 @@ namespace GameEngine {
     // ours:
     void DrawRectangle(Vec2<int> position, Vec2<int> size, Color color);
     //raylib function:
-    // void void DrawRectangleLinesEx(Rectangle rec, float lineThick, Color color)
+    // void DrawRectangleLinesEx(Rectangle rec, float lineThick, Color color)
     // ours:
     void DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color);
 }

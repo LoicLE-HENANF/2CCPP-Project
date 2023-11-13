@@ -5,26 +5,38 @@
 #ifndef INC_2CCPP_PROJECT_GAMESTATE_H
 #define INC_2CCPP_PROJECT_GAMESTATE_H
 
+#include <iostream>
 #include "Game.h"
-
 #include "IState.h"
-
 
 class GameState : IState {
 public:
-    explicit GameState(Game &game) : game(game){};
+    explicit GameState()= default;;
     ~GameState() override = default;
 
-    void OnEntry() override = 0;
-    void OnExit() override = 0;
+    void OnEntry() override {
+        isOpening = false;
+        std::cout << "Enterring "<< typeid(this).name() << "..." << std::endl;
+    };
+    void OnExit() override {
+        std::cout << "Exiting "<< typeid(this).name() << " ..." << std::endl;
+        isOpening = true;
+    };
+
+    static GameState* GetCurrentState(){ return currentState;};
+    bool IsOpening() const{return isOpening;};
 
     // Gamestates methods
+
+    static GameState* currentState;
+    static GameState *mainMenu, *options;
+
 private:
-    Game &game;
+    bool isOpening = true;
     virtual void Update()  = 0;
     virtual void Draw() = 0;
 public:
-    virtual void Tick() = 0;
+    virtual void Tick(){ this->Update(); this->Draw(); };
 
 
 

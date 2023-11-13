@@ -2,12 +2,15 @@
 // Created by lehen on 12/11/2023.
 //
 
+
+
 #include "../headers/Board.h"
-using namespace settings;
-#include "RaylibWrapper.cpp"
+#include "../headers/raylibWrapper.h"
+#include "../headers/settings.h"
 #include <cassert>
 
 using namespace GameEngine;
+using namespace settings;
 
 // Cell implementation
 Board::Cell::Cell()

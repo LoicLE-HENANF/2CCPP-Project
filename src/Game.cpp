@@ -4,9 +4,18 @@
 
 #include "../headers/Game.h"
 #include "raylib.h"
-#include "assert.h"
+#include <cassert>
+
 #include "../headers/settings.h"
-#include "Board.cpp"
+#include "../headers/GameStates.h"
+
+using namespace settings;
+
+// Simple Finite State Machine
+GameState * GameState::mainMenu = new MenuPrincipal();
+GameState * GameState::options = new Options();
+    // add states here first from GameStates classes
+GameState * GameState::currentState = GameState::mainMenu;
 
 Game::Game(int width, int height, int fps, const std::string& title)
     :
@@ -27,16 +36,23 @@ bool Game::GameShouldClose() const {
 }
 
 void Game::Tick() {
+
     // game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display method
     BeginDrawing();
-    Update();
-    Draw();
+//    Update();
+//    Draw();
+    if (GameState::currentState->IsOpening()){
+        GameState::currentState->OnEntry();
+    }
+    GameState::currentState->Tick();
     EndDrawing();
+
 }
 
 void Game::Draw() {
-    ClearBackground(BLACK);
-    board.Draw();
+//    ClearBackground(BLACK);
+//    board.Draw();
+
 }
 
 void Game::Update() {

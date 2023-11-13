@@ -2,17 +2,20 @@
 // Created by lehen on 13/11/2023.
 //
 
+#include <iostream>
 #include "../headers/GameStates.h"
 #include "raylib.h"
 
 // MenuPrincipal state:
-void MenuPrincipal::OnEntry() {
-    // run on entry
-}
-
-void MenuPrincipal::OnExit() {
-    // run on exit - will return or set next state
-}
+//void MenuPrincipal::OnEntry() {
+//    // run on entry
+//    std::cout << "Entering main menu..." << std::endl;
+//
+//}
+//
+//void MenuPrincipal::OnExit() {
+//    // run on exit - will return or set next state
+//}
 
 void MenuPrincipal::Update() {
     // updating the menu logic (click etc)
@@ -20,47 +23,35 @@ void MenuPrincipal::Update() {
 
 void MenuPrincipal::Draw() {
     // drawing the menu (bouton, image, sprites, title)
+    ClearBackground(GREEN);
 }
 
-void MenuPrincipal::Tick() {
-    BeginDrawing();
-    Update();
-    Draw();
-    EndDrawing();
-}
+//// GameOption state
+//void Options::OnEntry() {
+//    // run on entry
+//    std::cout << "Entering options..." << std::endl;
+//}
+//
+//void Options::OnExit() {
+//    // run on exit - will return or set next state
+//}
 
-// GameOption state
-void GameOptions::OnEntry() {
-    // run on entry
-}
-
-void GameOptions::OnExit() {
-    // run on exit - will return or set next state
-}
-
-void GameOptions::Update() {
+void Options::Update() {
 
 }
 
-void GameOptions::Draw() {
+void Options::Draw() {
 
 }
 
-void GameOptions::Tick() {
-    BeginDrawing();
-    Update();
-    Draw();
-    EndDrawing();
-}
-
-// Playing state
-void Playing::OnEntry() {
-
-}
-
-void Playing::OnExit() {
-
-}
+//// Playing state
+//void Playing::OnEntry() {
+//
+//}
+//
+//void Playing::OnExit() {
+//
+//}
 
 void Playing::Update() {
 
@@ -68,11 +59,4 @@ void Playing::Update() {
 
 void Playing::Draw() {
 
-}
-
-void Playing::Tick() {
-    BeginDrawing();
-    Update();
-    Draw();
-    EndDrawing();
 }

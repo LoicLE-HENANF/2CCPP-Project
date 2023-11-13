@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Board.h"
+//#include "GameStatesList.h"
 
 class Game {
 
@@ -20,18 +21,12 @@ public:
 
     void Tick();
 
-
-
-
-
 private:
     void Draw();
     void Update();
 
     Board board;
-
-
-
+//    GameStatesList gameStatesList;
 };
 
 
