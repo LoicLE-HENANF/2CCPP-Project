@@ -41,3 +41,7 @@ void Game::Draw() {
 void Game::Update() {
 
 }
+
+void Game::ChangeState(Game::PlayerState nextState) {
+    currentState = nextState;
+}

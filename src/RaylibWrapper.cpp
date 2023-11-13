@@ -5,7 +5,7 @@
 #include "../headers/RaylibWrapper.h"
 #include <cassert>
 
-void ray::DrawRectangle(Vec2<int> position, Vec2<int> size, Color color)
+void GameEngine::DrawRectangle(Vec2<int> position, Vec2<int> size, Color color)
 {
     assert(position.GetX() >= 0 && position.GetY() >= 0 &&
     position.GetX() < GetScreenWidth() && position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
@@ -15,7 +15,7 @@ void ray::DrawRectangle(Vec2<int> position, Vec2<int> size, Color color)
                   size.GetY(),
                   color);
 }
-void ray::DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color)
+void GameEngine::DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color)
 {
     assert(position.GetX() >= 0 && position.GetY() >= 0 &&
            position.GetX() < GetScreenWidth() && position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen

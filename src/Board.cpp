@@ -4,7 +4,10 @@
 
 #include "../headers/Board.h"
 #include "../headers/Settings.h"
+#include "../headers/raylibWrapper.h"
 #include <cassert>
+
+using namespace GameEngine;
 
 // Cell implementation
 Board::Cell::Cell()
@@ -55,16 +58,16 @@ void Board::DrawCell(Vec2<int> position) const {
     assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
     Color c = cells[position.GetY() * width + position.GetX()].GetColor();
     Vec2<int> origin = screenPos + padding + (position * cellSize);
-    ray::DrawRectangle(origin,
+    GameEngine::DrawRectangle(origin,
                   Vec2<int>{cellSize, cellSize} - padding,
-                  c);
+                              c);
 }
 
 void Board::DrawBorder() const {
-    ray::DrawRectangleLinesEx(screenPos - (cellSize/2),
+    GameEngine::DrawRectangleLinesEx(screenPos - (cellSize / 2),
                               Vec2{width*cellSize, height*cellSize} + cellSize,
                               cellSize/2,
-                              WHITE);
+                                     WHITE);
 }
 
 void Board::Draw() const {

@@ -8,7 +8,7 @@
 #include "Vec2.h"
 #include <raylib.h>
 
-namespace ray{
+namespace GameEngine {
     //raylib function:
     // void DrawRectangle(int posX, int posY, int width, int height, Color color)
     // ours:

@@ -9,15 +9,23 @@
 #include "Board.h"
 
 class Game {
+private:
+    enum PlayerState{
+        MenuPrincipal,
+        GameOptions,
+        Playing,
+    };
 public:
     Game(int width, int height, int fps, const std::string& title);
     ~Game() noexcept; // noexcept to avoid stack unwinding
     Game(const Game& other) = delete; //copy constructor deleted
     Game& operator=(const Game& other) = delete; //copy assignment deleted
 
-    bool GameShouldClose() const;
+    [[nodiscard]] bool GameShouldClose() const;
 
     void Tick();
+
+    void ChangeState(PlayerState nextState);
 
 
 
@@ -26,6 +34,8 @@ private:
     void Update();
 
     Board board;
+
+    PlayerState currentState = PlayerState::MenuPrincipal;
 
 };
 
