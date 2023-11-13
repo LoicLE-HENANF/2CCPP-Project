@@ -6,6 +6,7 @@
 #define INC_2CCPP_PROJECT_SETTINGS_H
 
 #include "Vec2.h"
+#include <string>
 
 namespace settings
 {
@@ -20,8 +21,11 @@ namespace settings
     // Board settings
     inline constexpr int cellSize = 20;
     inline constexpr int padding = 2;
-    inline constexpr  Vec2<int> boardPosition{250, 70};
+    inline constexpr  Vec2<int> boardPosition{200, 100};
     inline constexpr  Vec2<int> boardSize{20, 20};
+
+    // Cell settings
+    inline constexpr Color cellBaseColor = BROWN;
 }
 
 #endif //INC_2CCPP_PROJECT_SETTINGS_H

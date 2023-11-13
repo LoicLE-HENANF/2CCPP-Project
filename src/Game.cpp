@@ -5,10 +5,11 @@
 #include "../headers/Game.h"
 #include "raylib.h"
 #include "assert.h"
+#include "../headers/settings.h"
 
 Game::Game(int width, int height, int fps, const std::string& title)
     :
-    board(Vec2<int>{200, 200}, Vec2<int>{20, 20},15,2)
+    board(settings::boardPosition, settings::boardSize,settings::cellSize,settings::padding)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(fps);

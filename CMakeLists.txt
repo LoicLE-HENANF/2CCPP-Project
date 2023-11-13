@@ -3,6 +3,7 @@ project(2CCPP_Project)
 
 set(CMAKE_CXX_STANDARD 17)
 
+######## RAYLIB ########
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -24,11 +25,22 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
     endif()
 endif()
 
+################## nlohmann/json ###################
+set(JSON_VERSION 3.11.2)
+find_package(nlohmann_json ${JSON_VERSION} QUIET)
+if (NOT nlohmann_json_FOUND)
+    include(FetchContent)
+
+    FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v${JSON_VERSION}/json.tar.xz)
+    FetchContent_MakeAvailable(json)
+endif ()
+
 # Our Project
 
 add_executable(${PROJECT_NAME} main.cpp src/Game.cpp src/ThreadHandler.cpp src/Board.cpp src/Player.cpp src/RaylibWrapper.cpp)
 set(raylib_VERBOSE 1)
-target_link_libraries(${PROJECT_NAME} raylib -static) # -static to make the compiler add the missing dll libraries !!
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib -static) # -static to make the compiler add the missing dll libraries !!
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 
 # Web Configurations
 if (${PLATFORM} STREQUAL "Web")
