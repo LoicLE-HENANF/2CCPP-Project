@@ -3,13 +3,14 @@
 //
 
 #include "../headers/Board.h"
+#include "../headers/Settings.h"
 #include <cassert>
 
 // Cell implementation
 Board::Cell::Cell()
     :
-    exists(false),
-    c(WHITE)
+    exists(true),
+    c(settings::cellBaseColor)
 {
 
 }
