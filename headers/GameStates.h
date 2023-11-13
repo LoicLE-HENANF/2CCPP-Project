@@ -9,36 +9,37 @@
 #include "GameState.h"
 
 
-class MenuPrincipal: GameState {
+class MenuPrincipal: public GameState {
 public:
-    explicit MenuPrincipal(Game &game) : GameState(game) {}
+    explicit MenuPrincipal() = default;
 
-    void OnEntry() override;
-    void OnExit() override;
-    void Tick() override;
+//    void OnEntry() override;
+//    void OnExit() override;
 private:
     void Update() override;
     void Draw() override;
 };
 
-class GameOptions: GameState {
-    explicit GameOptions(Game &game) : GameState(game) {}
+class Options: public GameState {
+public:
+    explicit Options()= default;
 
-    void OnEntry() override;
-    void OnExit() override;
+//    void OnEntry() override;
+//    void OnExit() override;
+private:
     void Update() override;
     void Draw() override;
-    void Tick() override;
 };
 
-class Playing: GameState {
-    explicit Playing(Game &game) : GameState(game) {}
+class Playing: public GameState {
+public:
+    explicit Playing()= default;
 
-    void OnEntry() override;
-    void OnExit() override;
+//    void OnEntry() override;
+//    void OnExit() override;
+private:
     void Update() override;
     void Draw() override;
-    void Tick() override;
 };
 
 
