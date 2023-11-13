@@ -58,18 +58,20 @@ add_executable(${PROJECT_NAME} main.cpp
 
 set(raylib_VERBOSE 1)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib -static) # -static to make the compiler add the missing dll libraries !!
-target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
-
-# Web Configurations
-if (${PLATFORM} STREQUAL "Web")
-    # Tell Emscripten to build an example.html file.
-    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
-endif()
-
+if (WIN32)
+target_link_libraries(${PROJECT_NAME} raylib -static) # -static to make the compiler add the missing dll libraries !!
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
+elseif(APPLE)
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
-if (APPLE)
+    target_link_libraries(${PROJECT_NAME} raylib) # -static to make the compiler add the missing dll libraries !!
+    target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
+
+# Web Configurations
+#if (${PLATFORM} STREQUAL "Web")
+#    # Tell Emscripten to build an example.html file.
+#    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+#endif()
