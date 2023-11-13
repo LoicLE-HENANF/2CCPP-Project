@@ -7,6 +7,7 @@
 
 #include "Vec2.h"
 #include <string>
+#include "raylib.h"
 
 namespace settings
 {
@@ -26,6 +27,13 @@ namespace settings
 
     // Cell settings
     inline constexpr Color cellBaseColor = BROWN;
+
+    // GameStates
+    inline constexpr int MENU_PRINCIPAL_STATE = 0;
+    inline constexpr int PLAYING_STATE = 1;
+    inline constexpr int GAME_OPTIONS_STATE = 2;
+    inline constexpr int MENU_STATE = 3;
+    inline constexpr int MENU_STATE2 = 4;
 }
 
 #endif //INC_2CCPP_PROJECT_SETTINGS_H

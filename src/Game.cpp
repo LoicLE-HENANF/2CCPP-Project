@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "assert.h"
 #include "../headers/settings.h"
+#include "Board.cpp"
 
 Game::Game(int width, int height, int fps, const std::string& title)
     :
