@@ -9,12 +9,7 @@
 #include "Board.h"
 
 class Game {
-private:
-    enum PlayerState{
-        MenuPrincipal,
-        GameOptions,
-        Playing,
-    };
+
 public:
     Game(int width, int height, int fps, const std::string& title);
     ~Game() noexcept; // noexcept to avoid stack unwinding
@@ -25,7 +20,7 @@ public:
 
     void Tick();
 
-    void ChangeState(PlayerState nextState);
+
 
 
 
@@ -35,7 +30,7 @@ private:
 
     Board board;
 
-    PlayerState currentState = PlayerState::MenuPrincipal;
+
 
 };
 

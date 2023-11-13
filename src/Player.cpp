@@ -3,11 +3,4 @@
 //
 
 #include "../headers/Player.h"
-#include "vector"
-Player::Player() {
 
-}
-
-Player::~Player() {
-
-}

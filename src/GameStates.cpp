@@ -15,11 +15,11 @@ void MenuPrincipal::OnExit() {
 }
 
 void MenuPrincipal::Update() {
-    // updating the menu logic
+    // updating the menu logic (click etc)
 }
 
 void MenuPrincipal::Draw() {
-    // drawing the menu
+    // drawing the menu (bouton, image, sprites, title)
 }
 
 void MenuPrincipal::Tick() {
@@ -47,7 +47,10 @@ void GameOptions::Draw() {
 }
 
 void GameOptions::Tick() {
-
+    BeginDrawing();
+    Update();
+    Draw();
+    EndDrawing();
 }
 
 // Playing state
@@ -68,5 +71,8 @@ void Playing::Draw() {
 }
 
 void Playing::Tick() {
-
+    BeginDrawing();
+    Update();
+    Draw();
+    EndDrawing();
 }

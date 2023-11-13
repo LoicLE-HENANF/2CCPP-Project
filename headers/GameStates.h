@@ -5,11 +5,13 @@
 #ifndef INC_2CCPP_PROJECT_GAMESTATES_H
 #define INC_2CCPP_PROJECT_GAMESTATES_H
 
+#include "Game.h"
 #include "GameState.h"
+
 
 class MenuPrincipal: GameState {
 public:
-    MenuPrincipal(Game &game) : GameState(game) {}
+    explicit MenuPrincipal(Game &game) : GameState(game) {}
 
     void OnEntry() override;
     void OnExit() override;
@@ -20,7 +22,7 @@ private:
 };
 
 class GameOptions: GameState {
-    GameOptions(Game &game) : GameState(game) {}
+    explicit GameOptions(Game &game) : GameState(game) {}
 
     void OnEntry() override;
     void OnExit() override;
@@ -30,7 +32,7 @@ class GameOptions: GameState {
 };
 
 class Playing: GameState {
-    Playing(Game &game) : GameState(game) {}
+    explicit Playing(Game &game) : GameState(game) {}
 
     void OnEntry() override;
     void OnExit() override;
