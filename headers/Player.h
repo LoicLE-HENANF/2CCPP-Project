@@ -8,13 +8,15 @@
 #include "raylib.h"
 #include <string>
 
+// Our player class
 class Player {
 private:
     std::string name;
-    Color color;
+    Color color{};
+
 public:
-    Player();
-    ~Player();
+    Player() = default;
+    ~Player() = default;
     Player(const Player& other) = delete; //copy constructor deleted
     Player& operator=(const Player& other) = delete; //copy assignment deleted
 

@@ -4,12 +4,15 @@
 
 #ifndef INC_2CCPP_PROJECT_GAMESTATE_H
 #define INC_2CCPP_PROJECT_GAMESTATE_H
-#include "IState.h"
+
 #include "Game.h"
+
+#include "IState.h"
+
 
 class GameState : IState {
 public:
-    explicit GameState(Game &game) : game(game) {};
+    explicit GameState(Game &game) : game(game){};
     ~GameState() override = default;
 
     void OnEntry() override = 0;
@@ -17,7 +20,7 @@ public:
 
     // Gamestates methods
 private:
-    Game& game;
+    Game &game;
     virtual void Update()  = 0;
     virtual void Draw() = 0;
 public:
