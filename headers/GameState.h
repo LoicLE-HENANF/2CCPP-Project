@@ -14,17 +14,12 @@ public:
     explicit GameState()= default;;
     ~GameState() override = default;
 
-    void OnEntry() override {
-        isOpening = false;
-        std::cout << "Enterring "<< typeid(this).name() << "..." << std::endl;
-    };
-    void OnExit() override {
-        std::cout << "Exiting "<< typeid(this).name() << " ..." << std::endl;
-        isOpening = true;
-    };
+    void OnEntry() override = 0;
+    void OnExit() override = 0;
 
     static GameState* GetCurrentState(){ return currentState;};
-    bool IsOpening() const{return isOpening;};
+    bool IsOpening() const{ return isOpening; };
+    void OpenClose() { isOpening = !isOpening; };
 
     // Gamestates methods
 

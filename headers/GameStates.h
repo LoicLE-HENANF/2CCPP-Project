@@ -13,8 +13,8 @@ class MenuPrincipal: public GameState {
 public:
     explicit MenuPrincipal() = default;
 
-//    void OnEntry() override;
-//    void OnExit() override;
+    void OnEntry() override;
+    void OnExit() override;
 private:
     void Update() override;
     void Draw() override;
@@ -24,8 +24,8 @@ class Options: public GameState {
 public:
     explicit Options()= default;
 
-//    void OnEntry() override;
-//    void OnExit() override;
+    void OnEntry() override;
+    void OnExit() override;
 private:
     void Update() override;
     void Draw() override;
@@ -35,8 +35,8 @@ class Playing: public GameState {
 public:
     explicit Playing()= default;
 
-//    void OnEntry() override;
-//    void OnExit() override;
+    void OnEntry() override;
+    void OnExit() override;
 private:
     void Update() override;
     void Draw() override;
