@@ -7,25 +7,24 @@
 
 #include <string>
 #include "Board.h"
+#include "GameState.h"
 //#include "GameStatesList.h"
 
 class Game {
 
 public:
-    Game(int width, int height, int fps, const std::string& title);
+    Game(int width, int height, int fps, const std::string &title);
     ~Game() noexcept; // noexcept to avoid stack unwinding
     Game(const Game& other) = delete; //copy constructor deleted
     Game& operator=(const Game& other) = delete; //copy assignment deleted
 
-    [[nodiscard]] bool GameShouldClose() const;
+    [[nodiscard]] static bool GameShouldClose() ;
 
     void Tick();
 
 private:
     void Draw();
     void Update();
-
-    Board board;
 //    GameStatesList gameStatesList;
 };
 

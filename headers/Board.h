@@ -26,7 +26,10 @@ private:
             Color c;
             };
 public:
+    Board(): width(0), height(0), padding(0), cellSize(0){};
     Board(Vec2<int> screenPos, Vec2<int> size, int cellSize, int padding);
+
+    Board& operator=(const Board& other){ return *this;}
 
     void SetCell(Vec2<int> position, Color c);
     void DrawCell(Vec2<int> position) const;
@@ -35,7 +38,7 @@ public:
     bool CellExists(Vec2<int> position) const;
 private:
     std::vector<Cell> cells;
-    Vec2<int> screenPos;
+    Vec2<int> screenPos{};
     const int width;
     const int height;
     const int padding;
