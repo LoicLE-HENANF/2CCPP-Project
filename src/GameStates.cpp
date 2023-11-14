@@ -7,24 +7,24 @@
 #include "raylib.h"
 
 // MenuPrincipal state:
-void MenuPrincipal::OnEntry() {
+void MainMenu::OnEntry() {
     // run on entry
     OpenClose();
     std::cout << "Entering main menu..." << std::endl;
 
 }
 
-void MenuPrincipal::OnExit() {
+void MainMenu::OnExit() {
     // run on exit - will return or set next state
     OpenClose();
     std::cout << "Exiting main menu..." << std::endl;
 }
 
-void MenuPrincipal::Update() {
+void MainMenu::Update() {
     // updating the menu logic (click etc)
 }
 
-void MenuPrincipal::Draw() {
+void MainMenu::Draw() {
     // drawing the menu (bouton, image, sprites, title)
     ClearBackground(GREEN);
 }
