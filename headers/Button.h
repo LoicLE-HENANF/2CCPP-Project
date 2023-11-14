@@ -6,13 +6,15 @@
 #define INC_2CCPP_PROJECT_BUTTON_H
 
 
+#include <utility>
+
 #include "Vec2.h"
 #include "GameState.h"
 
 class Button {
 public:
     Button(Vec2<int> buttonPos, Vec2<int> buttonSize, std::string text, Color color) :
-        text(text),
+        text(std::move(text)),
         color(color),
         buttonPos(buttonPos),
         buttonSize(buttonSize)
