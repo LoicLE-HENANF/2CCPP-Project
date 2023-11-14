@@ -54,7 +54,9 @@ add_executable(${PROJECT_NAME} main.cpp
         src/ThreadHandler.cpp
         src/RaylibWrapper.cpp
         src/Board.cpp
-        headers/Tile.h)
+        headers/Tile.h
+        src/Tile.cpp
+)
 
 
 set(raylib_VERBOSE 1)
