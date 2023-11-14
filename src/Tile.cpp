@@ -10,7 +10,7 @@ Tile::Tile(const bool *shape, int dimension, Color color, const Board &board) :
         shape(shape),
         dimension(dimension),
         color(color),
-        boardPosition(board.GetPosition),
+        boardPosition(board.GetBoardPos()),
         board(board)
 {
 
