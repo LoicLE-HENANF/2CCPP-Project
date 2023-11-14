@@ -55,8 +55,7 @@ add_executable(${PROJECT_NAME} main.cpp
         src/RaylibWrapper.cpp
 
         src/Board.cpp 
-        src/Button.cpp)
-
+        src/Button.cpp
         headers/Tile.h
         src/Tile.cpp
 )
