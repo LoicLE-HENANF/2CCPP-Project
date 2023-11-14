@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "GameState.h"
 #include "Settings.h"
+#include "Button.h"
 
 
 class MainMenu: public GameState {
@@ -25,6 +26,13 @@ private:
     Vec2<int> playButtonPos = {
             (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
             (settings::screenHeight / 2) - (buttonSize.GetY() / 2)
+    };
+    Button playButton{
+        playButtonPos,
+        buttonSize,
+        "Play",
+        RED,
+        GameState::playing,
     };
     Vec2<int> optionsButtonPos = {
 
