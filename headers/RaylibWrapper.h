@@ -19,6 +19,8 @@ namespace GameEngine {
     void DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color);
 
     Vec2<int> GetMousePosition();
+
+    bool CheckCollisionPointRec(Vec2<int> point, Vec2<int> position, Vec2<int> size);
 }
 
 
