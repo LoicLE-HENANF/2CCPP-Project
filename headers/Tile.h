@@ -11,11 +11,11 @@
 
 class Tile {
 public:
-    Tile(const bool* shape, int dimension, Color color, const Board& board);
+    Tile(const int* shape, int dimension, Color color, const Board& board);
     void Draw() const; // fonction qui appelera DrawCell de board
 private:
     Vec2<int> boardPosition;
-    const bool* shape;
+    const int* shape;
     const int dimension;
     const Color color;
     const Board& board;
