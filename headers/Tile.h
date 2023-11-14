@@ -473,4 +473,84 @@ private:
     static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
 };
 
+class Tile43 : public Tile{
+public:
+Tile43(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,
+                                1,0,0,0,
+                                1,1,1,1,
+                                0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile44 : public Tile{
+public:
+Tile44(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,
+                                1,1,0,0,
+                                0,1,1,1,
+                                0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile45 : public Tile{
+public:
+Tile45(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                1,1,0,0,
+                                1,0,0,0,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile46 : public Tile{
+public:
+Tile46(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,0,
+                                1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,0,0,0,0,
+                                1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
+
+class Tile47 : public Tile{
+public:
+Tile47(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,1,1,
+                                0,0,1,0,0,
+                                0,0,1,0,0,
+                                0,0,1,0,0,
+                                1,1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif //INC_2CCPP_PROJECT_TILE_H

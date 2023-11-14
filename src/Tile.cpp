@@ -393,3 +393,77 @@ Tile42::Tile42(Color color, const Board &board) :
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
     // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
 }
+
+// Tile43
+Tile43::Tile43(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile44
+Tile44::Tile44(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile45
+Tile45::Tile45(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile46
+Tile46::Tile46(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile47
+Tile47::Tile47(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
