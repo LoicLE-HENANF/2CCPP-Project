@@ -26,6 +26,7 @@ void MainMenu::Update() {
 
 void MainMenu::Draw() {
     // drawing the menu (bouton, image, sprites, title)
+    playButton.Draw();
     ClearBackground(GREEN);
 }
 
