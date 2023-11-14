@@ -412,7 +412,7 @@ class Tile37 : public Tile{
 public:
 Tile37(Color color, const Board &board);
 private:
-static constexpr bool shape[] = {1,1,0,0,0,
+static constexpr int shape[] = {1,1,0,0,0,
                                  0,1,1,0,0,
                                  1,1,0,0,0,
                                  0,1,1,0,0,
@@ -424,7 +424,7 @@ class Tile38 : public Tile{
 public:
 Tile38(Color color, const Board &board);
 private:
-static constexpr bool shape[] = {1,0,0,
+static constexpr int shape[] = {1,0,0,
                                  1,1,0,
                                  1,1,0}; // la forme de la tuile
 static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
@@ -434,7 +434,7 @@ class Tile39 : public Tile{
 public:
 Tile39(Color color, const Board &board);
 private:
-static constexpr bool shape[] = {0,1,0,0,
+static constexpr int shape[] = {0,1,0,0,
                                  0,1,0,0,
                                  1,1,1,1,
                                  0,0,0,0}; // la forme de la tuile
@@ -445,7 +445,7 @@ class Tile40 : public Tile{
 public:
 Tile40(Color color, const Board &board);
 private:
-static constexpr bool shape[] = {0,1,0,0,
+static constexpr int shape[] = {0,1,0,0,
                                  1,1,0,0,
                                  1,1,0,0,
                                  1,0,0,0}; // la forme de la tuile
