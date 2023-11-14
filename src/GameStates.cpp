@@ -22,6 +22,7 @@ void MainMenu::OnExit() {
 
 void MainMenu::Update() {
     // updating the menu logic (click etc)
+    playButton.DetectClick();
 }
 
 void MainMenu::Draw() {

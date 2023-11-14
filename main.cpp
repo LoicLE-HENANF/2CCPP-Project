@@ -1,5 +1,5 @@
 #define SUPPORT_MODULE_RSHAPES 1
-#include "headers/settings.h"
+#include "headers/Settings.h"
 #include "headers/Game.h"
 #include "headers/GameStates.h"
 
