@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_BOARD_H
 
 #include <vector>
-#include "raylibWrapper.h"
+#include "RaylibWrapper.h"
 #include "Vec2.h"
 
 class Board {

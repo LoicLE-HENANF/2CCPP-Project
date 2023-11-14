@@ -6,7 +6,7 @@
 #include "raylib.h"
 #include <cassert>
 
-#include "../headers/settings.h"
+#include "../headers/Settings.h"
 #include "../headers/GameStates.h"
 
 using namespace settings;
