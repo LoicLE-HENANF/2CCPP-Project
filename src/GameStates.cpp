@@ -22,7 +22,10 @@ void MainMenu::OnExit() {
 
 void MainMenu::Update() {
     // updating the menu logic (click etc)
-    playButton.DetectClick();
+    if(playButton.DetectClick()){
+        GameState::currentState = playing;
+    }
+
 }
 
 void MainMenu::Draw() {
@@ -70,5 +73,5 @@ void Playing::Update() {
 }
 
 void Playing::Draw() {
-
+    ClearBackground(WHITE);
 }

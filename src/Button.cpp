@@ -13,13 +13,15 @@ int Button::CanClick() {
                                               buttonPos, buttonSize);
 }
 
-void Button::DetectClick() {
+bool Button::DetectClick() {
     if(CanClick()){
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             std::cout << "button pressed." << std::endl;
-        }else if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
-            GameState::currentState = targetState;
+        }
+        if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+            return true;
         }
     }
+    return false;
 }
 

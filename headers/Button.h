@@ -26,7 +26,7 @@ public:
 
     void Draw();
     int CanClick();
-    void DetectClick();
+    bool DetectClick();
 
 
 private:
