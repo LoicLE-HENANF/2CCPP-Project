@@ -25,6 +25,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
     endif()
 endif()
 
+
 ################## nlohmann/json ###################
 set(JSON_VERSION 3.11.2)
 find_package(nlohmann_json ${JSON_VERSION} QUIET)
@@ -61,8 +62,8 @@ add_executable(${PROJECT_NAME} main.cpp
 )
 
 
-
 set(raylib_VERBOSE 1)
+
 
 if (WIN32)
 target_link_libraries(${PROJECT_NAME} raylib -static) # -static to make the compiler add the missing dll libraries !!

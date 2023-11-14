@@ -5,29 +5,40 @@
 #include "../headers/raylibWrapper.h"
 #include <cassert>
 
-using namespace GameEngine;
+namespace GameEngine {
 
-void GameEngine::DrawRectangle(Vec2<int> position, Vec2<int> size, Color color)
-{
-    assert(position.GetX() >= 0 && position.GetY() >= 0 &&
-    position.GetX() < GetScreenWidth() && position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
-    DrawRectangle(position.GetX(),
-                  position.GetY(),
-                  size.GetX(),
-                  size.GetY(),
-                  color);
-}
-void GameEngine::DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color)
-{
-    assert(position.GetX() >= 0 && position.GetY() >= 0 &&
-           position.GetX() < GetScreenWidth() && position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
-    DrawRectangleLinesEx({(float)position.GetX(),(float)position.GetY(),(float)size.GetX(),(float)size.GetY()},
-                         (float)lineThickness,
-                  color);
-}
+    void DrawRectangle(Vec2<int> position, Vec2<int> size, Color color) {
+        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
+               position.GetX() < GetScreenWidth() &&
+               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
+        DrawRectangle(position.GetX(),
+                      position.GetY(),
+                      size.GetX(),
+                      size.GetY(),
+                      color);
+    }
 
-Vec2<int> GameEngine::GetMousePosition()
-{
-    return {GetMouseX(), GetMouseY()};
-}
+    void DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color) {
+        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
+               position.GetX() < GetScreenWidth() &&
+               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
+        DrawRectangleLinesEx(
+                {(float) position.GetX(), (float) position.GetY(), (float) size.GetX(), (float) size.GetY()},
+                (float) lineThickness,
+                color);
+    }
 
+    Vec2<int> GetMousePosition() {
+        return {GetMouseX(), GetMouseY()};
+    }
+
+    bool CheckCollisionPointRec(const Vec2<int> point, const Vec2<int> position, const Vec2<int> size) {
+        Vector2 targetPoint{static_cast<float>(point.GetX()), static_cast<float>(point.GetY())};
+        Rectangle rec{position.GetX(),
+                      position.GetY(),
+                      size.GetX(),
+                      size.GetY()};
+        return CheckCollisionPointRec(targetPoint, rec);
+    }
+
+}
