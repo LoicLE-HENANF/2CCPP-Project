@@ -31,7 +31,6 @@ bool Game::GameShouldClose() {
 }
 
 void Game::Tick() {
-
     // game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display method
     BeginDrawing();
 //    Update();

@@ -4,7 +4,7 @@
 
 #ifndef INC_2CCPP_PROJECT_TILE_H
 #define INC_2CCPP_PROJECT_TILE_H
-#include "../src/Board.cpp"
+#include "Board.h"
 // Color from raylib
 // Vec2 = custom vector class for our project
 // Board notre objet board

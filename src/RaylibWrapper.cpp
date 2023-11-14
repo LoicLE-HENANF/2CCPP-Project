@@ -26,3 +26,8 @@ void GameEngine::DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int li
                   color);
 }
 
+Vec2<int> GameEngine::GetMousePosition()
+{
+    return {GetMouseX(), GetMouseY()};
+}
+

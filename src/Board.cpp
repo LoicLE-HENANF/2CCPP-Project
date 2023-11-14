@@ -39,9 +39,9 @@ bool Board::Cell::Exists() const {
 }
 
 // Board implementation
-Board::Board(Vec2<int> screenPos, Vec2<int> size, int cellSize, int padding)
+Board::Board(Vec2<int> boardPos, Vec2<int> size, int cellSize, int padding)
     :
-    screenPos(screenPos),
+        boardPos(boardPos),
     width(size.GetX()),
     height(size.GetY()),
     cellSize(cellSize),
@@ -64,14 +64,14 @@ void Board::DrawCell(Vec2<int> position) const {
 }
 void Board::DrawCell(Vec2<int> position, Color c) const {
     assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
-    Vec2<int> origin = screenPos + padding + (position * cellSize);
+    Vec2<int> origin = boardPos + padding + (position * cellSize);
     GameEngine::DrawRectangle(origin,
                               Vec2<int>{cellSize, cellSize} - padding,
                               c);
 }
 
 void Board::DrawBorder() const {
-    GameEngine::DrawRectangleLinesEx(screenPos - (cellSize / 2),
+    GameEngine::DrawRectangleLinesEx(boardPos - (cellSize / 2),
                               Vec2{width*cellSize, height*cellSize} + cellSize,
                               cellSize/2,
                                      WHITE);
