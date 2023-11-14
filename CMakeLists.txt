@@ -68,7 +68,7 @@ set(raylib_VERBOSE 1)
 if (WIN32)
 target_link_libraries(${PROJECT_NAME} raylib -static) # -static to make the compiler add the missing dll libraries !!
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
-elseif(APPLE)
+elseif(UNIX)
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
     target_link_libraries(${PROJECT_NAME} raylib) # -static to make the compiler add the missing dll libraries !!
     target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)

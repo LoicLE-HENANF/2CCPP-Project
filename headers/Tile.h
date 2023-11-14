@@ -452,6 +452,25 @@ static constexpr int shape[] = {0,1,0,0,
 static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
 };
 
+class Tile41 : public Tile{
+public:
+Tile41(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,1,
+                                0,1,0,
+                                1,1,0}; // la forme de la tuile
+static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
+};
 
+class Tile42 : public Tile{
+public:
+    Tile42(Color color, const Board &board);
+private:
+    static constexpr int shape[] = {1,1,1,1,
+                                    0,0,0,0,
+                                    0,0,0,0,
+                                    0,0,0,0}; // la forme de la tuile
+    static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
 #endif //INC_2CCPP_PROJECT_TILE_H
