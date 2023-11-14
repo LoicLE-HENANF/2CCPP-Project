@@ -53,7 +53,8 @@ add_executable(${PROJECT_NAME} main.cpp
         src/Player.cpp
         src/ThreadHandler.cpp
         src/RaylibWrapper.cpp
-        src/Board.cpp)
+        src/Board.cpp
+        headers/Tile.h)
 
 
 set(raylib_VERBOSE 1)
