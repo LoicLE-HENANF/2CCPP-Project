@@ -10,15 +10,28 @@
 #include "Settings.h"
 
 
-class MenuPrincipal: public GameState {
+class MainMenu: public GameState {
 public:
-    explicit MenuPrincipal() = default;
+    explicit MainMenu() = default;
 
     void OnEntry() override;
     void OnExit() override;
 private:
     void Update() override;
     void Draw() override;
+
+    Vec2<int> buttonSize = {10,10};
+
+    Vec2<int> playButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2)
+    };
+    Vec2<int> optionsButtonPos = {
+
+    };
+    Vec2<int> quitButtonPos = {
+
+    };
 };
 
 class Options: public GameState {
