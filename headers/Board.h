@@ -33,6 +33,7 @@ public:
 
     void SetCell(Vec2<int> position, Color c);
     void DrawCell(Vec2<int> position) const;
+    void DrawCell(Vec2<int> position, Color c) const;
     void DrawBorder() const;
     void Draw() const;
     bool CellExists(Vec2<int> position) const;
