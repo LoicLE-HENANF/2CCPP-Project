@@ -18,20 +18,23 @@ public:
     void OnExit() override = 0;
 
     static GameState* GetCurrentState(){ return currentState;};
+
     bool IsOpening() const{ return isOpening; };
     void OpenClose() { isOpening = !isOpening; };
 
     // Gamestates methods
 
     static GameState* currentState;
-    static GameState *mainMenu, *options;
+    static GameState *mainMenu,
+                        *options,
+                        *playing;
+    virtual void Update()  = 0;
+    virtual void Draw() = 0;
 
 private:
     bool isOpening = true;
-    virtual void Update()  = 0;
-    virtual void Draw() = 0;
-public:
-    virtual void Tick(){ this->Update(); this->Draw(); };
+
+
 
 
 

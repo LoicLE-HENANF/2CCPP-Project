@@ -7,6 +7,7 @@
 
 #include "Game.h"
 #include "GameState.h"
+#include "Settings.h"
 
 
 class MenuPrincipal: public GameState {
@@ -33,11 +34,14 @@ private:
 
 class Playing: public GameState {
 public:
-    explicit Playing()= default;
+    Playing() = default;
 
     void OnEntry() override;
     void OnExit() override;
+
+    void SetBoard(const Board& b){ board = b; }
 private:
+    Board board;
     void Update() override;
     void Draw() override;
 };

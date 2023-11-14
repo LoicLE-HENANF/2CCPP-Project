@@ -11,19 +11,14 @@
 
 using namespace settings;
 
-// Simple Finite State Machine
-GameState * GameState::mainMenu = new MenuPrincipal();
-GameState * GameState::options = new Options();
-    // add states here first from GameStates classes
-GameState * GameState::currentState = GameState::mainMenu;
-
-Game::Game(int width, int height, int fps, const std::string& title)
-    :
-    board(settings::boardPosition, settings::boardSize,settings::cellSize,settings::padding)
+// Game class implementation
+Game::Game(int width, int height, int fps, const std::string &title)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
+
+
 }
 
 Game::~Game() noexcept {
@@ -31,7 +26,7 @@ Game::~Game() noexcept {
     CloseWindow();
 }
 
-bool Game::GameShouldClose() const {
+bool Game::GameShouldClose() {
     return WindowShouldClose();
 }
 
@@ -44,17 +39,19 @@ void Game::Tick() {
     if (GameState::currentState->IsOpening()){
         GameState::currentState->OnEntry();
     }
-    GameState::currentState->Tick();
+    GameState::currentState->Update();
+    GameState::currentState->Draw();
     EndDrawing();
 
 }
 
 void Game::Draw() {
+    // Draw basic logic ? maybe
 //    ClearBackground(BLACK);
 //    board.Draw();
 
 }
 
 void Game::Update() {
-
+    // Game logic
 }
