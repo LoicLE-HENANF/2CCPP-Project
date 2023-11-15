@@ -45,13 +45,23 @@ namespace GameEngine{
         DrawText(text.c_str(), (int)position.GetX(), (int)position.GetY(), fontSize, color);
     }
 
-    void DrawTriangle(Vec2<float> position, Vec2<float> size, Color color){
-        DrawTriangle(Vector2{position.GetX() + size.GetX()/2,
-                             position.GetY()},
-                     Vector2{position.GetX(),
-                             position.GetY() + size.GetY()},
-                     Vector2{position.GetX() + size.GetX(),
-                             position.GetY() + size.GetY()},
+    void DrawTriangleUp(Vec2<int> position, Vec2<int> size, Color color){
+        DrawTriangle(Vector2{static_cast<float>(position.GetX() + size.GetX()/2),
+                             static_cast<float>(position.GetY())},
+                     Vector2{static_cast<float>(position.GetX()),
+                             static_cast<float>(position.GetY() + size.GetY())},
+                     Vector2{static_cast<float>(position.GetX() + size.GetX()),
+                             static_cast<float>(position.GetY() + size.GetY())},
+                     color);
+    }
+    void DrawTriangleDown(Vec2<int> position, Vec2<int> size, Color color){
+        DrawTriangle(Vector2{static_cast<float>(position.GetX()),
+                             static_cast<float>(position.GetY())},
+                     Vector2{static_cast<float>(position.GetX() + size.GetX()/2),
+                             static_cast<float>(position.GetY() + size.GetY())},
+                     Vector2{static_cast<float>(position.GetX() + size.GetX()),
+                             static_cast<float>(position.GetY())},
+
                      color);
     }
 

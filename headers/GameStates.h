@@ -8,8 +8,9 @@
 #include "Game.h"
 #include "GameState.h"
 #include "Settings.h"
-#include "Button.h"
-#include "CheckBox.h"
+#include "UI/Button.h"
+#include "UI/CheckBox.h"
+#include "UI/NumberChoice.h"
 
 
 class MainMenu: public GameState {
@@ -42,6 +43,7 @@ private:
 
     };
 
+    // test checkbox
     Vec2<int> checkBoxPos = {
         50,50
     };
@@ -54,6 +56,16 @@ private:
         PINK,
         false
     };
+
+    // test numberChoice
+    Vec2<int> numberChoicePos = {100,100};
+
+    NumberChoice numberChoice{numberChoicePos,
+                              Vec2{100,100},
+                              BLACK,
+                              WHITE,
+                              2,
+                              9};
 
 };
 

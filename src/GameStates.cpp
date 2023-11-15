@@ -26,6 +26,7 @@ void MainMenu::Update() {
         GameState::currentState = playing;
     }
     checkBox.DetectClick();
+    numberChoice.DetectClick();
 
 }
 
@@ -33,6 +34,7 @@ void MainMenu::Draw() {
     // drawing the menu (bouton, image, sprites, title)
     playButton.Draw();
     checkBox.Draw();
+    numberChoice.Draw();
     ClearBackground(GREEN);
 }
 

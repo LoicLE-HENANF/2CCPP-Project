@@ -50,19 +50,19 @@ add_executable(${PROJECT_NAME} main.cpp
         headers/ThreadHandler.h
         headers/Vec2.h
         headers/Tile.h
-        headers/CheckBox.h
+        headers/UI/CheckBox.h
 
         src/Game.cpp
         src/GameStates.cpp
         src/Player.cpp
         src/RaylibWrapper.cpp
         src/ThreadHandler.cpp
-        src/Board.cpp 
-        src/Button.cpp
+        src/Board.cpp
+        src/UI/Button.cpp
 
         src/Tile.cpp
 
-        src/CheckBox.cpp)
+        src/UI/CheckBox.cpp src/UI/NumberChoice.cpp)
 
 
 set(raylib_VERBOSE 1)
