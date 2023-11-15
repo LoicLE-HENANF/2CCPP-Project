@@ -19,10 +19,8 @@ private:
             void Remove();
             void SetColor(Color color);
             Color GetColor() const;
-            bool Exists() const;
 
         private:
-            bool exists;
             Color c;
             };
 public:

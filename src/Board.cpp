@@ -15,7 +15,6 @@ using namespace settings;
 // Cell implementation
 Board::Cell::Cell()
     :
-    exists(true),
     c(settings::cellBaseColor)
 {
 
@@ -23,19 +22,10 @@ Board::Cell::Cell()
 
 void Board::Cell::SetColor(Color color) {
     c = color;
-    exists = true;
-}
-
-void Board::Cell::Remove() {
-    exists = false;
 }
 
 Color Board::Cell::GetColor() const {
     return c;
-}
-
-bool Board::Cell::Exists() const {
-    return exists;
 }
 
 // Board implementation
@@ -72,26 +62,21 @@ void Board::DrawCell(Vec2<int> position, Color c) const {
 
 void Board::DrawBorder() const {
     GameEngine::DrawRectangleLinesEx(boardPos - (cellSize / 2),
-                              Vec2{width*cellSize, height*cellSize} + cellSize,
-                              cellSize/2,
+                                     Vec2{width*cellSize, height*cellSize} + cellSize,
+                                     cellSize/2,
                                      WHITE);
 }
 
 void Board::Draw() const {
+    // Drawing cells
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-            if (CellExists({x,y})){
-                DrawCell(Vec2<int>{x, y});
-            }
-
+            DrawCell(Vec2<int>{x, y});
         }
     }
+
+    // Drawing board borders
     DrawBorder();
 
 }
-
-bool Board::CellExists(Vec2<int> position) const {
-    return cells[position.GetY() * width + position.GetX()].Exists();
-}
-
 
