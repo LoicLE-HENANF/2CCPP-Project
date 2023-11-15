@@ -38,28 +38,17 @@ endif ()
 
 # Our Project
 add_executable(${PROJECT_NAME} main.cpp
-        headers/Board.h
-        headers/Game.h
-        headers/GameState.h
-        headers/GameStates.h
-        headers/IState.h
-        headers/Player.h
-        headers/RaylibWrapper.h
-        headers/settings.h
-        headers/ThreadHandler.h
-        headers/Vec2.h
+        headers/Tile.h
 
         src/Game.cpp
         src/GameStates.cpp
         src/Player.cpp
         src/ThreadHandler.cpp
         src/RaylibWrapper.cpp
-
         src/Board.cpp 
         src/Button.cpp
-        headers/Tile.h
         src/Tile.cpp
-)
+        src/CheckBox.cpp)
 
 
 set(raylib_VERBOSE 1)
