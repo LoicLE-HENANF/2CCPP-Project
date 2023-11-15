@@ -14,7 +14,7 @@
 class Button {
 public:
     Button(Vec2<int> buttonPos, Vec2<int> buttonSize, std::string text, Color color, GameState* targetState) :
-        text(std::move(text)),
+        text(text),
         color(color),
         buttonPos(buttonPos),
         buttonSize(buttonSize),

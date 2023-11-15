@@ -9,6 +9,7 @@
 #include "GameState.h"
 #include "Settings.h"
 #include "Button.h"
+#include "CheckBox.h"
 
 
 class MainMenu: public GameState {
@@ -21,7 +22,7 @@ private:
     void Update() override;
     void Draw() override;
 
-    Vec2<int> buttonSize = {10,10};
+    Vec2<int> buttonSize = {70,30};
 
     Vec2<int> playButtonPos = {
             (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
@@ -40,6 +41,20 @@ private:
     Vec2<int> quitButtonPos = {
 
     };
+
+    Vec2<int> checkBoxPos = {
+        50,50
+    };
+
+    CheckBox checkBox {
+        checkBoxPos,
+        {50,50},
+        5,
+        BLACK,
+        PINK,
+        false
+    };
+
 };
 
 class Options: public GameState {
