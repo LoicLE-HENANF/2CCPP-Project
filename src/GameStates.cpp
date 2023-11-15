@@ -25,12 +25,14 @@ void MainMenu::Update() {
     if(playButton.DetectClick()){
         GameState::currentState = playing;
     }
+    checkBox.DetectClick();
 
 }
 
 void MainMenu::Draw() {
     // drawing the menu (bouton, image, sprites, title)
     playButton.Draw();
+    checkBox.Draw();
     ClearBackground(GREEN);
 }
 

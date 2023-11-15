@@ -5,7 +5,10 @@
 #include "../headers/Button.h"
 
 void Button::Draw() {
+
     GameEngine::DrawRectangle(buttonPos, buttonSize, color);
+//    GameEngine::DrawText(text, buttonPos, 20, color);
+    DrawText(text.c_str(), buttonPos.GetX() + 5, buttonPos.GetY() + 5, 20, BLACK);
 }
 
 int Button::CanClick() {
