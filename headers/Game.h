@@ -8,6 +8,7 @@
 #include <string>
 #include "Board.h"
 #include "GameState.h"
+#include "Settings.h"
 //#include "GameStatesList.h"
 
 class Game {
@@ -22,10 +23,14 @@ public:
 
     void Tick();
 
+
+
 private:
     void Draw();
     void Update();
-//    GameStatesList gameStatesList;
+
+    // Game variables
+    Vec2<int> boardSize;
 };
 
 
