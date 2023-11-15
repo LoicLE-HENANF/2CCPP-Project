@@ -5,7 +5,9 @@
 #include "../headers/Button.h"
 
 void Button::Draw() {
+
     GameEngine::DrawRectangle(buttonPos, buttonSize, color);
+//    GameEngine::DrawText(text, buttonPos, 20, color);
 }
 
 int Button::CanClick() {

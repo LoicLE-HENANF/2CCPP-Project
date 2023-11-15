@@ -38,16 +38,30 @@ endif ()
 
 # Our Project
 add_executable(${PROJECT_NAME} main.cpp
+        headers/Board.h
+        headers/Game.h
+        headers/GameState.h
+        headers/GameStates.h
+        headers/IState.h
+        headers/Player.h
+        headers/RaylibWrapper.h
+
+        headers/settings.h
+        headers/ThreadHandler.h
+        headers/Vec2.h
         headers/Tile.h
+        headers/CheckBox.h
 
         src/Game.cpp
         src/GameStates.cpp
         src/Player.cpp
-        src/ThreadHandler.cpp
         src/RaylibWrapper.cpp
+        src/ThreadHandler.cpp
         src/Board.cpp 
         src/Button.cpp
+
         src/Tile.cpp
+
         src/CheckBox.cpp)
 
 

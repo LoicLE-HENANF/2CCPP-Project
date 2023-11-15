@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_RAYLIBWRAPPER_H
 
 #include "Vec2.h"
-#include <raylib.h>
+#include "raylib.h"
 #include <string>
 
 namespace GameEngine {
@@ -23,7 +23,7 @@ namespace GameEngine {
 
     bool CheckCollisionPointRec(Vec2<int> point, Vec2<int> position, Vec2<int> size);
 
-    void DrawText(const std::string& text, Vec2<int> position, int fontSize, Color color);
+    void DrawText(std::string& text, Vec2<int> position, int fontSize, Color color);
 
     void DrawTriangle(Vec2<int> position, Vec2<float> size, Color color);
 }

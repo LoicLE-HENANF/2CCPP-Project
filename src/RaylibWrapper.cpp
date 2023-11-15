@@ -5,7 +5,7 @@
 #include "../headers/RaylibWrapper.h"
 #include <cassert>
 
-namespace GameEngine {
+namespace GameEngine{
 
     void DrawRectangle(Vec2<int> position, Vec2<int> size, Color color) {
         assert(position.GetX() >= 0 && position.GetY() >= 0 &&
@@ -41,13 +41,11 @@ namespace GameEngine {
         return CheckCollisionPointRec(targetPoint, rec);
     }
 
-    void DrawText(const std::string& text, Vec2<float> position, int fontSize, Color color)
-    {
+    void DrawText(const std::string& text, Vec2<float> position, int fontSize, Color color){
         DrawText(text.c_str(), (int)position.GetX(), (int)position.GetY(), fontSize, color);
     }
 
-    void DrawTriangle(Vec2<float> position, Vec2<float> size, Color color)
-    {
+    void DrawTriangle(Vec2<float> position, Vec2<float> size, Color color){
         DrawTriangle(Vector2{position.GetX() + size.GetX()/2,
                              position.GetY()},
                      Vector2{position.GetX(),
