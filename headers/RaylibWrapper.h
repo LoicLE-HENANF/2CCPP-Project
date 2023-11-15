@@ -25,7 +25,8 @@ namespace GameEngine {
 
     void DrawText(std::string& text, Vec2<int> position, int fontSize, Color color);
 
-    void DrawTriangle(Vec2<int> position, Vec2<float> size, Color color);
+    void DrawTriangleUp(Vec2<int> position, Vec2<int> size, Color color);
+    void DrawTriangleDown(Vec2<int> position, Vec2<int> size, Color color);
 }
 
 

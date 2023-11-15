@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include "../headers/CheckBox.h"
-#include "../headers/RaylibWrapper.h"
+#include "../../headers/UI/CheckBox.h"
+#include "../../headers/RaylibWrapper.h"
 
 using namespace GameEngine;
 

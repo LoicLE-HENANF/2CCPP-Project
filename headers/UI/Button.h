@@ -8,8 +8,8 @@
 
 #include <utility>
 
-#include "Vec2.h"
-#include "GameState.h"
+#include "../Vec2.h"
+#include "../GameState.h"
 
 class Button {
 public:
