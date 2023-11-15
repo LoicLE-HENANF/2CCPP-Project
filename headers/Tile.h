@@ -530,27 +530,453 @@ static constexpr int shape[] = {0,0,1,1,1,
 static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
 };
 
+class Tile48 : public Tile{
+public:
+Tile48(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,0,0,
+                                 0,1,0,0,0,0,
+                                 1,1,0,0,0,0,
+                                 1,0,0,0,0,0,
+                                 1,1,0,0,0,0,
+                                 1,0,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
 
+class Tile49 : public Tile{
+public:
+Tile49(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,0,
+                                0,1,0,0,0,
+                                0,1,1,1,0,
+                                0,0,0,1,0,
+                                0,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile50 : public Tile{
+public:
+Tile50(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,0,
+                                0,1,0,0,0,
+                                1,1,1,0,0,
+                                0,1,0,0,0,
+                                0,1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile51 : public Tile{
+public:
+Tile51(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,
+                                0,0,1,
+                                1,1,1}; // la forme de la tuile
+static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
+};
 
+class Tile52 : public Tile{
+public:
+Tile52(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,0,0,
+                                1,0,0,0,0,0,
+                                1,0,0,0,0,0,
+                                1,0,0,0,0,0,
+                                1,0,0,0,0,0,
+                                1,0,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
 
+class Tile53 : public Tile{
+public:
+Tile53(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,1,0,
+                                1,1,1,0,
+                                0,1,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile54 : public Tile{
+public:
+Tile54(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,0,
+                                1,1,1,0,
+                                0,1,1,1,
+                                0,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile55 : public Tile{
+public:
+Tile55(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,
+                                0,1,0,0,
+                                0,1,0,0,
+                                1,1,1,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile56 : public Tile{
+public:
+Tile56(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,0,
+                                1,0,0,0,0,
+                                1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile57 : public Tile{
+public:
+Tile57(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,
+                                0,1,0,0,
+                                0,1,0,1,
+                                1,1,1,1}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile58 : public Tile{
+public:
+Tile58(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,0,0,
+                                0,1,1,0,0,
+                                1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile59 : public Tile{
+public:
+Tile59(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0,
+                                1,1,0,0,0,0,
+                                1,0,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
 
+class Tile60 : public Tile{
+public:
+Tile60(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,1,0,
+                                1,1,1,1,
+                                0,0,0,0,
+                                0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile61 : public Tile{
+public:
+Tile61(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,
+                                0,1,0,1,
+                                0,1,0,1,
+                                0,1,1,1}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile62 : public Tile{
+public:
+Tile62(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,0,
+                                1,0,1,0,0,
+                                1,1,1,1,0,
+                                0,1,0,0,0,
+                                0,1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile63 : public Tile{
+public:
+Tile63(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,0,0,0,
+                                1,0,0,0,0,0,0,
+                                1,0,0,0,0,0,0,
+                                1,0,0,0,0,0,0,
+                                1,0,0,0,0,0,0,
+                                1,0,0,0,0,0,0,
+                                1,0,0,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 7; //pour garder en mémoire la taille du pattern
+};
 
+class Tile64 : public Tile{
+public:
+Tile64(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                1,1,1,0,
+                                1,0,0,0,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
+class Tile65 : public Tile{
+public:
+Tile65(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,
+                                1,0,1,
+                                1,1,1}; // la forme de la tuile
+static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
+};
 
+class Tile66 : public Tile{
+public:
+Tile66(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,
+                                1,1,1,
+                                1,0,1}; // la forme de la tuile
+static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
+};
 
+class Tile67 : public Tile{
+public:
+Tile67(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,0,0,
+                                0,0,1,0,0,
+                                1,1,1,1,1,
+                                0,0,1,0,0,
+                                0,0,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile68 : public Tile{
+public:
+Tile68(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,0,1,0,0,
+                                0,0,1,1,0,0,
+                                0,0,1,0,0,0,
+                                0,0,1,0,0,0,
+                                0,1,1,0,0,0,
+                                1,1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
 
+class Tile69 : public Tile{
+public:
+Tile69(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
 
+class Tile70 : public Tile{
+public:
+Tile70(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,0,
+                                0,1,0,0,0,
+                                0,1,0,0,0,
+                                1,1,1,1,0,
+                                0,1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
+
+class Tile71 : public Tile{
+public:
+Tile71(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,0,
+                                1,1,0,0,0,
+                                1,0,0,0,0,
+                                1,0,0,0,0,
+                                1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 5; //pour garder en mémoire la taille du pattern
+};
+
+class Tile72 : public Tile{
+public:
+Tile72(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,
+                                0,1,0,0,
+                                1,1,0,0,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile73 : public Tile{
+public:
+Tile73(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,0,0,
+                                0,1,0,0,0,0,
+                                1,1,0,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
+
+class Tile74 : public Tile{
+public:
+Tile74(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,0,0,
+                                1,1,0,0,0,0,
+                                0,1,1,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0,
+                                0,1,0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 6; //pour garder en mémoire la taille du pattern
+};
+
+class Tile75 : public Tile{
+public:
+Tile75(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                0,1,1,0,
+                                1,1,0,0,
+                                0,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile76 : public Tile{
+public:
+Tile76(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,0,0,
+                                1,1,1,1,
+                                0,0,0,0,
+                                0,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile77 : public Tile{
+public:
+Tile77(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,1,1,
+                                1,1,1,0,
+                                1,0,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile78 : public Tile{
+public:
+Tile78(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,
+                                0,1,0,0,
+                                0,1,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile79 : public Tile{
+public:
+Tile79(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                0,1,0,0,
+                                1,1,1,0,
+                                0,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile80 : public Tile{
+public:
+Tile80(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,1,1,0,
+                                1,0,1,0,
+                                1,0,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile81 : public Tile{
+public:
+Tile81(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                0,1,1,0,
+                                1,1,0,0,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile82 : public Tile{
+public:
+Tile82(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,
+                                1,1,0,
+                                1,1,1}; // la forme de la tuile
+static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
+};
+
+class Tile83 : public Tile{
+public:
+Tile83(Color color, const Board &board);
+private:
+static constexpr int shape[] = {1,0,0,0,
+                                1,0,0,0,
+                                1,0,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile84 : public Tile{
+public:
+Tile84(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,0,0,0,
+                                0,1,0,0,
+                                1,1,1,1,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile85 : public Tile{
+public:
+Tile85(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,1,0,
+                                1,1,0,0,
+                                1,0,0,0,
+                                1,0,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
+
+class Tile86 : public Tile{
+public:
+Tile86(Color color, const Board &board);
+private:
+static constexpr int shape[] = {0,1,0,0,
+                                1,1,0,0,
+                                1,0,0,0,
+                                1,1,0,0}; // la forme de la tuile
+static constexpr int dimension = 4; //pour garder en mémoire la taille du pattern
+};
 
 #endif //INC_2CCPP_PROJECT_TILE_H
