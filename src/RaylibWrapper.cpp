@@ -41,4 +41,20 @@ namespace GameEngine {
         return CheckCollisionPointRec(targetPoint, rec);
     }
 
+    void DrawText(const std::string& text, Vec2<float> position, int fontSize, Color color)
+    {
+        DrawText(text.c_str(), (int)position.GetX(), (int)position.GetY(), fontSize, color);
+    }
+
+    void DrawTriangle(Vec2<float> position, Vec2<float> size, Color color)
+    {
+        DrawTriangle(Vector2{position.GetX() + size.GetX()/2,
+                             position.GetY()},
+                     Vector2{position.GetX(),
+                             position.GetY() + size.GetY()},
+                     Vector2{position.GetX() + size.GetX(),
+                             position.GetY() + size.GetY()},
+                     color);
+    }
+
 }
