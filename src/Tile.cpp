@@ -439,31 +439,356 @@ Tile47::Tile47(Color color, const Board &board) :
     // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
 }
 
+// Tile48
+Tile48::Tile48(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile49
+Tile49::Tile49(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile50
+Tile50::Tile50(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile51
+Tile51::Tile51(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile52
+Tile52::Tile52(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile53
+Tile53::Tile53(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile54
+Tile54::Tile54(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile55
+Tile55::Tile55(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile56
+Tile56::Tile56(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile57
+Tile57::Tile57(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile58
+Tile58::Tile58(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile59
+Tile59::Tile59(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile60
+Tile60::Tile60(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile61
+Tile61::Tile61(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile62
+Tile62::Tile62(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile63
+Tile63::Tile63(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile64
+Tile64::Tile64(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile65
+Tile65::Tile65(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile66
+Tile66::Tile66(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile67
+Tile67::Tile67(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile68
+Tile68::Tile68(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile69
+Tile69::Tile69(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile70
+Tile70::Tile70(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile71
+Tile71::Tile71(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile72
+Tile72::Tile72(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
+// Tile73
+Tile73::Tile73(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile74
+Tile74::Tile74(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile75
+Tile75::Tile75(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile76
+Tile76::Tile76(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile77
+Tile77::Tile77(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile78
+Tile78::Tile78(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile79
+Tile79::Tile79(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile80
+Tile80::Tile80(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile81
+Tile81::Tile81(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile82
+Tile82::Tile82(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile83
+Tile83::Tile83(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile84
+Tile84::Tile84(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile85
+Tile85::Tile85(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
+
+// Tile86
+Tile86::Tile86(Color color, const Board &board) :
+        Tile(shape, dimension, color, board)
+{
+    // check if dim correspond bien à la shape at compile time
+    static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
+    // très simple de voir si ca fonctionne: change la dim de la Tile et static_assert au dessus devient rouge (failed assertion)
+}
 
 
 
