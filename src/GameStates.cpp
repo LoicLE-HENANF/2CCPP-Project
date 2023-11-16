@@ -24,6 +24,7 @@ void MainMenu::Update() {
     // updating the menu logic (click etc)
     if(playButton.DetectClick()){
         GameState::currentState = playing;
+        OnExit();
     }
     checkBox.DetectClick();
     numberChoice.DetectClick();

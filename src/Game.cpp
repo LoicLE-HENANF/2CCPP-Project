@@ -12,11 +12,11 @@
 using namespace settings;
 
 // Game class implementation
-Game::Game(int width, int height, int fps, const std::string &title)
+Game::Game(int width, int height, int _fps, const std::string &_title)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
-    SetTargetFPS(fps);
-    InitWindow(width, height, title.c_str());
+    SetTargetFPS(_fps);
+    InitWindow(width, height, _title.c_str());
 
 
 }
@@ -32,12 +32,12 @@ bool Game::GameShouldClose() {
 
 void Game::Tick() {
     // game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display method
-    BeginDrawing();
 //    Update();
 //    Draw();
     if (GameState::currentState->IsOpening()){
         GameState::currentState->OnEntry();
     }
+    BeginDrawing();
     GameState::currentState->Update();
     GameState::currentState->Draw();
     EndDrawing();
