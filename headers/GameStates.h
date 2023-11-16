@@ -88,8 +88,13 @@ public:
     void OnExit() override;
 
     void SetBoard(const Board& b){ board = b; }
+
 private:
     Board board;
+
+    Vec2<int> boardSize;
+    int numberOfPlayer;
+
     void Update() override;
     void Draw() override;
 };
