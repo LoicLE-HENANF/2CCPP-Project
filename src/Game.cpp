@@ -20,6 +20,8 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
+
+    players.resize(numberOfPlayer);
 }
 
 Game::~Game() noexcept {
@@ -32,7 +34,7 @@ bool Game::GameShouldClose() {
 }
 
 ///
-/// Function that will run every tick (1 tick = 1/framerate seconds)
+/// Function that will run every tick (1 tick = 1/{framerate} seconds)
 ///
 void Game::Tick() {
 ///
@@ -47,47 +49,65 @@ void Game::Tick() {
 
 void Game::Draw() {
     // Draw basic logic ? maybe
-    ClearBackground(WHITE);
-
+    ClearBackground(GRAY);
 
     if(areChoicesMade){
         // les choix sont fait
-        board.Draw();
-        if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
-                                               boardPosition,
-                                               boardSize * (cellSize))  )
-        {
-            tileQueue.GetCurrentTile().DrawFollow(boardSize);
-        }
-
-
-        playButton.TurnOff();
+        DrawGame();
     }else{
-        // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
-        playButton.Draw();
-
+        DrawMenu();
     }
 
 }
 
 void Game::Update() {
-    tickCounter = tickCounter + 1 % 60;
-    if (tickCounter % 10 == 1){
-//        auto pos = tileQueue.GetCurrentTile().GetPosition();
-//        std::cout << "position: " << pos.GetX() << ", " << pos.GetY() << std::endl;
+    tickCounter = (tickCounter + 1) % fps;
+    if (tickCounter == 1){
+        // loop for displaying info once every {framerate} seconds
+        std::cout << numberOfPlayer << std::endl;
+        std::cout << tickCounter << std::endl;
+
     }
-    // UI logic (options)
+
+    if(areChoicesMade){
+        UpdateGame();
+    } else {
+        UpdateMenu();
+    }
+}
+
+void Game::DrawMenu() {
+    // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
+    playButton.Draw();
+    numberChoice.Draw();
+}
+
+void Game::UpdateMenu() {
+// UI logic (options)
     if(playButton.DetectClick()){
         areChoicesMade = true;
         boardSize = {20,20};
         board.SetBoardSize(boardSize);
 
+        board.InitBoard(players);
+
+        // all button turn off
+        playButton.TurnOff();
     }
 
-    // Game logic
+    numberOfPlayer = numberChoice.DetectClick();
+}
 
+void Game::DrawGame() {
+    board.Draw();
+    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
+                                           boardPosition,
+                                           boardSize * (cellSize))  )
+    {
+        tileQueue.GetCurrentTile().DrawFollow(boardSize);
+    }
+}
 
+void Game::UpdateGame() {
 
-
-    // UI logic (game)
 }

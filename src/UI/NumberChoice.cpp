@@ -40,7 +40,7 @@ bool NumberChoice::CanClickArrowDown() {
                                               trianglePosDown, triangleSizeDown);
 }
 
-void NumberChoice::DetectClick() {
+int NumberChoice::DetectClick() {
     if (CanClickArrowDown()){
         // -
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
@@ -53,7 +53,11 @@ void NumberChoice::DetectClick() {
                 value = maximum;
             }
 
+
+
         }
+
+
     }
     if (CanClickArrowUp()){
         // +
@@ -69,5 +73,7 @@ void NumberChoice::DetectClick() {
 
         }
     }
+
+    return value;
 
 }

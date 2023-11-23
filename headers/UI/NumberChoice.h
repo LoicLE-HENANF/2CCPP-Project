@@ -31,7 +31,7 @@ public:
     bool CanClickArrowUp();
     bool CanClickArrowDown();
 
-    void DetectClick();
+    int DetectClick();
 
 private:
     Vec2<int> position;

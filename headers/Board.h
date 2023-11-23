@@ -6,9 +6,12 @@
 #define INC_2CCPP_PROJECT_BOARD_H
 
 #include <vector>
+#include <iostream>
 #include "RaylibWrapper.h"
 #include "Vec2.h"
 #include "Settings.h"
+#include "cassert"
+#include "Player.h"
 
 class Board {
 private:
@@ -25,20 +28,37 @@ private:
             Color c;
             };
 public:
-    Board(): boardPos(settings::boardPosition), width(0), height(0), padding(settings::padding), cellSize(settings::cellSize){};
-    Board(Vec2<int> boardPos, Vec2<int> size, int cellSize, int padding);
+    Board(): boardPos(settings::boardPosition),
+            width(settings::boardSize.GetX()),
+            height(settings::boardSize.GetY()),
+            padding(settings::padding),
+            cellSize(settings::cellSize){
+        assert(width > 0 && height > 0); // If assertion triggers : the width or height is below 0
+        assert(cellSize > 0); // If assertion triggers : the width or height is below 0
+        cells.resize(width*height);
+        std::cout << "nb of cells: " << cells.size() << std::endl;
+    };
 
     Board& operator=(const Board& other){ return *this;}
 
+    void ClearBoard(){
+        cells.clear();
+        cells.resize(width*height);
+    }
+    void InitBoard(const std::vector<Player>& players);
     void SetCell(Vec2<int> position, Color c);
-    Vec2<int> GetBoardPos() const { return boardPos;}
+    Vec2<int> GetBoardPos() const {
+        return boardPos;
+    };
     void DrawCell(Vec2<int> position) const;
     void DrawCell(Vec2<int> position, Color c) const;
     void DrawBorder() const;
     void Draw() const;
 
     // getters, setters
-    void SetBoardPos(Vec2<int> newBoardPos){ boardPos = newBoardPos; };
+    void SetBoardPos(Vec2<int> newBoardPos){
+        boardPos = newBoardPos;
+    };
     void SetBoardSize(Vec2<int> boardSize){
         width = boardSize.GetX();
         height = boardSize.GetY();
@@ -51,6 +71,7 @@ public:
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
+
     int width;
     int height;
     int padding;

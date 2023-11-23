@@ -15,11 +15,10 @@ private:
     Color color{};
 
 public:
-    Player() = default;
+    Player() : name(""), color(WHITE){};
     ~Player() = default;
-    Player(const Player& other) = delete; //copy constructor deleted
-    Player& operator=(const Player& other) = delete; //copy assignment deleted
 
+    Color GetColor() const;
 };
 
 
