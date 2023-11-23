@@ -2,9 +2,9 @@
 // Created by Enzo Robert on 14/11/2023.
 //
 
-#include "../headers/Tile.h"
-#include "../headers/Settings.h"
-#include "../headers/RaylibWrapper.h"
+#include "../../headers/GameObjects/Tile.h"
+#include "../../headers/Settings.h"
+#include "../../headers/GameEngine/RaylibWrapper.h"
 
 
 Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> position) :
