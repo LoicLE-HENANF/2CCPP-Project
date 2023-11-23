@@ -13,6 +13,7 @@
 #include "UI/Button.h"
 #include "Tile.h"
 #include "TileQueue.h"
+#include "UI/NumberChoice.h"
 
 class Game {
 
@@ -32,10 +33,16 @@ private:
     void Draw();
     void Update();
 
+    void DrawMenu();
+    void UpdateMenu();
+
+    void DrawGame();
+    void UpdateGame();
+
     // Game variables
     bool areChoicesMade;
     Board board;
-    Vec2<int> boardSize;
+    Vec2<int> boardSize{};
 
     int tickCounter = 0;
     // -> Tiles
@@ -44,8 +51,9 @@ private:
 
 
     //player info
-    int numberOfPlayer;
+    int numberOfPlayer = 4;
     std::vector<Player> players;
+    int currentPlayerIndex = 0;
 
 
     // UI (options)
@@ -61,6 +69,15 @@ private:
             "Play",
             RED
     };
+
+    Vec2<int> numberChoicePos = {100,100};
+
+    NumberChoice numberChoice{numberChoicePos,
+                              Vec2{100,100},
+                              BLACK,
+                              WHITE,
+                              2,
+                              9};
 
     // UI (game)
 

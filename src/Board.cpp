@@ -7,8 +7,10 @@
 #include "../headers/Board.h"
 #include "../headers/RaylibWrapper.h"
 #include "../headers/settings.h"
+#include "../headers/Player.h"
 #include <cassert>
 #include <iostream>
+#include <algorithm>
 
 using namespace GameEngine;
 using namespace settings;
@@ -30,18 +32,38 @@ Color Board::Cell::GetColor() const {
 }
 
 // Board implementation
-Board::Board(Vec2<int> boardPos, Vec2<int> size, int cellSize, int padding)
-    :
-        boardPos(boardPos),
-    width(size.GetX()),
-    height(size.GetY()),
-    cellSize(cellSize),
-    padding(padding)
-{
-    assert(width > 0 && height > 0); // If assertion triggers : the width or height is below 0
-    assert(cellSize > 0); // If assertion triggers : the width or height is below 0
+void Board::InitBoard(const std::vector<Player>& players) {
+    // clearing board
+    cells.clear();
     cells.resize(width*height);
-    std::cout << "nb of cells: " << cells.size() << std::endl;
+    // determining starting positions
+    std::vector<Vec2<int>> startingPos;
+
+    // generation des emplacements de départ
+    while(startingPos.size() < players.size()) {
+        Vec2<int> newPos {
+                std::rand() % boardSize.GetX(),
+                std::rand() % boardSize.GetY()
+        };
+
+        // check if element in vector
+        if (std::find(startingPos.begin(), startingPos.end(), newPos) == startingPos.end()){
+            startingPos.push_back(newPos);
+        }
+    }
+
+    // placing starting cells
+    for (int i = 0; i < players.size(); ++i) {
+        Color color = players[i].GetColor();
+        Vec2<int> position = startingPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(color);
+    }
+
+
+
+    // determining bonuses positions
+
+    //
 }
 
 void Board::SetCell(Vec2<int> position, Color c) {
@@ -52,7 +74,7 @@ void Board::SetCell(Vec2<int> position, Color c) {
 void Board::DrawCell(Vec2<int> position) const {
 
     Color c = cells[position.GetY() * width + position.GetX()].GetColor();
-    assert(c != WHITE); // If assertion triggers : cell is white
+//    assert(c != WHITE); // If assertion triggers : cell is white
 
 
     DrawCell(position, c);

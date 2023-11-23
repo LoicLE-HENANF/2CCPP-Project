@@ -4,3 +4,6 @@
 
 #include "../headers/Player.h"
 
+Color Player::GetColor() const {
+    return color;
+}
