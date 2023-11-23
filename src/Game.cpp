@@ -20,9 +20,6 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
-
-
-
 }
 
 Game::~Game() noexcept {
@@ -34,9 +31,13 @@ bool Game::GameShouldClose() {
     return WindowShouldClose();
 }
 
+///
+/// Function that will run every tick (1 tick = 1/framerate seconds)
+///
 void Game::Tick() {
-    // game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display method
-
+///
+/// desc:Game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display methods
+///
     BeginDrawing();
     Update();
     Draw();
@@ -52,7 +53,15 @@ void Game::Draw() {
     if(areChoicesMade){
         // les choix sont fait
         board.Draw();
-        tile.Draw();
+        if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
+                                               boardPosition,
+                                               boardSize * (cellSize))  )
+        {
+            tileQueue.GetCurrentTile().DrawFollow();
+        }
+
+
+        playButton.TurnOff();
     }else{
         // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
         playButton.Draw();
@@ -62,13 +71,23 @@ void Game::Draw() {
 }
 
 void Game::Update() {
-    // Game logic
+    tickCounter = tickCounter + 1 % 60;
+    if (tickCounter % 10 == 1){
+//        auto pos = tileQueue.GetCurrentTile().GetPosition();
+//        std::cout << "position: " << pos.GetX() << ", " << pos.GetY() << std::endl;
+    }
     // UI logic (options)
     if(playButton.DetectClick()){
         areChoicesMade = true;
-        board.SetBoardSize({20,20});
+        boardSize = {20,20};
+        board.SetBoardSize(boardSize);
 
     }
+
+    // Game logic
+
+
+
 
     // UI logic (game)
 }

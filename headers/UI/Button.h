@@ -29,12 +29,21 @@ public:
     int CanClick();
     bool DetectClick();
 
+    void TurnOn(){
+        activated = true;
+    }
+    void TurnOff(){
+        activated = false;
+    }
+
 
 private:
     std::string text;
     Color color;
     Vec2<int> buttonPos;
     Vec2<int> buttonSize;
+
+    bool activated = true;
 };
 
 

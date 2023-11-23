@@ -69,7 +69,7 @@ void Board::DrawCell(Vec2<int> position, Color c) const {
 
 void Board::DrawBorder() const {
     GameEngine::DrawRectangleLinesEx(boardPos - (cellSize / 2),
-                                     Vec2{width*cellSize, height*cellSize} + cellSize,
+                                     Vec2{width*cellSize, height*cellSize} + cellSize + padding,
                                      cellSize/2,
                                      BLACK);
 }
