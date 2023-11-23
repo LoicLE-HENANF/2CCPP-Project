@@ -18,6 +18,9 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     SetTargetFPS(_fps);
     InitWindow(width, height, _title.c_str());
 
+    areChoicesMade = false;
+
+
 
 }
 
@@ -32,25 +35,37 @@ bool Game::GameShouldClose() {
 
 void Game::Tick() {
     // game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display method
-//    Update();
-//    Draw();
-    if (GameState::currentState->IsOpening()){
-        GameState::currentState->OnEntry();
-    }
+
     BeginDrawing();
-    GameState::currentState->Update();
-    GameState::currentState->Draw();
+    Update();
+    Draw();
     EndDrawing();
 
 }
 
 void Game::Draw() {
     // Draw basic logic ? maybe
-//    ClearBackground(BLACK);
-//    board.Draw();
+    ClearBackground(WHITE);
+
+
+    if(areChoicesMade){
+        // les choix sont fait
+        board.Draw();
+    }else{
+        // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
+        playButton.Draw();
+
+    }
 
 }
 
 void Game::Update() {
     // Game logic
+    // UI logic (options)
+    if(playButton.DetectClick()){
+        areChoicesMade = true;
+        board.SetBoardSize({20,20});
+    }
+
+    // UI logic (game)
 }

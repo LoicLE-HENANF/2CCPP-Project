@@ -23,7 +23,7 @@ void MainMenu::OnExit() {
 void MainMenu::Update() {
     // updating the menu logic (click etc)
     if(playButton.DetectClick()){
-        GameState::currentState = playing;
+//        GameState::currentState = playing;
         OnExit();
     }
     checkBox.DetectClick();

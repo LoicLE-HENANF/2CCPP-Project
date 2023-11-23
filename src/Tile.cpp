@@ -16,6 +16,14 @@ Tile::Tile(const int *shape, int dimension, Color color, const Board &board) :
 
 }
 
+void Tile::Draw() const {
+    for (int i = 0; i < dimension; ++i) {
+        for (int j = 0; j < dimension; ++j) {
+            // draw cell here
+        }
+    }
+}
+
 // Tile1
 Tile1::Tile1(Color color, const Board &board) :
         Tile(shape, dimension, color, board)

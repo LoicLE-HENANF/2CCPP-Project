@@ -2,7 +2,9 @@
 // Created by lehen on 14/11/2023.
 //
 
+#include <iostream>
 #include "../../headers/UI/Button.h"
+#include "../../headers/RaylibWrapper.h"
 
 void Button::Draw() {
 

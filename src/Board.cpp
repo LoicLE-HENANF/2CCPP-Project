@@ -5,9 +5,10 @@
 
 
 #include "../headers/Board.h"
-#include "../headers/raylibWrapper.h"
+#include "../headers/RaylibWrapper.h"
 #include "../headers/settings.h"
 #include <cassert>
+#include <iostream>
 
 using namespace GameEngine;
 using namespace settings;
@@ -40,6 +41,7 @@ Board::Board(Vec2<int> boardPos, Vec2<int> size, int cellSize, int padding)
     assert(width > 0 && height > 0); // If assertion triggers : the width or height is below 0
     assert(cellSize > 0); // If assertion triggers : the width or height is below 0
     cells.resize(width*height);
+    std::cout << "nb of cells: " << cells.size() << std::endl;
 }
 
 void Board::SetCell(Vec2<int> position, Color c) {
@@ -48,8 +50,13 @@ void Board::SetCell(Vec2<int> position, Color c) {
 }
 
 void Board::DrawCell(Vec2<int> position) const {
+
     Color c = cells[position.GetY() * width + position.GetX()].GetColor();
+    assert(c != WHITE); // If assertion triggers : cell is white
+
+
     DrawCell(position, c);
+
 
 }
 void Board::DrawCell(Vec2<int> position, Color c) const {
@@ -64,13 +71,14 @@ void Board::DrawBorder() const {
     GameEngine::DrawRectangleLinesEx(boardPos - (cellSize / 2),
                                      Vec2{width*cellSize, height*cellSize} + cellSize,
                                      cellSize/2,
-                                     WHITE);
+                                     BLACK);
 }
 
 void Board::Draw() const {
     // Drawing cells
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
+//            std::cout << "drawing cell at " << x << ", " << y << std::endl;
             DrawCell(Vec2<int>{x, y});
         }
     }
