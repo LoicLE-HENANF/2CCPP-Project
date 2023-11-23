@@ -5,7 +5,6 @@
 #ifndef INC_2CCPP_PROJECT_PLAYERS_H
 #define INC_2CCPP_PROJECT_PLAYERS_H
 
-
 #include <vector>
 #include "Player.h"
 

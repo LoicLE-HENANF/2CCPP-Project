@@ -5,7 +5,7 @@
 #ifndef INC_2CCPP_PROJECT_RAYLIBWRAPPER_H
 #define INC_2CCPP_PROJECT_RAYLIBWRAPPER_H
 
-#include "Vec2.h"
+#include "../Vec2.h"
 #include "raylib.h"
 #include <string>
 

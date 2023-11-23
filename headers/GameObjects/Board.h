@@ -5,15 +5,11 @@
 #ifndef INC_2CCPP_PROJECT_BOARD_H
 #define INC_2CCPP_PROJECT_BOARD_H
 
-#include <vector>
+#include <cassert>
 #include <iostream>
-#include "RaylibWrapper.h"
-#include "Vec2.h"
-#include "Settings.h"
-#include "cassert"
-#include "Player.h"
 #include "Players.h"
 #include "Tile.h"
+#include "../Settings.h"
 
 class Board {
 private:

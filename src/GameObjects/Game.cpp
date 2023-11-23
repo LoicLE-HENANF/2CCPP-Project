@@ -2,13 +2,10 @@
 // Created by lehen on 12/11/2023.
 //
 
-#include "../headers/Game.h"
-#include "raylib.h"
-#include <cassert>
+#include "../../headers/GameObjects/Game.h"
+#include "../../headers/GameEngine/RaylibWrapper.h"
 
-#include "../headers/Settings.h"
-#include "../headers/GameStates.h"
-#include "../headers/Tile.h"
+#include <cassert>
 
 using namespace settings;
 

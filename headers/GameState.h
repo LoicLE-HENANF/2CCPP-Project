@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_GAMESTATE_H
 
 #include <iostream>
-#include "Game.h"
+#include "GameObjects/Game.h"
 #include "IState.h"
 
 class GameState : IState {

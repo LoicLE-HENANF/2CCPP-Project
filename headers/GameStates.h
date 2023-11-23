@@ -5,7 +5,7 @@
 #ifndef INC_2CCPP_PROJECT_GAMESTATES_H
 #define INC_2CCPP_PROJECT_GAMESTATES_H
 
-#include "Game.h"
+#include "GameObjects/Game.h"
 #include "GameState.h"
 #include "Settings.h"
 #include "UI/Button.h"

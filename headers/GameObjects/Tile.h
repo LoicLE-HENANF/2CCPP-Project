@@ -5,12 +5,8 @@
 #ifndef INC_2CCPP_PROJECT_TILE_H
 #define INC_2CCPP_PROJECT_TILE_H
 
-// Color from raylib
-// Vec2 = custom vector class for our project
-// Board notre objet board
-
 #include "raylib.h"
-#include "Vec2.h"
+#include "../Vec2.h"
 
 class Tile {
 public:

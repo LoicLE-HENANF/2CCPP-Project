@@ -5,15 +5,12 @@
 #ifndef INC_2CCPP_PROJECT_GAME_H
 #define INC_2CCPP_PROJECT_GAME_H
 
+
 #include <string>
 #include "Board.h"
-#include "GameState.h"
-#include "Settings.h"
-#include "UI/Button.h"
-#include "Tile.h"
 #include "Tiles.h"
-#include "UI/NumberChoice.h"
-#include "Players.h"
+#include "../UI/Button.h"
+#include "../UI/NumberChoice.h"
 
 class Game {
 

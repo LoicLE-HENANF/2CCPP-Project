@@ -2,7 +2,7 @@
 // Created by lehen on 23/11/2023.
 //
 
-#include "../headers/Tiles.h"
+#include "../../headers/GameObjects/Tiles.h"
 
 Tiles::Tiles(Color color) {
     // On ajoute à tiles toutes les Tiles

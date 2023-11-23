@@ -2,7 +2,7 @@
 // Created by lehen on 12/11/2023.
 //
 
-#include "../headers/RaylibWrapper.h"
+#include "../../headers/GameEngine/RaylibWrapper.h"
 #include <cassert>
 
 namespace GameEngine{

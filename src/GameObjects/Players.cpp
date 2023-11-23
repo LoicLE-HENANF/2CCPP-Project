@@ -2,7 +2,7 @@
 // Created by lehen on 23/11/2023.
 //
 
-#include "../headers/Players.h"
+#include "../../headers/GameObjects/Players.h"
 
 void Players::Init(int numberOfPlayers, Color color) {
     players.clear();

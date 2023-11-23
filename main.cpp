@@ -1,7 +1,6 @@
 #define SUPPORT_MODULE_RSHAPES 1
 #include "headers/Settings.h"
-#include "headers/Game.h"
-#include "headers/GameStates.h"
+#include "headers/GameObjects/Game.h"
 
 
 int main()

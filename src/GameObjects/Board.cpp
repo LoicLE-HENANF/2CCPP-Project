@@ -4,16 +4,11 @@
 
 
 
-#include "../headers/Board.h"
-#include "../headers/RaylibWrapper.h"
-#include "../headers/settings.h"
-#include "../headers/Player.h"
-#include "../headers/Players.h"
+#include "../../headers/GameObjects/Board.h"
 #include <cassert>
-#include <iostream>
+#include "../../headers/GameEngine/RaylibWrapper.h"
 #include <algorithm>
 
-using namespace GameEngine;
 using namespace settings;
 
 // Cell implementation
@@ -73,15 +68,10 @@ void Board::SetCell(Vec2<int> position, Color c) {
 }
 
 void Board::DrawCell(Vec2<int> position) const {
-
     Color c = cells[position.GetY() * width + position.GetX()].GetColor();
-//    assert(c != WHITE); // If assertion triggers : cell is white
-
-
     DrawCell(position, c);
-
-
 }
+
 void Board::DrawCell(Vec2<int> position, Color c) const {
     assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
     Vec2<int> origin = boardPos + padding + (position * cellSize);
