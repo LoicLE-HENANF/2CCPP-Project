@@ -7,18 +7,19 @@
 
 
 #include <utility>
+#include <string>
 
 #include "../Vec2.h"
-#include "../GameState.h"
+#include "raylib.h"
+
 
 class Button {
 public:
-    Button(Vec2<int> buttonPos, Vec2<int> buttonSize, std::string text, Color color, GameState* targetState) :
-        text(text),
+    Button(Vec2<int> buttonPos, Vec2<int> buttonSize, std::string text, Color color) :
+        text(std::move(text)),
         color(color),
         buttonPos(buttonPos),
-        buttonSize(buttonSize),
-        targetState(targetState)
+        buttonSize(buttonSize)
         {
 
         };
@@ -30,7 +31,6 @@ public:
 
 
 private:
-    GameState* targetState;
     std::string text;
     Color color;
     Vec2<int> buttonPos;

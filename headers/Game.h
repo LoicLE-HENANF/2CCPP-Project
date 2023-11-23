@@ -9,7 +9,9 @@
 #include "Board.h"
 #include "GameState.h"
 #include "Settings.h"
-//#include "GameStatesList.h"
+#include "Player.h"
+#include "UI/Button.h"
+#include "Tile.h"
 
 class Game {
 
@@ -30,7 +32,35 @@ private:
     void Update();
 
     // Game variables
+    bool areChoicesMade;
+    Board board;
     Vec2<int> boardSize;
+    // -> Tiles
+    Tile1 tile {GREEN, settings::boardPosition, {200,100}};
+
+
+    //player info
+    int numberOfPlayer;
+    std::vector<Player> players;
+
+
+    // UI (options)
+    Vec2<int> buttonSize = {70,30};
+
+    Vec2<int> playButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2)
+    };
+    Button playButton{
+            playButtonPos,
+            buttonSize,
+            "Play",
+            RED
+    };
+
+    // UI (game)
+
+
 };
 
 

@@ -11,19 +11,20 @@
 
 class Tile {
 public:
-    Tile(const int* shape, int dimension, Color color, const Board& board);
+    Tile(const int *shape, const int dimension, Color color, Vec2<int> boardPos, Vec2<int> position);
     void Draw() const; // fonction qui appelera DrawCell de board
+
 private:
-    Vec2<int> boardPosition;
+    Vec2<int> boardPos;
     const int* shape;
     const int dimension;
-    const Color color;
-    const Board& board;
+    Color color;
+    Vec2<int> position;
 };
 
 class Tile1 : public Tile{
 public:
-    Tile1(Color color, const Board &board);
+    Tile1(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,0,0,
                                      1,1,1,
@@ -33,7 +34,7 @@ private:
 
 class Tile2 : public Tile{
 public:
-    Tile2(Color color, const Board &board);
+    Tile2(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,1,0,
                                      0,1,0,
@@ -43,7 +44,7 @@ private:
 
 class Tile3 : public Tile{
 public:
-    Tile3(Color color, const Board &board);
+    Tile3(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,1,0,
                                      1,1,1,
@@ -53,7 +54,7 @@ private:
 
 class Tile4 : public Tile{
 public:
-    Tile4(Color color, const Board &board);
+    Tile4(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,0,1,
                                      1,1,1,
@@ -63,7 +64,7 @@ private:
 
 class Tile5 : public Tile{
 public:
-    Tile5(Color color, const Board &board);
+    Tile5(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,1,0,
                                      1,1,1,
@@ -73,7 +74,7 @@ private:
 
 class Tile6 : public Tile{
 public:
-    Tile6(Color color, const Board &board);
+    Tile6(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,1,
                                      1,1}; // la forme de la tuile
@@ -82,7 +83,7 @@ private:
 
 class Tile7 : public Tile{
 public:
-    Tile7(Color color, const Board &board);
+    Tile7(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,0,1,
                                      1,1,1,
@@ -92,7 +93,7 @@ private:
 
 class Tile8 : public Tile{
 public:
-    Tile8(Color color, const Board &board);
+    Tile8(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,1,1,
                                      0,0,0,
@@ -102,7 +103,7 @@ private:
 
 class Tile9 : public Tile{
 public:
-    Tile9(Color color, const Board &board);
+    Tile9(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,1,0,
                                      1,1,0,
@@ -112,7 +113,7 @@ private:
 
 class Tile10 : public Tile{
 public:
-    Tile10(Color color, const Board &board);
+    Tile10(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,0,
                                      1,1}; // la forme de la tuile
@@ -121,7 +122,7 @@ private:
 
 class Tile11 : public Tile{
 public:
-    Tile11(Color color, const Board &board);
+    Tile11(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,0,1,
                                      0,1,1,
@@ -131,7 +132,7 @@ private:
 
 class Tile12 : public Tile{
 public:
-    Tile12(Color color, const Board &board);
+    Tile12(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,1,
                                      0,0}; // la forme de la tuile
@@ -140,7 +141,7 @@ private:
 
 class Tile13 : public Tile{
 public:
-    Tile13(Color color, const Board &board);
+    Tile13(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {0,1,0,0,0,
                                      1,1,0,0,0,
@@ -152,7 +153,7 @@ private:
 
 class Tile14 : public Tile{
 public:
-    Tile14(Color color, const Board &board);
+    Tile14(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,1,1,0,0,
                                      1,0,0,0,0,
@@ -164,7 +165,7 @@ private:
 
 class Tile15 : public Tile{
 public:
-Tile15(Color color, const Board &board);
+Tile15(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,0,1,0,
                                  0,0,0,1,0,
@@ -176,7 +177,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile16 : public Tile{
 public:
-Tile16(Color color, const Board &board);
+Tile16(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,0,
                                  0,1,1,0,
@@ -187,7 +188,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile17 : public Tile{
 public:
-Tile17(Color color, const Board &board);
+Tile17(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,
                                  1,1,1,
@@ -197,7 +198,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile18 : public Tile{
 public:
-Tile18(Color color, const Board &board);
+Tile18(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                  1,1,0,0,
@@ -208,7 +209,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile19 : public Tile{
 public:
-Tile19(Color color, const Board &board);
+Tile19(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,
                                  1,1,0,
@@ -218,7 +219,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile20 : public Tile{
 public:
-Tile20(Color color, const Board &board);
+Tile20(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,
                                  1,1,0,
@@ -228,7 +229,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile21 : public Tile{
 public:
-Tile21(Color color, const Board &board);
+Tile21(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                  0,1,0,0,
@@ -239,7 +240,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile22 : public Tile{
 public:
-Tile22(Color color, const Board &board);
+Tile22(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,
                                  1,1,0,
@@ -249,7 +250,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile23 : public Tile{
 public:
-Tile23(Color color, const Board &board);
+Tile23(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,
                                  0,1,0,0,
@@ -260,7 +261,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile24 : public Tile{
 public:
-Tile24(Color color, const Board &board);
+Tile24(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                  1,1,0,0,
@@ -271,7 +272,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile25 : public Tile{
 public:
-Tile25(Color color, const Board &board);
+Tile25(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,1,1,1,
                                  0,0,0,0,0,
@@ -283,7 +284,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile26 : public Tile{
 public:
-Tile26(Color color, const Board &board);
+Tile26(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,
                                  0,1,1,1,
@@ -294,7 +295,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile27 : public Tile{
 public:
-Tile27(Color color, const Board &board);
+Tile27(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,
                                  1,1,0,0,0,
@@ -306,7 +307,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile28 : public Tile{
 public:
-Tile28(Color color, const Board &board);
+Tile28(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                  1,1,0,0,
@@ -317,7 +318,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile29 : public Tile{
 public:
-Tile29(Color color, const Board &board);
+Tile29(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,
                                  0,1,0,0,0,
@@ -329,7 +330,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile30 : public Tile{
 public:
-Tile30(Color color, const Board &board);
+Tile30(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                  1,1,1,0,
@@ -340,7 +341,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile31 : public Tile{
 public:
-Tile31(Color color, const Board &board);
+Tile31(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,
                                  0,1,0,0,0,
@@ -352,7 +353,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile32 : public Tile{
 public:
-Tile32(Color color, const Board &board);
+Tile32(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,
                                  0,1,0,0,0,
@@ -364,7 +365,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile33 : public Tile{
 public:
-Tile33(Color color, const Board &board);
+Tile33(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                  1,0,0,0,
@@ -375,7 +376,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile34 : public Tile{
 public:
-Tile34(Color color, const Board &board);
+Tile34(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,1,
                                  1,1,1,1,
@@ -386,7 +387,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile35 : public Tile{
 public:
-Tile35(Color color, const Board &board);
+Tile35(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,0,1,1,
                                  1,0,0,0,1,
@@ -398,7 +399,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile36 : public Tile{
 public:
-Tile36(Color color, const Board &board);
+Tile36(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,
                                  1,0,0,0,0,
@@ -410,7 +411,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile37 : public Tile{
 public:
-Tile37(Color color, const Board &board);
+Tile37(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,
                                  0,1,1,0,0,
@@ -422,7 +423,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile38 : public Tile{
 public:
-Tile38(Color color, const Board &board);
+Tile38(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,
                                  1,1,0,
@@ -432,7 +433,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile39 : public Tile{
 public:
-Tile39(Color color, const Board &board);
+Tile39(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                  0,1,0,0,
@@ -443,7 +444,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile40 : public Tile{
 public:
-Tile40(Color color, const Board &board);
+Tile40(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                  1,1,0,0,
@@ -454,7 +455,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile41 : public Tile{
 public:
-Tile41(Color color, const Board &board);
+Tile41(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,1,
                                 0,1,0,
@@ -464,7 +465,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile42 : public Tile{
 public:
-    Tile42(Color color, const Board &board);
+    Tile42(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
     static constexpr int shape[] = {1,1,1,1,
                                     0,0,0,0,
@@ -475,7 +476,7 @@ private:
 
 class Tile43 : public Tile{
 public:
-Tile43(Color color, const Board &board);
+Tile43(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                 1,0,0,0,
@@ -486,7 +487,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile44 : public Tile{
 public:
-Tile44(Color color, const Board &board);
+Tile44(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,
                                 1,1,0,0,
@@ -497,7 +498,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile45 : public Tile{
 public:
-Tile45(Color color, const Board &board);
+Tile45(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 1,1,0,0,
@@ -508,7 +509,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile46 : public Tile{
 public:
-Tile46(Color color, const Board &board);
+Tile46(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,
                                 1,1,0,0,0,
@@ -520,7 +521,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile47 : public Tile{
 public:
-Tile47(Color color, const Board &board);
+Tile47(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,1,1,
                                 0,0,1,0,0,
@@ -532,7 +533,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile48 : public Tile{
 public:
-Tile48(Color color, const Board &board);
+Tile48(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,0,
                                  0,1,0,0,0,0,
@@ -545,7 +546,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile49 : public Tile{
 public:
-Tile49(Color color, const Board &board);
+Tile49(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,
                                 0,1,0,0,0,
@@ -557,7 +558,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile50 : public Tile{
 public:
-Tile50(Color color, const Board &board);
+Tile50(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,
                                 0,1,0,0,0,
@@ -569,7 +570,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile51 : public Tile{
 public:
-Tile51(Color color, const Board &board);
+Tile51(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,
                                 0,0,1,
@@ -579,7 +580,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile52 : public Tile{
 public:
-Tile52(Color color, const Board &board);
+Tile52(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,0,
                                 1,0,0,0,0,0,
@@ -592,7 +593,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile53 : public Tile{
 public:
-Tile53(Color color, const Board &board);
+Tile53(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,1,0,
                                 1,1,1,0,
@@ -603,7 +604,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile54 : public Tile{
 public:
-Tile54(Color color, const Board &board);
+Tile54(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,0,
                                 1,1,1,0,
@@ -614,7 +615,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile55 : public Tile{
 public:
-Tile55(Color color, const Board &board);
+Tile55(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,
                                 0,1,0,0,
@@ -625,7 +626,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile56 : public Tile{
 public:
-Tile56(Color color, const Board &board);
+Tile56(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,
                                 1,0,0,0,0,
@@ -637,7 +638,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile57 : public Tile{
 public:
-Tile57(Color color, const Board &board);
+Tile57(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,
                                 0,1,0,0,
@@ -648,7 +649,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile58 : public Tile{
 public:
-Tile58(Color color, const Board &board);
+Tile58(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,0,0,
                                 0,1,1,0,0,
@@ -660,7 +661,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile59 : public Tile{
 public:
-Tile59(Color color, const Board &board);
+Tile59(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,0,0,
                                 0,1,0,0,0,0,
@@ -673,7 +674,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile60 : public Tile{
 public:
-Tile60(Color color, const Board &board);
+Tile60(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,1,0,
                                 1,1,1,1,
@@ -684,7 +685,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile61 : public Tile{
 public:
-Tile61(Color color, const Board &board);
+Tile61(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,
                                 0,1,0,1,
@@ -695,7 +696,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile62 : public Tile{
 public:
-Tile62(Color color, const Board &board);
+Tile62(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,0,
                                 1,0,1,0,0,
@@ -707,7 +708,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile63 : public Tile{
 public:
-Tile63(Color color, const Board &board);
+Tile63(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,0,0,
                                 1,0,0,0,0,0,0,
@@ -721,7 +722,7 @@ static constexpr int dimension = 7; //pour garder en mémoire la taille du patte
 
 class Tile64 : public Tile{
 public:
-Tile64(Color color, const Board &board);
+Tile64(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 1,1,1,0,
@@ -732,7 +733,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile65 : public Tile{
 public:
-Tile65(Color color, const Board &board);
+Tile65(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,
                                 1,0,1,
@@ -742,7 +743,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile66 : public Tile{
 public:
-Tile66(Color color, const Board &board);
+Tile66(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,
                                 1,1,1,
@@ -752,7 +753,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile67 : public Tile{
 public:
-Tile67(Color color, const Board &board);
+Tile67(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,0,0,
                                 0,0,1,0,0,
@@ -764,7 +765,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile68 : public Tile{
 public:
-Tile68(Color color, const Board &board);
+Tile68(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,0,1,0,0,
                                 0,0,1,1,0,0,
@@ -777,7 +778,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile69 : public Tile{
 public:
-Tile69(Color color, const Board &board);
+Tile69(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,
                                 1,0,0,0,0,
@@ -789,7 +790,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile70 : public Tile{
 public:
-Tile70(Color color, const Board &board);
+Tile70(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,
                                 0,1,0,0,0,
@@ -801,7 +802,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile71 : public Tile{
 public:
-Tile71(Color color, const Board &board);
+Tile71(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,0,
                                 1,1,0,0,0,
@@ -813,7 +814,7 @@ static constexpr int dimension = 5; //pour garder en mémoire la taille du patte
 
 class Tile72 : public Tile{
 public:
-Tile72(Color color, const Board &board);
+Tile72(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,
                                 0,1,0,0,
@@ -824,7 +825,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile73 : public Tile{
 public:
-Tile73(Color color, const Board &board);
+Tile73(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,0,0,
                                 0,1,0,0,0,0,
@@ -837,7 +838,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile74 : public Tile{
 public:
-Tile74(Color color, const Board &board);
+Tile74(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,0,0,
                                 1,1,0,0,0,0,
@@ -850,7 +851,7 @@ static constexpr int dimension = 6; //pour garder en mémoire la taille du patte
 
 class Tile75 : public Tile{
 public:
-Tile75(Color color, const Board &board);
+Tile75(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 0,1,1,0,
@@ -861,7 +862,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile76 : public Tile{
 public:
-Tile76(Color color, const Board &board);
+Tile76(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,0,0,
                                 1,1,1,1,
@@ -872,7 +873,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile77 : public Tile{
 public:
-Tile77(Color color, const Board &board);
+Tile77(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,1,1,
                                 1,1,1,0,
@@ -883,7 +884,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile78 : public Tile{
 public:
-Tile78(Color color, const Board &board);
+Tile78(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,
                                 0,1,0,0,
@@ -894,7 +895,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile79 : public Tile{
 public:
-Tile79(Color color, const Board &board);
+Tile79(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 0,1,0,0,
@@ -905,7 +906,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile80 : public Tile{
 public:
-Tile80(Color color, const Board &board);
+Tile80(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,1,1,0,
                                 1,0,1,0,
@@ -916,7 +917,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile81 : public Tile{
 public:
-Tile81(Color color, const Board &board);
+Tile81(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 0,1,1,0,
@@ -927,7 +928,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile82 : public Tile{
 public:
-Tile82(Color color, const Board &board);
+Tile82(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,
                                 1,1,0,
@@ -937,7 +938,7 @@ static constexpr int dimension = 3; //pour garder en mémoire la taille du patte
 
 class Tile83 : public Tile{
 public:
-Tile83(Color color, const Board &board);
+Tile83(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {1,0,0,0,
                                 1,0,0,0,
@@ -948,7 +949,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile84 : public Tile{
 public:
-Tile84(Color color, const Board &board);
+Tile84(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,0,0,0,
                                 0,1,0,0,
@@ -959,7 +960,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile85 : public Tile{
 public:
-Tile85(Color color, const Board &board);
+Tile85(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,1,0,
                                 1,1,0,0,
@@ -970,7 +971,7 @@ static constexpr int dimension = 4; //pour garder en mémoire la taille du patte
 
 class Tile86 : public Tile{
 public:
-Tile86(Color color, const Board &board);
+Tile86(Color color, Vec2<int> boardPos, Vec2<int> position);
 private:
 static constexpr int shape[] = {0,1,0,0,
                                 1,1,0,0,

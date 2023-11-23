@@ -6,19 +6,31 @@
 
 
 
-Tile::Tile(const int *shape, int dimension, Color color, const Board &board) :
+Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> boardPos, Vec2<int> position) :
         shape(shape),
         dimension(dimension),
         color(color),
-        boardPosition(board.GetBoardPos()),
-        board(board)
+        boardPos(boardPos),
+        position(position)
 {
 
 }
 
+void Tile::Draw() const {
+    for (int x= 0; x< dimension; ++x) {
+        for (int y = 0; y < dimension; ++y) {
+            if(shape[x * dimension + y]){
+                Vec2<int> cellPos = {x, y};
+                Vec2<int> size = {settings::cellSize, settings::cellSize};
+                GameEngine::DrawRectangle(position + cellPos * settings::cellSize + settings::padding, size - settings::padding, color);
+            }
+        }
+    }
+}
+
 // Tile1
-Tile1::Tile1(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile1::Tile1(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -26,8 +38,8 @@ Tile1::Tile1(Color color, const Board &board) :
 }
 
 // Tile2
-Tile2::Tile2(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile2::Tile2(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -35,8 +47,8 @@ Tile2::Tile2(Color color, const Board &board) :
 }
 
 // Tile3
-Tile3::Tile3(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile3::Tile3(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -44,8 +56,8 @@ Tile3::Tile3(Color color, const Board &board) :
 }
 
 // Tile4
-Tile4::Tile4(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile4::Tile4(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -53,8 +65,8 @@ Tile4::Tile4(Color color, const Board &board) :
 }
 
 // Tile5
-Tile5::Tile5(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile5::Tile5(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -62,8 +74,8 @@ Tile5::Tile5(Color color, const Board &board) :
 }
 
 // Tile6
-Tile6::Tile6(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile6::Tile6(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -71,8 +83,8 @@ Tile6::Tile6(Color color, const Board &board) :
 }
 
 // Tile7
-Tile7::Tile7(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile7::Tile7(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -80,8 +92,8 @@ Tile7::Tile7(Color color, const Board &board) :
 }
 
 // Tile8
-Tile8::Tile8(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile8::Tile8(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -89,8 +101,8 @@ Tile8::Tile8(Color color, const Board &board) :
 }
 
 // Tile9
-Tile9::Tile9(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile9::Tile9(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -98,8 +110,8 @@ Tile9::Tile9(Color color, const Board &board) :
 }
 
 // Tile10
-Tile10::Tile10(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile10::Tile10(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -107,8 +119,8 @@ Tile10::Tile10(Color color, const Board &board) :
 }
 
 // Tile11
-Tile11::Tile11(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile11::Tile11(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -116,8 +128,8 @@ Tile11::Tile11(Color color, const Board &board) :
 }
 
 // Tile12
-Tile12::Tile12(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile12::Tile12(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -125,8 +137,8 @@ Tile12::Tile12(Color color, const Board &board) :
 }
 
 // Tile13
-Tile13::Tile13(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile13::Tile13(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -134,8 +146,8 @@ Tile13::Tile13(Color color, const Board &board) :
 }
 
 // Tile14
-Tile14::Tile14(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile14::Tile14(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -143,8 +155,8 @@ Tile14::Tile14(Color color, const Board &board) :
 }
 
 // Tile15
-Tile15::Tile15(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile15::Tile15(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -152,8 +164,8 @@ Tile15::Tile15(Color color, const Board &board) :
 }
 
 // Tile16
-Tile16::Tile16(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile16::Tile16(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -161,8 +173,8 @@ Tile16::Tile16(Color color, const Board &board) :
 }
 
 // Tile17
-Tile17::Tile17(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile17::Tile17(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -170,8 +182,8 @@ Tile17::Tile17(Color color, const Board &board) :
 }
 
 // Tile18
-Tile18::Tile18(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile18::Tile18(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -179,8 +191,8 @@ Tile18::Tile18(Color color, const Board &board) :
 }
 
 // Tile19
-Tile19::Tile19(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile19::Tile19(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -188,8 +200,8 @@ Tile19::Tile19(Color color, const Board &board) :
 }
 
 // Tile20
-Tile20::Tile20(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile20::Tile20(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -197,8 +209,8 @@ Tile20::Tile20(Color color, const Board &board) :
 }
 
 // Tile21
-Tile21::Tile21(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile21::Tile21(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -206,8 +218,8 @@ Tile21::Tile21(Color color, const Board &board) :
 }
 
 // Tile22
-Tile22::Tile22(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile22::Tile22(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -215,8 +227,8 @@ Tile22::Tile22(Color color, const Board &board) :
 }
 
 // Tile23
-Tile23::Tile23(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile23::Tile23(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -224,8 +236,8 @@ Tile23::Tile23(Color color, const Board &board) :
 }
 
 // Tile24
-Tile24::Tile24(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile24::Tile24(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -233,8 +245,8 @@ Tile24::Tile24(Color color, const Board &board) :
 }
 
 // Tile25
-Tile25::Tile25(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile25::Tile25(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -242,8 +254,8 @@ Tile25::Tile25(Color color, const Board &board) :
 }
 
 // Tile26
-Tile26::Tile26(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile26::Tile26(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -251,8 +263,8 @@ Tile26::Tile26(Color color, const Board &board) :
 }
 
 // Tile27
-Tile27::Tile27(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile27::Tile27(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -260,8 +272,8 @@ Tile27::Tile27(Color color, const Board &board) :
 }
 
 // Tile28
-Tile28::Tile28(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile28::Tile28(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -269,8 +281,8 @@ Tile28::Tile28(Color color, const Board &board) :
 }
 
 // Tile29
-Tile29::Tile29(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile29::Tile29(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -278,8 +290,8 @@ Tile29::Tile29(Color color, const Board &board) :
 }
 
 // Tile30
-Tile30::Tile30(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile30::Tile30(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -287,8 +299,8 @@ Tile30::Tile30(Color color, const Board &board) :
 }
 
 // Tile31
-Tile31::Tile31(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile31::Tile31(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -296,8 +308,8 @@ Tile31::Tile31(Color color, const Board &board) :
 }
 
 // Tile32
-Tile32::Tile32(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile32::Tile32(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -305,8 +317,8 @@ Tile32::Tile32(Color color, const Board &board) :
 }
 
 // Tile33
-Tile33::Tile33(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile33::Tile33(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -314,8 +326,8 @@ Tile33::Tile33(Color color, const Board &board) :
 }
 
 // Tile34
-Tile34::Tile34(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile34::Tile34(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -323,8 +335,8 @@ Tile34::Tile34(Color color, const Board &board) :
 }
 
 // Tile35
-Tile35::Tile35(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile35::Tile35(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -332,8 +344,8 @@ Tile35::Tile35(Color color, const Board &board) :
 }
 
 // Tile36
-Tile36::Tile36(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile36::Tile36(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -341,8 +353,8 @@ Tile36::Tile36(Color color, const Board &board) :
 }
 
 // Tile37
-Tile37::Tile37(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile37::Tile37(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -350,8 +362,8 @@ Tile37::Tile37(Color color, const Board &board) :
 }
 
 // Tile38
-Tile38::Tile38(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile38::Tile38(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -359,8 +371,8 @@ Tile38::Tile38(Color color, const Board &board) :
 }
 
 // Tile39
-Tile39::Tile39(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile39::Tile39(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -368,8 +380,8 @@ Tile39::Tile39(Color color, const Board &board) :
 }
 
 // Tile40
-Tile40::Tile40(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile40::Tile40(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -377,8 +389,8 @@ Tile40::Tile40(Color color, const Board &board) :
 }
 
 // Tile41
-Tile41::Tile41(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile41::Tile41(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -386,8 +398,8 @@ Tile41::Tile41(Color color, const Board &board) :
 }
 
 // Tile42
-Tile42::Tile42(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile42::Tile42(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -395,8 +407,8 @@ Tile42::Tile42(Color color, const Board &board) :
 }
 
 // Tile43
-Tile43::Tile43(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile43::Tile43(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -404,8 +416,8 @@ Tile43::Tile43(Color color, const Board &board) :
 }
 
 // Tile44
-Tile44::Tile44(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile44::Tile44(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -413,8 +425,8 @@ Tile44::Tile44(Color color, const Board &board) :
 }
 
 // Tile45
-Tile45::Tile45(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile45::Tile45(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -422,8 +434,8 @@ Tile45::Tile45(Color color, const Board &board) :
 }
 
 // Tile46
-Tile46::Tile46(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile46::Tile46(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -431,8 +443,8 @@ Tile46::Tile46(Color color, const Board &board) :
 }
 
 // Tile47
-Tile47::Tile47(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile47::Tile47(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -440,8 +452,8 @@ Tile47::Tile47(Color color, const Board &board) :
 }
 
 // Tile48
-Tile48::Tile48(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile48::Tile48(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -449,8 +461,8 @@ Tile48::Tile48(Color color, const Board &board) :
 }
 
 // Tile49
-Tile49::Tile49(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile49::Tile49(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -458,8 +470,8 @@ Tile49::Tile49(Color color, const Board &board) :
 }
 
 // Tile50
-Tile50::Tile50(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile50::Tile50(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -467,8 +479,8 @@ Tile50::Tile50(Color color, const Board &board) :
 }
 
 // Tile51
-Tile51::Tile51(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile51::Tile51(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -476,8 +488,8 @@ Tile51::Tile51(Color color, const Board &board) :
 }
 
 // Tile52
-Tile52::Tile52(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile52::Tile52(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -485,8 +497,8 @@ Tile52::Tile52(Color color, const Board &board) :
 }
 
 // Tile53
-Tile53::Tile53(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile53::Tile53(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -494,8 +506,8 @@ Tile53::Tile53(Color color, const Board &board) :
 }
 
 // Tile54
-Tile54::Tile54(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile54::Tile54(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -503,8 +515,8 @@ Tile54::Tile54(Color color, const Board &board) :
 }
 
 // Tile55
-Tile55::Tile55(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile55::Tile55(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -512,8 +524,8 @@ Tile55::Tile55(Color color, const Board &board) :
 }
 
 // Tile56
-Tile56::Tile56(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile56::Tile56(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -521,8 +533,8 @@ Tile56::Tile56(Color color, const Board &board) :
 }
 
 // Tile57
-Tile57::Tile57(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile57::Tile57(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -530,8 +542,8 @@ Tile57::Tile57(Color color, const Board &board) :
 }
 
 // Tile58
-Tile58::Tile58(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile58::Tile58(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -539,8 +551,8 @@ Tile58::Tile58(Color color, const Board &board) :
 }
 
 // Tile59
-Tile59::Tile59(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile59::Tile59(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -548,8 +560,8 @@ Tile59::Tile59(Color color, const Board &board) :
 }
 
 // Tile60
-Tile60::Tile60(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile60::Tile60(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -557,8 +569,8 @@ Tile60::Tile60(Color color, const Board &board) :
 }
 
 // Tile61
-Tile61::Tile61(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile61::Tile61(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -566,8 +578,8 @@ Tile61::Tile61(Color color, const Board &board) :
 }
 
 // Tile62
-Tile62::Tile62(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile62::Tile62(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -575,8 +587,8 @@ Tile62::Tile62(Color color, const Board &board) :
 }
 
 // Tile63
-Tile63::Tile63(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile63::Tile63(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -584,8 +596,8 @@ Tile63::Tile63(Color color, const Board &board) :
 }
 
 // Tile64
-Tile64::Tile64(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile64::Tile64(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -593,8 +605,8 @@ Tile64::Tile64(Color color, const Board &board) :
 }
 
 // Tile65
-Tile65::Tile65(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile65::Tile65(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -602,8 +614,8 @@ Tile65::Tile65(Color color, const Board &board) :
 }
 
 // Tile66
-Tile66::Tile66(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile66::Tile66(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -611,8 +623,8 @@ Tile66::Tile66(Color color, const Board &board) :
 }
 
 // Tile67
-Tile67::Tile67(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile67::Tile67(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -620,8 +632,8 @@ Tile67::Tile67(Color color, const Board &board) :
 }
 
 // Tile68
-Tile68::Tile68(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile68::Tile68(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -629,8 +641,8 @@ Tile68::Tile68(Color color, const Board &board) :
 }
 
 // Tile69
-Tile69::Tile69(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile69::Tile69(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -638,8 +650,8 @@ Tile69::Tile69(Color color, const Board &board) :
 }
 
 // Tile70
-Tile70::Tile70(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile70::Tile70(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -647,8 +659,8 @@ Tile70::Tile70(Color color, const Board &board) :
 }
 
 // Tile71
-Tile71::Tile71(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile71::Tile71(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -656,8 +668,8 @@ Tile71::Tile71(Color color, const Board &board) :
 }
 
 // Tile72
-Tile72::Tile72(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile72::Tile72(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -665,8 +677,8 @@ Tile72::Tile72(Color color, const Board &board) :
 }
 
 // Tile73
-Tile73::Tile73(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile73::Tile73(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -674,8 +686,8 @@ Tile73::Tile73(Color color, const Board &board) :
 }
 
 // Tile74
-Tile74::Tile74(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile74::Tile74(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -683,8 +695,8 @@ Tile74::Tile74(Color color, const Board &board) :
 }
 
 // Tile75
-Tile75::Tile75(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile75::Tile75(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -692,8 +704,8 @@ Tile75::Tile75(Color color, const Board &board) :
 }
 
 // Tile76
-Tile76::Tile76(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile76::Tile76(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -701,8 +713,8 @@ Tile76::Tile76(Color color, const Board &board) :
 }
 
 // Tile77
-Tile77::Tile77(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile77::Tile77(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -710,8 +722,8 @@ Tile77::Tile77(Color color, const Board &board) :
 }
 
 // Tile78
-Tile78::Tile78(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile78::Tile78(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -719,8 +731,8 @@ Tile78::Tile78(Color color, const Board &board) :
 }
 
 // Tile79
-Tile79::Tile79(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile79::Tile79(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -728,8 +740,8 @@ Tile79::Tile79(Color color, const Board &board) :
 }
 
 // Tile80
-Tile80::Tile80(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile80::Tile80(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -737,8 +749,8 @@ Tile80::Tile80(Color color, const Board &board) :
 }
 
 // Tile81
-Tile81::Tile81(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile81::Tile81(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -746,8 +758,8 @@ Tile81::Tile81(Color color, const Board &board) :
 }
 
 // Tile82
-Tile82::Tile82(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile82::Tile82(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -755,8 +767,8 @@ Tile82::Tile82(Color color, const Board &board) :
 }
 
 // Tile83
-Tile83::Tile83(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile83::Tile83(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -764,8 +776,8 @@ Tile83::Tile83(Color color, const Board &board) :
 }
 
 // Tile84
-Tile84::Tile84(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile84::Tile84(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -773,8 +785,8 @@ Tile84::Tile84(Color color, const Board &board) :
 }
 
 // Tile85
-Tile85::Tile85(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile85::Tile85(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);
@@ -782,8 +794,8 @@ Tile85::Tile85(Color color, const Board &board) :
 }
 
 // Tile86
-Tile86::Tile86(Color color, const Board &board) :
-        Tile(shape, dimension, color, board)
+Tile86::Tile86(Color color, Vec2<int> boardPos, Vec2<int> position) :
+        Tile(shape, dimension, color, boardPos, position)
 {
     // check if dim correspond bien à la shape at compile time
     static_assert(sizeof(shape) / sizeof(int) == dimension * dimension);

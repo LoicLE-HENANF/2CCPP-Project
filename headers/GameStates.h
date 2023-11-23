@@ -33,8 +33,7 @@ private:
         playButtonPos,
         buttonSize,
         "Play",
-        RED,
-        GameState::playing,
+        RED
     };
     Vec2<int> optionsButtonPos = {
 
