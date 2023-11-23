@@ -9,11 +9,11 @@
 #include "Board.h"
 #include "GameState.h"
 #include "Settings.h"
-#include "Player.h"
 #include "UI/Button.h"
 #include "Tile.h"
 #include "TileQueue.h"
 #include "UI/NumberChoice.h"
+#include "Players.h"
 
 class Game {
 
@@ -52,8 +52,9 @@ private:
 
     //player info
     int numberOfPlayer = 4;
-    std::vector<Player> players;
+    Players players;
     int currentPlayerIndex = 0;
+    Color colorChoice = RED;
 
 
     // UI (options)

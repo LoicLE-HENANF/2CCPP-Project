@@ -20,8 +20,6 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
-
-    players.resize(numberOfPlayer);
 }
 
 Game::~Game() noexcept {
@@ -89,7 +87,9 @@ void Game::UpdateMenu() {
         boardSize = {20,20};
         board.SetBoardSize(boardSize);
 
+        players.Init(numberOfPlayer, colorChoice);
         board.InitBoard(players);
+
 
         // all button turn off
         playButton.TurnOff();

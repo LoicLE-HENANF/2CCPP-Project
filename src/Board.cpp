@@ -8,6 +8,7 @@
 #include "../headers/RaylibWrapper.h"
 #include "../headers/settings.h"
 #include "../headers/Player.h"
+#include "../headers/Players.h"
 #include <cassert>
 #include <iostream>
 #include <algorithm>
@@ -32,7 +33,7 @@ Color Board::Cell::GetColor() const {
 }
 
 // Board implementation
-void Board::InitBoard(const std::vector<Player>& players) {
+void Board::InitBoard(const Players& players) {
     // clearing board
     cells.clear();
     cells.resize(width*height);
@@ -40,7 +41,7 @@ void Board::InitBoard(const std::vector<Player>& players) {
     std::vector<Vec2<int>> startingPos;
 
     // generation des emplacements de départ
-    while(startingPos.size() < players.size()) {
+    while(startingPos.size() < players.GetSize()) {
         Vec2<int> newPos {
                 std::rand() % boardSize.GetX(),
                 std::rand() % boardSize.GetY()
@@ -53,8 +54,8 @@ void Board::InitBoard(const std::vector<Player>& players) {
     }
 
     // placing starting cells
-    for (int i = 0; i < players.size(); ++i) {
-        Color color = players[i].GetColor();
+    for (int i = 0; i < players.GetSize(); ++i) {
+        Color color = players.GetPlayer(i).GetColor();
         Vec2<int> position = startingPos[i];
         cells[position.GetY() * width + position.GetX()].SetColor(color);
     }

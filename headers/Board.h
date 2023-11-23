@@ -12,6 +12,7 @@
 #include "Settings.h"
 #include "cassert"
 #include "Player.h"
+#include "Players.h"
 
 class Board {
 private:
@@ -45,7 +46,7 @@ public:
         cells.clear();
         cells.resize(width*height);
     }
-    void InitBoard(const std::vector<Player>& players);
+    void InitBoard(const Players& players);
     void SetCell(Vec2<int> position, Color c);
     Vec2<int> GetBoardPos() const {
         return boardPos;
