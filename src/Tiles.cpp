@@ -2,9 +2,9 @@
 // Created by lehen on 23/11/2023.
 //
 
-#include "../headers/TileQueue.h"
+#include "../headers/Tiles.h"
 
-TileQueue::TileQueue(Color color) {
+Tiles::Tiles(Color color) {
     // On ajoute à tiles toutes les Tiles
     tiles.push_back(Tile1{color, {0,0}});
     tiles.push_back(Tile2{color, {0,0}});

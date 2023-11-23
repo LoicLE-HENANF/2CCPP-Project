@@ -20,8 +20,6 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
-
-    players.resize(numberOfPlayer);
 }
 
 Game::~Game() noexcept {
@@ -37,6 +35,12 @@ bool Game::GameShouldClose() {
 /// Function that will run every tick (1 tick = 1/{framerate} seconds)
 ///
 void Game::Tick() {
+    tickCounter = (tickCounter + 1) % fps;
+    if (tickCounter == 1){
+        // loop for displaying info once every {framerate} seconds
+//        std::cout << numberOfPlayer << std::endl;
+
+    }
 ///
 /// desc:Game logic is wrap in begin and end drawing function of raylib to avoid forgetting about it in the game logic or the display methods
 ///
@@ -61,14 +65,6 @@ void Game::Draw() {
 }
 
 void Game::Update() {
-    tickCounter = (tickCounter + 1) % fps;
-    if (tickCounter == 1){
-        // loop for displaying info once every {framerate} seconds
-        std::cout << numberOfPlayer << std::endl;
-        std::cout << tickCounter << std::endl;
-
-    }
-
     if(areChoicesMade){
         UpdateGame();
     } else {
@@ -85,29 +81,55 @@ void Game::DrawMenu() {
 void Game::UpdateMenu() {
 // UI logic (options)
     if(playButton.DetectClick()){
-        areChoicesMade = true;
-        boardSize = {20,20};
-        board.SetBoardSize(boardSize);
-
-        board.InitBoard(players);
-
-        // all button turn off
-        playButton.TurnOff();
+        PlayButtonClick();
     }
 
     numberOfPlayer = numberChoice.DetectClick();
 }
 
 void Game::DrawGame() {
+
     board.Draw();
+
+    // si la souris est sur le board
     if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
                                            boardPosition,
                                            boardSize * (cellSize))  )
     {
-        tileQueue.GetCurrentTile().DrawFollow(boardSize);
+        // on affice la current tile dans la queue
+        tiles.GetCurrentTile().DrawFollow(boardSize);
     }
+
+    // TODO: afficher les placedTiles de tiles
+    // TODO: afficher les NextTiles de tiles
+
+    // TODO: bouton bonus
+
 }
 
 void Game::UpdateGame() {
+    // TODO: placer les tiles en detectant un clic sur le board
+        // TODO:  changer les tiles avec une fonction de Tiles
 
+    // TODO: detecter bonus recuperé
+    // TODO: detecter bonus utilisé
+
+    // TODO: detecter clique droit pour rotation
+    // TODO: detecter click pour flip
+
+
+    // TODO: fin de partie
+}
+
+void Game::PlayButtonClick() {
+    areChoicesMade = true;
+    boardSize = {20,20};
+    board.SetBoardSize(boardSize);
+
+    players.Init(numberOfPlayer, colorChoice);
+    board.InitBoard(players);
+
+
+    // all button turn off
+    playButton.TurnOff();
 }

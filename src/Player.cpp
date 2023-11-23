@@ -7,3 +7,7 @@
 Color Player::GetColor() const {
     return color;
 }
+
+void Player::SetColor(Color _color) {
+    color = _color;
+}

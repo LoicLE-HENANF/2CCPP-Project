@@ -2,18 +2,19 @@
 // Created by lehen on 23/11/2023.
 //
 
-#ifndef INC_2CCPP_PROJECT_TILEQUEUE_H
-#define INC_2CCPP_PROJECT_TILEQUEUE_H
+#ifndef INC_2CCPP_PROJECT_TILES_H
+#define INC_2CCPP_PROJECT_TILES_H
 
 
+#include <vector>
 #include "Tile.h"
 
 ///
 /// Classe qui gérera les tiles que le joueur peut poser, qui seront toutes de la couleur qu'il a choisi.
 ///
-class TileQueue {
+class Tiles {
 public:
-    TileQueue(Color color);
+    Tiles(Color color);
 
 
     // getters and setters
@@ -54,9 +55,10 @@ public:
 private:
     std::vector<Tile> tiles;
     int currentTileIndex = 0;
+    std::vector<Tile> placedTiles;
 
 
 };
 
 
-#endif //INC_2CCPP_PROJECT_TILEQUEUE_H
+#endif //INC_2CCPP_PROJECT_TILES_H

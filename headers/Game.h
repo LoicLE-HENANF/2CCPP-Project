@@ -9,11 +9,11 @@
 #include "Board.h"
 #include "GameState.h"
 #include "Settings.h"
-#include "Player.h"
 #include "UI/Button.h"
 #include "Tile.h"
-#include "TileQueue.h"
+#include "Tiles.h"
 #include "UI/NumberChoice.h"
+#include "Players.h"
 
 class Game {
 
@@ -47,21 +47,22 @@ private:
     int tickCounter = 0;
     // -> Tiles
 
-    TileQueue tileQueue{GREEN};
+    Tiles tiles{GREEN};
 
 
     //player info
     int numberOfPlayer = 4;
-    std::vector<Player> players;
-    int currentPlayerIndex = 0;
+    Players players;
+    Color colorChoice = RED;
 
 
     // UI (options)
+
     Vec2<int> buttonSize = {70,30};
 
     Vec2<int> playButtonPos = {
             (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2)
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) +200
     };
     Button playButton{
             playButtonPos,
@@ -69,8 +70,11 @@ private:
             "Play",
             RED
     };
+    void PlayButtonClick();
 
-    Vec2<int> numberChoicePos = {100,100};
+    Vec2<int> numberChoicePos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) - 100};
 
     NumberChoice numberChoice{numberChoicePos,
                               Vec2{100,100},
@@ -80,6 +84,9 @@ private:
                               9};
 
     // UI (game)
+    // TODO: next tiles
+    // TODO: bouton pour utiliser bonus
+
 
 
 };

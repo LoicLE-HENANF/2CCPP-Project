@@ -18,7 +18,9 @@ public:
     Player() : name(""), color(WHITE){};
     ~Player() = default;
 
-    Color GetColor() const;
+    [[nodiscard]] Color GetColor() const;
+
+    void SetColor(Color _color);
 };
 
 
