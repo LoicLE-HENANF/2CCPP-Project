@@ -111,3 +111,17 @@ void Board::Draw() const {
 
 }
 
+void Board::SetCells(Tile tile, Color c) {
+    // TODO: check if tile can be placed
+
+    // TODO: place tile in cells
+    for (int x = 0; x < tile.GetDimension(); ++x) {
+        for (int y = 0; y < tile.GetDimension(); ++y) {
+            if(tile.GetShape()[y * tile.GetDimension() + x]){
+                SetCell({x,y}, c);
+            }
+        }
+    }
+
+}
+

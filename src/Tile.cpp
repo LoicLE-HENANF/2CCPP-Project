@@ -3,7 +3,8 @@
 //
 
 #include "../headers/Tile.h"
-
+#include "../headers/Settings.h"
+#include "../headers/RaylibWrapper.h"
 
 
 Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> position) :
@@ -18,7 +19,7 @@ Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> positio
 void Tile::Draw() {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
-            if(shape[x * dimension + y]){
+            if(shape[y * dimension + x]){
                 Vec2<int> cellPos = {x, y};
                 Vec2<int> size = {settings::cellSize, settings::cellSize};
                 GameEngine::DrawRectangle(position + cellPos * settings::cellSize + settings::padding,
@@ -32,8 +33,8 @@ void Tile::Draw() {
 void Tile::DrawFollow(Vec2<int> boardSize) {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
-            if(shape[x * dimension + y]){
-                Vec2<int> cellPos = {y, x};
+            if(shape[y * dimension + x]){
+                Vec2<int> cellPos = {x, y};
                 Vec2<int> size = {settings::cellSize, settings::cellSize};
 
                 Vec2<int> mousePos = GameEngine::GetMousePosition();
@@ -52,6 +53,14 @@ void Tile::DrawFollow(Vec2<int> boardSize) {
             }
         }
     }
+}
+
+int Tile::GetDimension() {
+    return dimension;
+}
+
+const int * Tile::GetShape() {
+    return shape;
 }
 
 // Tile1

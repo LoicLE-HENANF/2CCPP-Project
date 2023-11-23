@@ -62,7 +62,7 @@ add_executable(${PROJECT_NAME} main.cpp
 
         src/Tile.cpp
 
-        src/UI/CheckBox.cpp src/UI/NumberChoice.cpp src/TileQueue.cpp src/Players.cpp)
+        src/UI/CheckBox.cpp src/UI/NumberChoice.cpp src/Tiles.cpp src/Players.cpp)
 
 
 set(raylib_VERBOSE 1)

@@ -4,14 +4,20 @@
 
 #ifndef INC_2CCPP_PROJECT_TILE_H
 #define INC_2CCPP_PROJECT_TILE_H
-#include "Board.h"
+
 // Color from raylib
 // Vec2 = custom vector class for our project
 // Board notre objet board
 
+#include "raylib.h"
+#include "Vec2.h"
+
 class Tile {
 public:
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
+    // TODO:  gérer rotation avec un enum ?
+    // TODO: fonction qui renvoie bool avec
+    //  utilisation de l'enum pour la rotation
     void Draw(); // fonction qui appelera DrawCell de board
     void DrawFollow(Vec2<int> boardSize); // Comme draw mais pour suivre la souris
 
@@ -22,6 +28,10 @@ public:
     Vec2<int> GetPosition(){
         return position;
     }
+
+    int GetDimension();
+
+    const int * GetShape();
 
 private:
     const int* shape;
