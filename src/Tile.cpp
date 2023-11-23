@@ -29,7 +29,7 @@ void Tile::Draw() {
     }
 }
 
-void Tile::DrawFollow() {
+void Tile::DrawFollow(Vec2<int> boardSize) {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
             if(shape[x * dimension + y]){
@@ -40,7 +40,13 @@ void Tile::DrawFollow() {
 
                 int offset = (dimension / 2) * settings::cellSize;
 
-                GameEngine::DrawRectangle(mousePos + cellPos * settings::cellSize + settings::padding - offset,
+                Vec2<int> pos = mousePos - (mousePos % boardSize);
+
+//                GameEngine::DrawRectangle(pos + cellPos * settings::cellSize + settings::padding - offset,
+//                                          size - settings::padding,
+//                                          color);
+
+                GameEngine::DrawRectangle(pos + cellPos * settings::cellSize + settings::padding,
                                           size - settings::padding,
                                           color);
             }
