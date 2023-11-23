@@ -80,6 +80,18 @@ public:
     {
         return *this = *this / other;
     }
+    Vec2 operator%(const Vec2<int> other) const
+    {
+        return {x % other.GetX(), y % other.GetY()};
+    }
+    Vec2 operator%(const int other) const
+    {
+        return {x % other, y % other};
+    }
+    Vec2& operator%=(const Vec2& other)
+    {
+        return *this = *this % other;
+    }
 
 
 

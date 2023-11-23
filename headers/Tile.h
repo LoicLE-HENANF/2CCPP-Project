@@ -11,9 +11,9 @@
 
 class Tile {
 public:
-    Tile(const int *shape, const int dimension, Color color, Vec2<int> position);
+    Tile(const int *shape, int dimension, Color color, Vec2<int> position);
     void Draw(); // fonction qui appelera DrawCell de board
-    void DrawFollow(); // Comme draw mais pour suivre la souris
+    void DrawFollow(Vec2<int> boardSize); // Comme draw mais pour suivre la souris
 
     void SetPosition(Vec2<int> _position){
         position = _position;

@@ -57,7 +57,7 @@ void Game::Draw() {
                                                boardPosition,
                                                boardSize * (cellSize))  )
         {
-            tileQueue.GetCurrentTile().DrawFollow();
+            tileQueue.GetCurrentTile().DrawFollow(boardSize);
         }
 
 
