@@ -36,7 +36,7 @@ private:
     Board board;
     Vec2<int> boardSize;
     // -> Tiles
-    Tile1 tile {GREEN, settings::boardPosition, {200,100}};
+    Tile1 tile {GREEN, {0,0}};
 
 
     //player info

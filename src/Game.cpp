@@ -52,7 +52,7 @@ void Game::Draw() {
     if(areChoicesMade){
         // les choix sont fait
         board.Draw();
-        tile.Draw();
+        tile.Draw(settings::boardPosition);
     }else{
         // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
         playButton.Draw();
