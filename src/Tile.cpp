@@ -15,13 +15,32 @@ Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> positio
 
 }
 
-void Tile::Draw(Vec2<int> offset) {
+void Tile::Draw() {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
             if(shape[x * dimension + y]){
                 Vec2<int> cellPos = {x, y};
                 Vec2<int> size = {settings::cellSize, settings::cellSize};
-                GameEngine::DrawRectangle(position + offset + cellPos * settings::cellSize + settings::padding,
+                GameEngine::DrawRectangle(position + cellPos * settings::cellSize + settings::padding,
+                                          size - settings::padding,
+                                          color);
+            }
+        }
+    }
+}
+
+void Tile::DrawFollow() {
+    for (int x= 0; x< dimension; ++x) {
+        for (int y = 0; y < dimension; ++y) {
+            if(shape[x * dimension + y]){
+                Vec2<int> cellPos = {y, x};
+                Vec2<int> size = {settings::cellSize, settings::cellSize};
+
+                Vec2<int> mousePos = GameEngine::GetMousePosition();
+
+                int offset = (dimension / 2) * settings::cellSize;
+
+                GameEngine::DrawRectangle(mousePos + cellPos * settings::cellSize + settings::padding - offset,
                                           size - settings::padding,
                                           color);
             }

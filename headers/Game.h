@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "UI/Button.h"
 #include "Tile.h"
+#include "TileQueue.h"
 
 class Game {
 
@@ -35,8 +36,11 @@ private:
     bool areChoicesMade;
     Board board;
     Vec2<int> boardSize;
+
+    int tickCounter = 0;
     // -> Tiles
-    Tile1 tile {GREEN, {0,0}};
+
+    TileQueue tileQueue{GREEN};
 
 
     //player info

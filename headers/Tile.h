@@ -12,7 +12,16 @@
 class Tile {
 public:
     Tile(const int *shape, const int dimension, Color color, Vec2<int> position);
-    void Draw(Vec2<int> offset); // fonction qui appelera DrawCell de board
+    void Draw(); // fonction qui appelera DrawCell de board
+    void DrawFollow(); // Comme draw mais pour suivre la souris
+
+    void SetPosition(Vec2<int> _position){
+        position = _position;
+    }
+
+    Vec2<int> GetPosition(){
+        return position;
+    }
 
 private:
     const int* shape;
