@@ -8,6 +8,7 @@
 
 #include "../headers/Settings.h"
 #include "../headers/GameStates.h"
+#include "../headers/Tile.h"
 
 using namespace settings;
 
@@ -51,6 +52,7 @@ void Game::Draw() {
     if(areChoicesMade){
         // les choix sont fait
         board.Draw();
+        tile.Draw();
     }else{
         // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
         playButton.Draw();
@@ -65,6 +67,7 @@ void Game::Update() {
     if(playButton.DetectClick()){
         areChoicesMade = true;
         board.SetBoardSize({20,20});
+
     }
 
     // UI logic (game)

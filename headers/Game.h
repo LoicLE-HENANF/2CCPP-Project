@@ -11,7 +11,7 @@
 #include "Settings.h"
 #include "Player.h"
 #include "UI/Button.h"
-//#include "GameStatesList.h"
+#include "Tile.h"
 
 class Game {
 
@@ -36,6 +36,7 @@ private:
     Board board;
     Vec2<int> boardSize;
     // -> Tiles
+    Tile1 tile {GREEN, settings::boardPosition, {200,100}};
 
 
     //player info
