@@ -89,13 +89,13 @@ void Game::DrawGame() {
     board.Draw();
 
     // si la souris est sur le board
-    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
-                                           boardPosition,
-                                           boardSize * (cellSize))  )
-    {
+//    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
+//                                           boardPosition,
+//                                           boardSize * (cellSize))  )
+//    {
         // on affice la current tile dans la queue
         tiles.GetCurrentTile().DrawFollow(boardSize);
-    }
+//    }
 
     // TODO: afficher les placedTiles de tiles
     // TODO: afficher les NextTiles de tiles
@@ -107,6 +107,9 @@ void Game::DrawGame() {
 void Game::UpdateGame() {
     // TODO: placer les tiles en detectant un clic sur le board
         // TODO:  changer les tiles avec une fonction de Tiles
+    if (IsKeyPressed(KEY_E)){
+        tiles.GetCurrentTile().RotateClockwise();
+    }
 
     // TODO: detecter bonus recuperé
     // TODO: detecter bonus utilisé

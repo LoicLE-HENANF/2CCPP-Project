@@ -102,9 +102,6 @@ void Board::Draw() const {
 }
 
 void Board::SetCells(Tile tile, Color c) {
-    // TODO: check if tile can be placed
-
-    // TODO: place tile in cells
     for (int x = 0; x < tile.GetDimension(); ++x) {
         for (int y = 0; y < tile.GetDimension(); ++y) {
             if(tile.GetShape()[y * tile.GetDimension() + x]){
@@ -112,6 +109,19 @@ void Board::SetCells(Tile tile, Color c) {
             }
         }
     }
-
 }
+
+bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
+    // TODO check if tile can be place
+    return false;
+}
+
+void Board::PlaceTile(Tile tile, Vec2<int> position) {
+    if (CanPlaceTile(tile, position)){
+        // TODO place tile inside board here using setCells
+    }
+}
+
+
+
 

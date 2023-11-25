@@ -11,46 +11,29 @@ Tile::Tile(const int *shape, const int dimension, Color color, Vec2<int> positio
         shape(shape),
         dimension(dimension),
         color(color),
-        position(position)
+        position(position),
+        currentRotation(Rotation::UP)
 {
 
 }
 
-void Tile::Draw() {
-    for (int x= 0; x< dimension; ++x) {
-        for (int y = 0; y < dimension; ++y) {
-            if(shape[y * dimension + x]){
-                Vec2<int> cellPos = {x, y};
-                Vec2<int> size = {settings::cellSize, settings::cellSize};
-                GameEngine::DrawRectangle(position + cellPos * settings::cellSize + settings::padding,
-                                          size - settings::padding,
-                                          color);
-            }
-        }
-    }
+void Tile::Draw(Vec2<int> pos, Vec2<int> cellPos) {
+    Vec2<int> size = {settings::cellSize, settings::cellSize};
+    GameEngine::DrawRectangle(pos + cellPos * settings::cellSize + settings::padding,
+                              size - settings::padding,
+                              color);
 }
 
 void Tile::DrawFollow(Vec2<int> boardSize) {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
-            if(shape[y * dimension + x]){
-                Vec2<int> cellPos = {x, y};
-                Vec2<int> size = {settings::cellSize, settings::cellSize};
+            Vec2<int> mousePos = GameEngine::GetMousePosition();
+            Vec2<int> pos = mousePos - (mousePos % boardSize);
 
-                Vec2<int> mousePos = GameEngine::GetMousePosition();
-
-                int offset = (dimension / 2) * settings::cellSize;
-
-                Vec2<int> pos = mousePos - (mousePos % boardSize);
-
-//                GameEngine::DrawRectangle(pos + cellPos * settings::cellSize + settings::padding - offset,
-//                                          size - settings::padding,
-//                                          color);
-
-                GameEngine::DrawRectangle(pos + cellPos * settings::cellSize + settings::padding,
-                                          size - settings::padding,
-                                          color);
+            if(GetValue(x,y)){
+                Draw(pos, {x, y});
             }
+
         }
     }
 }
@@ -59,9 +42,37 @@ int Tile::GetDimension() {
     return dimension;
 }
 
+const int Tile::GetValue(int x, int y) {
+    switch (currentRotation) {
+                case Rotation::UP: // 0
+                    return shape[y * dimension + x];
+                case Rotation::RIGHT: // 90
+                    return shape[dimension * (dimension - 1) - dimension * x + y];
+                case Rotation::DOWN: // 180
+                    return shape[(dimension * dimension - 1) - dimension * y - x];
+                case Rotation::LEFT: // 270
+                    return shape[dimension - 1 + dimension * x - y];
+            }
+}
+
+
 const int * Tile::GetShape() {
     return shape;
 }
+
+void Tile::RotateClockwise() {
+    currentRotation = Rotation((int(currentRotation) + 1) % 4);
+}
+
+void Tile::RotateCounterClockwise() {
+    if (currentRotation == Rotation::UP){
+        currentRotation = Rotation::LEFT;
+    }else{
+        currentRotation = Rotation(int(currentRotation) - 1);
+    }
+}
+
+
 
 // Tile1
 Tile1::Tile1(Color color, Vec2<int> position) :

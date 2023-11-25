@@ -67,6 +67,10 @@ public:
     void SetBoardPadding(int newPadding){ padding = newPadding; };
     void SetBoardCellSize(int newCellSize){ cellSize = newCellSize; };
 
+    // Tile placement
+    bool CanPlaceTile(Tile tile, Vec2<int> position);
+    void PlaceTile(Tile tile, Vec2<int> position);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;

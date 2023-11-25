@@ -27,6 +27,7 @@ public:
 
 
 private:
+    // Draw and Update
     void Draw();
     void Update();
 
@@ -35,6 +36,10 @@ private:
 
     void DrawGame();
     void UpdateGame();
+
+    // Game logic
+    bool CanPlaceTile(Tile tile, Vec2<int> position);
+    void PlaceTile(Tile tile, Vec2<int> position);
 
     // Game variables
     bool areChoicesMade;
