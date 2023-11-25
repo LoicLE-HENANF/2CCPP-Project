@@ -105,31 +105,27 @@ void Game::DrawGame() {
 }
 
 void Game::UpdateGame() {
-    // TODO: placer les tiles en detectant un clic sur le board
-        // TODO:  changer les tiles avec une fonction de Tiles
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-        std::cout << "position: " << position.GetX() << ", " << position.GetY() << std::endl;
-        std::cout << "mouse pos - board pos >= 0: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) << std::endl;
-        std::cout << "mouse pos - board pos <= boardSize: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize()) << std::endl;
-        std::cout << "board size: " << board.GetSize().GetX() << ", " << board.GetSize().GetY() << std::endl;
-        std::cout << "mouse position: " << GameEngine::GetMousePosition().GetX() << ", " << GameEngine::GetMousePosition().GetY() << std::endl;
-
-        std::cout << "check inside: " << (((GameEngine::GetMousePosition() - board.GetBoardPos()) / board.GetSize() >= Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos() / (board.GetSize()) <= board.GetSize()))) << std::endl;
-
         if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            board.PlaceTile(tiles.GetCurrentTile(), position);
+            if(board.PlaceTile(tiles.GetCurrentTile(), position)){
+                // change tile
+                tiles.NextTile();
+            }
         }
 
     }
-    if (IsKeyPressed(KEY_E)){
+    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
         tiles.GetCurrentTile().RotateClockwise();
+    }
+
+    if (IsKeyPressed(KEY_F)){
+        tiles.GetCurrentTile().Flip();
     }
 
     // TODO: detecter bonus recuperé
     // TODO: detecter bonus utilisé
 
-    // TODO: detecter clique droit pour rotation
     // TODO: detecter click pour flip
 
 

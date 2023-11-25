@@ -45,13 +45,30 @@ int Tile::GetDimension() {
 const int Tile::GetValue(int x, int y) {
     switch (currentRotation) {
                 case Rotation::UP: // 0
-                    return shape[y * dimension + x];
+                    if (flipped){
+                        return shape[dimension * (dimension - 1) - dimension * y + x];
+                    }else{
+                        return shape[y * dimension + x];
+                    }
+
                 case Rotation::RIGHT: // 90
-                    return shape[dimension * (dimension - 1) - dimension * x + y];
+                    if (flipped){
+                        return shape[(dimension * dimension - 1) - dimension * x - y];
+                    }else {
+                        return shape[dimension * (dimension - 1) - dimension * x + y];
+                    }
                 case Rotation::DOWN: // 180
-                    return shape[(dimension * dimension - 1) - dimension * y - x];
+                    if (flipped){
+                        return shape[dimension - 1 + dimension * y - x];
+                    }else {
+                        return shape[(dimension * dimension - 1) - dimension * y - x];
+                    }
                 case Rotation::LEFT: // 270
-                    return shape[dimension - 1 + dimension * x - y];
+                    if (flipped){
+                        return shape[x * dimension + y];
+                    }else {
+                        return shape[dimension - 1 + dimension * x - y];
+                    }
                 default:
                     return false;
             }
@@ -76,6 +93,10 @@ void Tile::RotateCounterClockwise() {
 
 Color Tile::GetColor() {
     return color;
+}
+
+void Tile::Flip() {
+    flipped = !flipped;
 }
 
 

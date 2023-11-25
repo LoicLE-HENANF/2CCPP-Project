@@ -34,6 +34,8 @@ public:
 
     Color GetColor();
 
+    void Flip();
+
 private:
     enum class Rotation{
         UP,
@@ -42,6 +44,7 @@ private:
         LEFT
     };
     Rotation currentRotation;
+    bool flipped = false;
 
     const int* shape;
     const int dimension;

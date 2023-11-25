@@ -72,7 +72,7 @@ public:
 
     // Tile placement
     bool CanPlaceTile(Tile tile, Vec2<int> position);
-    void PlaceTile(Tile tile, Vec2<int> position);
+    bool PlaceTile(Tile tile, Vec2<int> position);
 
     Vec2<int> GetSize() const;
 

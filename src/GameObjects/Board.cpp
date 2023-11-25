@@ -111,7 +111,7 @@ void Board::Draw() const {
 void Board::SetCells(Tile tile, Vec2<int> position) {
     for (int x = 0; x < tile.GetDimension(); ++x) {
         for (int y = 0; y < tile.GetDimension(); ++y) {
-            if(tile.GetShape()[y * tile.GetDimension() + x]){
+            if(tile.GetValue(x, y)){
                 SetCell({position.GetX() + x, position.GetY() + y}, tile.GetColor());
             }
         }
@@ -136,10 +136,12 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
     return true;
 }
 
-void Board::PlaceTile(Tile tile, Vec2<int> position) {
+bool Board::PlaceTile(Tile tile, Vec2<int> position) {
     if (CanPlaceTile(tile, position)){
         SetCells(tile, position);
+        return true;
     }
+    return false;
 }
 
 Vec2<int> Board::GetSize() const {
