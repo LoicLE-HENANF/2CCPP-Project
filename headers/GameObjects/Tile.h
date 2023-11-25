@@ -36,6 +36,8 @@ public:
 
     void Flip();
 
+    void SetColor(Color color);
+
 private:
     enum class Rotation{
         UP,

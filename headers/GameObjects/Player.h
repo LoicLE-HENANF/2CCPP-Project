@@ -6,16 +6,17 @@
 #define INC_2CCPP_PROJECT_PLAYER_H
 
 #include "raylib.h"
+#include "Tiles.h"
 #include <string>
 
 // Our player class
 class Player {
 private:
     std::string name;
-    Color color{};
+    Color color;
 
 public:
-    Player() : name(""), color(WHITE){};
+    Player() : name(""), color(WHITE) {};
     ~Player() = default;
 
     [[nodiscard]] Color GetColor() const;

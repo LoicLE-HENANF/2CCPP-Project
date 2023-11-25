@@ -49,7 +49,9 @@ private:
     int tickCounter = 0;
     // -> Tiles
 
-    Tiles tiles{GREEN};
+//    Tiles tiles{GREEN};
+
+    std::vector<Tiles> playersTiles;
 
 
     //player info

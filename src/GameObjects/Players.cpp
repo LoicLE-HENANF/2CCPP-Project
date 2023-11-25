@@ -18,3 +18,7 @@ int Players::GetSize() const{
 Player Players::GetPlayer(int i) const{
     return players[i];
 }
+
+int Players::GetCurrentPlayerIndex() const {
+    return currentPlayerIndex;
+}

@@ -21,6 +21,8 @@ public:
 
     Player GetPlayer(int i) const;
 
+    int GetCurrentPlayerIndex() const;
+
 private:
     std::vector<Player> players = {};
     Player currentPlayer;

@@ -99,6 +99,10 @@ void Tile::Flip() {
     flipped = !flipped;
 }
 
+void Tile::SetColor(Color _color) {
+    color = _color;
+}
+
 
 // Tile1
 Tile1::Tile1(Color color, Vec2<int> position) :

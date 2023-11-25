@@ -17,6 +17,8 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
+
+
 }
 
 Game::~Game() noexcept {
@@ -85,42 +87,28 @@ void Game::UpdateMenu() {
 }
 
 void Game::DrawGame() {
-
     board.Draw();
 
-    // si la souris est sur le board
-//    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
-//                                           boardPosition,
-//                                           boardSize * (cellSize))  )
-//    {
-        // on affice la current tile dans la queue
-        tiles.GetCurrentTile().DrawFollow(boardSize);
-//    }
-
-    // TODO: afficher les placedTiles de tiles
-    // TODO: afficher les NextTiles de tiles
-
-    // TODO: bouton bonus
-
+    playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().DrawFollow(boardSize);
 }
 
 void Game::UpdateGame() {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
         if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if(board.PlaceTile(tiles.GetCurrentTile(), position)){
+            if(board.PlaceTile(playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile(), position)){
                 // change tile
-                tiles.NextTile();
+                playersTiles[players.GetCurrentPlayerIndex()].NextTile();
             }
         }
-
     }
+
     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
-        tiles.GetCurrentTile().RotateClockwise();
+        playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().RotateClockwise();
     }
 
     if (IsKeyPressed(KEY_F)){
-        tiles.GetCurrentTile().Flip();
+        playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().Flip();
     }
 
     // TODO: detecter bonus recuperé
@@ -138,7 +126,12 @@ void Game::PlayButtonClick() {
     board.SetBoardSize(boardSize);
 
     players.Init(numberOfPlayer, colorChoice);
+
     board.InitBoard(players);
+
+    // init tiles
+    playersTiles.resize(numberOfPlayer);
+    playersTiles[0].SetTilesColor(colorChoice);
 
 
     // all button turn off
