@@ -13,7 +13,7 @@ public:
     Players() = default;
     ~Players() = default;
 
-    void Init(int numberOfPlayers, Color color);
+    void Init(int numberOfPlayers, Color color, std::vector<Color> allColors);
 
     Color GetCurrentPlayerColor(){ return players[currentPlayerIndex].GetColor(); };
 
@@ -24,7 +24,7 @@ public:
     int GetCurrentPlayerIndex() const;
 
 private:
-    std::vector<Player> players = {};
+    std::vector<Player> players;
     Player currentPlayer;
     int currentPlayerIndex = 0;
 

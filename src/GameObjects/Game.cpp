@@ -6,6 +6,7 @@
 #include "../../headers/GameEngine/RaylibWrapper.h"
 
 #include <cassert>
+#include <algorithm>
 
 using namespace settings;
 
@@ -75,6 +76,7 @@ void Game::DrawMenu() {
     // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
     playButton.Draw();
     numberChoice.Draw();
+    colorChoiceButton.Draw();
 }
 
 void Game::UpdateMenu() {
@@ -82,6 +84,8 @@ void Game::UpdateMenu() {
     if(playButton.DetectClick()){
         PlayButtonClick();
     }
+
+    colorChoice = colorChoiceButton.DetectClick();
 
     numberOfPlayer = numberChoice.DetectClick();
 }
@@ -125,7 +129,11 @@ void Game::PlayButtonClick() {
     boardSize = {20,20};
     board.SetBoardSize(boardSize);
 
-    players.Init(numberOfPlayer, colorChoice);
+
+
+
+
+    players.Init(numberOfPlayer, colorChoice, allColors);
 
     board.InitBoard(players);
 
