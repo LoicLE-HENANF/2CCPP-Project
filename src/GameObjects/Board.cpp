@@ -21,10 +21,15 @@ Board::Cell::Cell()
 
 void Board::Cell::SetColor(Color color) {
     c = color;
+    placed = true;
 }
 
 Color Board::Cell::GetColor() const {
     return c;
+}
+
+int Board::Cell::Placed() {
+    return placed;
 }
 
 // Board implementation
@@ -63,8 +68,10 @@ void Board::InitBoard(const Players& players) {
 }
 
 void Board::SetCell(Vec2<int> position, Color c) {
-    assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
-    cells[position.GetY() * width + position.GetX()].SetColor(c);
+    if(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height){
+        cells[position.GetY() * width + position.GetX()].SetColor(c);
+
+    }
 }
 
 void Board::DrawCell(Vec2<int> position) const {
@@ -101,25 +108,42 @@ void Board::Draw() const {
 
 }
 
-void Board::SetCells(Tile tile, Color c) {
+void Board::SetCells(Tile tile, Vec2<int> position) {
     for (int x = 0; x < tile.GetDimension(); ++x) {
         for (int y = 0; y < tile.GetDimension(); ++y) {
             if(tile.GetShape()[y * tile.GetDimension() + x]){
-                SetCell({x,y}, c);
+                SetCell({position.GetX() + x, position.GetY() + y}, tile.GetColor());
             }
         }
     }
 }
 
 bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
-    // TODO check if tile can be place
-    return false;
+    // check if tile can be place by comparing tile 1 and 0 to the clicked groupe of cells
+    for (int x = 0; x < tile.GetDimension(); ++x) {
+        for (int y = 0; y < tile.GetDimension(); ++y) {
+            // check if ousite the board
+            if (position.GetX() + x >= 0 && position.GetY() + y >= 0 && position.GetX() + x <width && position.GetY() + y < height){
+                if (tile.GetValue(x, y) && cells[(position.GetY() + y) * width + (position.GetX() + x)].Placed()){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+        }
+    }
+    return true;
 }
 
 void Board::PlaceTile(Tile tile, Vec2<int> position) {
     if (CanPlaceTile(tile, position)){
-        // TODO place tile inside board here using setCells
+        SetCells(tile, position);
     }
+}
+
+Vec2<int> Board::GetSize() const {
+    return {width, height};
 }
 
 

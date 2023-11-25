@@ -52,6 +52,8 @@ const int Tile::GetValue(int x, int y) {
                     return shape[(dimension * dimension - 1) - dimension * y - x];
                 case Rotation::LEFT: // 270
                     return shape[dimension - 1 + dimension * x - y];
+                default:
+                    return false;
             }
 }
 
@@ -72,6 +74,9 @@ void Tile::RotateCounterClockwise() {
     }
 }
 
+Color Tile::GetColor() {
+    return color;
+}
 
 
 // Tile1

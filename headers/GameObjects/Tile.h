@@ -32,6 +32,8 @@ public:
     void RotateClockwise();
     void RotateCounterClockwise();
 
+    Color GetColor();
+
 private:
     enum class Rotation{
         UP,

@@ -22,9 +22,12 @@ private:
             void SetColor(Color color);
             Color GetColor() const;
 
-        private:
+        int Placed();
+
+    private:
             Color c;
-            };
+            bool placed = false;
+    };
 public:
     Board(): boardPos(settings::boardPosition),
             width(settings::boardSize.GetX()),
@@ -44,7 +47,7 @@ public:
         cells.resize(width*height);
     }
     void InitBoard(const Players& players);
-    void SetCells(Tile tile, Color c);
+    void SetCells(Tile tile, Vec2<int> position);
     void SetCell(Vec2<int> position, Color c);
     Vec2<int> GetBoardPos() const {
         return boardPos;
@@ -70,6 +73,8 @@ public:
     // Tile placement
     bool CanPlaceTile(Tile tile, Vec2<int> position);
     void PlaceTile(Tile tile, Vec2<int> position);
+
+    Vec2<int> GetSize() const;
 
 private:
     std::vector<Cell> cells;
