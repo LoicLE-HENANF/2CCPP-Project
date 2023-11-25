@@ -89,13 +89,13 @@ void Game::DrawGame() {
     board.Draw();
 
     // si la souris est sur le board
-    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
-                                           boardPosition,
-                                           boardSize * (cellSize))  )
-    {
+//    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
+//                                           boardPosition,
+//                                           boardSize * (cellSize))  )
+//    {
         // on affice la current tile dans la queue
         tiles.GetCurrentTile().DrawFollow(boardSize);
-    }
+//    }
 
     // TODO: afficher les placedTiles de tiles
     // TODO: afficher les NextTiles de tiles
@@ -107,6 +107,24 @@ void Game::DrawGame() {
 void Game::UpdateGame() {
     // TODO: placer les tiles en detectant un clic sur le board
         // TODO:  changer les tiles avec une fonction de Tiles
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+        std::cout << "position: " << position.GetX() << ", " << position.GetY() << std::endl;
+        std::cout << "mouse pos - board pos >= 0: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) << std::endl;
+        std::cout << "mouse pos - board pos <= boardSize: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize()) << std::endl;
+        std::cout << "board size: " << board.GetSize().GetX() << ", " << board.GetSize().GetY() << std::endl;
+        std::cout << "mouse position: " << GameEngine::GetMousePosition().GetX() << ", " << GameEngine::GetMousePosition().GetY() << std::endl;
+
+        std::cout << "check inside: " << (((GameEngine::GetMousePosition() - board.GetBoardPos()) / board.GetSize() >= Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos() / (board.GetSize()) <= board.GetSize()))) << std::endl;
+
+        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
+            board.PlaceTile(tiles.GetCurrentTile(), position);
+        }
+
+    }
+    if (IsKeyPressed(KEY_E)){
+        tiles.GetCurrentTile().RotateClockwise();
+    }
 
     // TODO: detecter bonus recuperé
     // TODO: detecter bonus utilisé

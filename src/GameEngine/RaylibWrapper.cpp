@@ -8,9 +8,9 @@
 namespace GameEngine{
 
     void DrawRectangle(Vec2<int> position, Vec2<int> size, Color color) {
-        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
-               position.GetX() < GetScreenWidth() &&
-               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
+//        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
+//               position.GetX() < GetScreenWidth() &&
+//               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
         DrawRectangle(position.GetX(),
                       position.GetY(),
                       size.GetX(),
@@ -19,9 +19,9 @@ namespace GameEngine{
     }
 
     void DrawRectangleLinesEx(Vec2<int> position, Vec2<int> size, int lineThickness, Color color) {
-        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
-               position.GetX() < GetScreenWidth() &&
-               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
+//        assert(position.GetX() >= 0 && position.GetY() >= 0 &&
+//               position.GetX() < GetScreenWidth() &&
+//               position.GetY() < GetScreenHeight()); // If asssertion triggers : Trying to draw ouside of the screen
         DrawRectangleLinesEx(
                 {(float) position.GetX(), (float) position.GetY(), (float) size.GetX(), (float) size.GetY()},
                 (float) lineThickness,

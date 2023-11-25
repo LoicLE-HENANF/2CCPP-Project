@@ -92,6 +92,25 @@ public:
     {
         return *this = *this % other;
     }
+    // > and < and <= and >=
+    bool operator<(const Vec2<int> other) const
+    {
+        return x < other.GetX() && y < other.GetY();
+    }
+
+    bool operator>(const Vec2<int> other) const
+    {
+        return x > other.GetX() && y > other.GetY();
+    }
+    bool operator<=(const Vec2<int> other) const
+    {
+        return x <= other.GetX() && y <= other.GetY();
+    }
+
+    bool operator>=(const Vec2<int> other) const
+    {
+        return x >= other.GetX() && y >= other.GetY();
+    }
 
 
 

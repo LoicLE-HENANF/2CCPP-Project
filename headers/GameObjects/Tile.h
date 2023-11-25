@@ -12,9 +12,8 @@ class Tile {
 public:
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
     // TODO:  gérer rotation avec un enum ?
-    // TODO: fonction qui renvoie bool avec
-    //  utilisation de l'enum pour la rotation
-    void Draw(); // fonction qui appelera DrawCell de board
+
+    void Draw(Vec2<int> pos, Vec2<int> cellPos);
     void DrawFollow(Vec2<int> boardSize); // Comme draw mais pour suivre la souris
 
     void SetPosition(Vec2<int> _position){
@@ -27,9 +26,23 @@ public:
 
     int GetDimension();
 
+    const int GetValue(int x, int y);
     const int * GetShape();
 
+    void RotateClockwise();
+    void RotateCounterClockwise();
+
+    Color GetColor();
+
 private:
+    enum class Rotation{
+        UP,
+        RIGHT,
+        DOWN,
+        LEFT
+    };
+    Rotation currentRotation;
+
     const int* shape;
     const int dimension;
     Color color;
