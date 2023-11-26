@@ -7,7 +7,7 @@
 
 
 #include <iostream>
-#include "../Vec2.h"
+#include "../Utilities/Vec2.h"
 #include "raylib.h"
 
 class ColorChoice { ;

@@ -45,7 +45,7 @@ add_executable(${PROJECT_NAME} main.cpp
 
         headers/settings.h
         headers/GameEngine/ThreadHandler.h
-        headers/Vec2.h
+        headers/Utilities/Vec2.h
         headers/GameObjects/Tile.h
         headers/UI/CheckBox.h
 

@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_CHECKBOX_H
 
 
-#include "../Vec2.h"
+#include "../Utilities/Vec2.h"
 #include "raylib.h"
 
 class CheckBox {

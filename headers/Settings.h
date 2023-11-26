@@ -5,7 +5,7 @@
 #ifndef INC_2CCPP_PROJECT_SETTINGS_H
 #define INC_2CCPP_PROJECT_SETTINGS_H
 
-#include "Vec2.h"
+#include "Utilities/Vec2.h"
 #include <string>
 #include "raylib.h"
 
