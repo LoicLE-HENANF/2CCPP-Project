@@ -33,6 +33,8 @@ public:
 
     Tiles& GetCurrentTiles();
 
+    Player GetCurrentPlayer();
+
 private:
     std::vector<Player> players;
     Player currentPlayer;

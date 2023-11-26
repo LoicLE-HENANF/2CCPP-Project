@@ -97,34 +97,50 @@ void Game::DrawGame() {
 }
 
 void Game::UpdateGame() {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-        // position = {boardX, boardY}
-        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-// on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
-        //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if(board.PlaceTile(players.GetCurrentTiles().GetCurrentTile(), position)){
+    // if player is ai
+    if (players.GetCurrentPlayer().GetIsAI()) {
+
+        // if player is distant (multiplayer)
+    } else if(players.GetCurrentPlayer().GetIsDistant()){
+
+        // if player is neither distant nor ai
+    } else if(!players.GetCurrentPlayer().GetIsDistant() && !players.GetCurrentPlayer().GetIsAI()) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            // position = {boardX, boardY}
+            Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+            // on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
+            //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
+            if (board.PlaceTile(players.GetCurrentTiles().GetCurrentTile(), position)) {
                 // change tile
                 players.GetCurrentTiles().NextTile();
                 players.NextPlayer();
-//            }
+                //            }
+            }
+        }
+
+        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+            players.GetCurrentTiles().GetCurrentTile().RotateClockwise();
+        }
+
+        if (IsKeyPressed(KEY_F)) {
+            players.GetCurrentTiles().GetCurrentTile().Flip();
+        }
+
+        // TODO: detecter bonus recuperé
+        // TODO: detecter bonus utilisé
+
+        // TODO: detecter click pour flip
+
+
+        // TODO: fin de partie
+
+        // multiplayer send data
+        if (isServer){
+
+        }else if(isClient){
+
         }
     }
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
-        players.GetCurrentTiles().GetCurrentTile().RotateClockwise();
-    }
-
-    if (IsKeyPressed(KEY_F)){
-        players.GetCurrentTiles().GetCurrentTile().Flip();
-    }
-
-    // TODO: detecter bonus recuperé
-    // TODO: detecter bonus utilisé
-
-    // TODO: detecter click pour flip
-
-
-    // TODO: fin de partie
 }
 
 void Game::PlayButtonClick() {

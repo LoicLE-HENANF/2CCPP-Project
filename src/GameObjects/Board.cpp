@@ -140,7 +140,7 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
 }
 
 bool Board::PlaceTile(Tile tile, Vec2<int> position) {
-    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position) && !OposingTile(tile, position)){
+    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position)){
         SetCells(tile, position);
         return true;
     }
@@ -155,13 +155,13 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
     bool cellFound = false;
     for (int y = 0; y < tile.GetDimension(); ++y) {
         for (int x = 0; x < tile.GetDimension(); ++x) {
-            // si la case de la tile est vide, check si une tile de meme couleur est presente
             Color tileColor = tile.GetColor();
             Color cellColor = GetCell(position.GetX() + x, position.GetY() + y).GetColor();
-            auto cellUpColor = BROWN;
-            auto cellDownColor = BROWN;
-            auto cellLeftColor = BROWN;
-            auto cellRightColor = BROWN;
+            Color cellUpColor = cellBaseColor;
+            Color cellDownColor = cellBaseColor;
+            Color cellLeftColor = cellBaseColor;
+            Color cellRightColor = cellBaseColor;
+
             if (position.GetY() + y + 1 < height){
                 cellUpColor = GetCell(position.GetX() + x, position.GetY() + y+1).GetColor();
             }
@@ -190,6 +190,7 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
             bool checkBaseCellRightColor = GameEngine::ColorEquals(cellBaseColor, cellRightColor);
             
             std::cout << "check for neighbor tile number: " << y * tile.GetDimension() + x << std::endl;
+
             // si la case de la tile est vide (0) et que ca couleur correspond
             if (!tile.GetValue(x, y) && checkTileCellColor){
                 cellFound = true;
@@ -220,10 +221,6 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
 
 Board::Cell &Board::GetCell(int x, int y) {
     return cells[y * boardSize.GetX() + x];
-}
-
-bool Board::OposingTile(Tile tile, Vec2<int> position) {
-    return false;
 }
 
 

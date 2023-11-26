@@ -38,9 +38,9 @@ private:
     void DrawGame();
     void UpdateGame();
 
-    // Game logic
-    bool CanPlaceTile(Tile tile, Vec2<int> position);
-    void PlaceTile(Tile tile, Vec2<int> position);
+    // multiplayer logic
+    bool isServer = false;
+    bool isClient = false;
 
     // Game variables
     bool areChoicesMade;
