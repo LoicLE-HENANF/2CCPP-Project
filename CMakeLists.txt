@@ -40,9 +40,6 @@ endif ()
 add_executable(${PROJECT_NAME} main.cpp
         headers/GameObjects/Board.h
         headers/GameObjects/Game.h
-        headers/GameState.h
-        headers/GameStates.h
-        headers/IState.h
         headers/GameObjects/Player.h
         headers/GameEngine/RaylibWrapper.h
 
@@ -53,7 +50,6 @@ add_executable(${PROJECT_NAME} main.cpp
         headers/UI/CheckBox.h
 
         src/GameObjects/Game.cpp
-        src/GameStates.cpp
         src/GameObjects/Player.cpp
         src/GameEngine/RaylibWrapper.cpp
         src/GameEngine/ThreadHandler.cpp
