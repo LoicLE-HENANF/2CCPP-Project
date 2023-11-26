@@ -14,3 +14,7 @@ TODO général:
 * Check si tile peut etre placée
 * Corriger tile qui dépasse du board
 * Faire la fin du jeu à terme
+
+
+Problems:
+* if random tiles (shuffle) -> how to multiplayer (sending tile info ? no random ?)

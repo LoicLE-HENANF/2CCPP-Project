@@ -16,13 +16,29 @@ private:
     Color color;
     Tiles tiles;
 
+    bool isAI = false;
+    bool isDistant = false;
+
 public:
     Player() : name(""), color(WHITE) {};
     ~Player() = default;
 
     [[nodiscard]] Color GetColor() const;
-
     void SetColor(Color _color);
+
+    [[nodiscard]] bool GetIsAI() const{
+        return isAI;
+    };
+    void SetIsAI(bool _isAI){
+        isAI = _isAI;
+    };
+
+    [[nodiscard]] bool GetIsDistant() const{
+        return isDistant;
+    };
+    void SetIsDistant(bool _isDistant){
+        isAI = _isDistant;
+    };
 
     void InitTiles(){
         tiles.SetTilesColor(color);

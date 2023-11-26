@@ -21,11 +21,12 @@ void Players::Init(int numberOfPlayers, Color color, std::vector<Color> allColor
     }
 
     int skip = 0;
-    for (int playerIndex = 1; playerIndex < players.size(); ++playerIndex) {
-        if (allColors[playerIndex].r == 255 && allColors[playerIndex].g == 255 && allColors[playerIndex].b == 255 &&allColors[playerIndex].a == 255){
+    for (int playerIndex = 0; playerIndex < players.size(); ++playerIndex) {
+        Color playerColor = allColors[playerIndex];
+        if (playerColor.r == 255 && playerColor.g == 255 && playerColor.b == 255 &&playerColor.a == 255){
             skip = 1;
         }
-        players[playerIndex].SetColor(allColors[playerIndex + skip]);
+        players[playerIndex+1].SetColor(allColors[playerIndex + skip]);
     }
 
     InitAllTiles();
@@ -51,4 +52,8 @@ void Players::NextPlayer() {
 
 Tiles& Players::GetCurrentTiles() {
     return players[currentPlayerIndex].GetTiles();
+}
+
+Player Players::GetCurrentPlayer() {
+    return players[currentPlayerIndex];
 }
