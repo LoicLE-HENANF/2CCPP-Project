@@ -6,6 +6,7 @@
 #include "../../headers/GameEngine/RaylibWrapper.h"
 
 #include <cassert>
+#include <algorithm>
 
 using namespace settings;
 
@@ -17,6 +18,8 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
     InitWindow(width, height, _title.c_str());
 
     areChoicesMade = false;
+
+
 }
 
 Game::~Game() noexcept {
@@ -73,6 +76,7 @@ void Game::DrawMenu() {
     // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
     playButton.Draw();
     numberChoice.Draw();
+    colorChoiceButton.Draw();
 }
 
 void Game::UpdateMenu() {
@@ -81,55 +85,42 @@ void Game::UpdateMenu() {
         PlayButtonClick();
     }
 
+    colorChoice = colorChoiceButton.DetectClick();
+
     numberOfPlayer = numberChoice.DetectClick();
 }
 
 void Game::DrawGame() {
-
     board.Draw();
 
-    // si la souris est sur le board
-//    if (GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
-//                                           boardPosition,
-//                                           boardSize * (cellSize))  )
-//    {
-        // on affice la current tile dans la queue
-        tiles.GetCurrentTile().DrawFollow(boardSize);
-//    }
-
-    // TODO: afficher les placedTiles de tiles
-    // TODO: afficher les NextTiles de tiles
-
-    // TODO: bouton bonus
-
+    players.GetCurrentTiles().GetCurrentTile().DrawFollow(boardSize);
 }
 
 void Game::UpdateGame() {
-    // TODO: placer les tiles en detectant un clic sur le board
-        // TODO:  changer les tiles avec une fonction de Tiles
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        // position = {boardX, boardY}
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-        std::cout << "position: " << position.GetX() << ", " << position.GetY() << std::endl;
-        std::cout << "mouse pos - board pos >= 0: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) << std::endl;
-        std::cout << "mouse pos - board pos <= boardSize: " << ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize()) << std::endl;
-        std::cout << "board size: " << board.GetSize().GetX() << ", " << board.GetSize().GetY() << std::endl;
-        std::cout << "mouse position: " << GameEngine::GetMousePosition().GetX() << ", " << GameEngine::GetMousePosition().GetY() << std::endl;
-
-        std::cout << "check inside: " << (((GameEngine::GetMousePosition() - board.GetBoardPos()) / board.GetSize() >= Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos() / (board.GetSize()) <= board.GetSize()))) << std::endl;
-
-        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            board.PlaceTile(tiles.GetCurrentTile(), position);
+// on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
+        //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
+            if(board.PlaceTile(players.GetCurrentTiles().GetCurrentTile(), position)){
+                // change tile
+                players.GetCurrentTiles().NextTile();
+                players.NextPlayer();
+//            }
         }
-
     }
-    if (IsKeyPressed(KEY_E)){
-        tiles.GetCurrentTile().RotateClockwise();
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
+        players.GetCurrentTiles().GetCurrentTile().RotateClockwise();
+    }
+
+    if (IsKeyPressed(KEY_F)){
+        players.GetCurrentTiles().GetCurrentTile().Flip();
     }
 
     // TODO: detecter bonus recuperé
     // TODO: detecter bonus utilisé
 
-    // TODO: detecter clique droit pour rotation
     // TODO: detecter click pour flip
 
 
@@ -141,9 +132,9 @@ void Game::PlayButtonClick() {
     boardSize = {20,20};
     board.SetBoardSize(boardSize);
 
-    players.Init(numberOfPlayer, colorChoice);
+    //Inits
+    players.Init(numberOfPlayer, colorChoice, allColors);
     board.InitBoard(players);
-
 
     // all button turn off
     playButton.TurnOff();

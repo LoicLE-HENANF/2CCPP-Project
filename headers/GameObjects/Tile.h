@@ -11,7 +11,6 @@
 class Tile {
 public:
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
-    // TODO:  gérer rotation avec un enum ?
 
     void Draw(Vec2<int> pos, Vec2<int> cellPos);
     void DrawFollow(Vec2<int> boardSize); // Comme draw mais pour suivre la souris
@@ -34,6 +33,10 @@ public:
 
     Color GetColor();
 
+    void Flip();
+
+    void SetColor(Color color);
+
 private:
     enum class Rotation{
         UP,
@@ -42,6 +45,7 @@ private:
         LEFT
     };
     Rotation currentRotation;
+    bool flipped = false;
 
     const int* shape;
     const int dimension;

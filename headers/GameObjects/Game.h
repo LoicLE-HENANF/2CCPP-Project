@@ -11,6 +11,7 @@
 #include "Tiles.h"
 #include "../UI/Button.h"
 #include "../UI/NumberChoice.h"
+#include "../UI/ColorChoice.h"
 
 class Game {
 
@@ -47,15 +48,14 @@ private:
     Vec2<int> boardSize{};
 
     int tickCounter = 0;
-    // -> Tiles
-
-    Tiles tiles{GREEN};
 
 
     //player info
     int numberOfPlayer = 4;
     Players players;
     Color colorChoice = RED;
+
+    std::vector<Color> allColors = {RED,BLUE,GREEN, YELLOW, PURPLE, BLACK, ORANGE};
 
 
     // UI (options)
@@ -84,6 +84,17 @@ private:
                               WHITE,
                               2,
                               9};
+
+    Vec2<int> colorChoiceSize = {50,50};
+
+    Vec2<int> colorChoicePos = {
+            (settings::screenWidth / 2) - (colorChoiceSize.GetX() / 2),
+            (settings::screenHeight / 2) - (colorChoiceSize.GetY() / 2) + 100
+    };
+    ColorChoice colorChoiceButton{
+        colorChoicePos,
+        colorChoiceSize
+    };
 
     // UI (game)
     // TODO: next tiles

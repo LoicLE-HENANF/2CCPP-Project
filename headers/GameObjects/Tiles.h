@@ -14,7 +14,7 @@
 ///
 class Tiles {
 public:
-    Tiles(Color color);
+    Tiles();
 
 
     // getters and setters
@@ -52,10 +52,18 @@ public:
         }
     }
 
+    void SetTilesColor(Color _color){
+        color = _color;
+        for (Tile &tile : tiles) {
+            tile.SetColor(_color);
+        }
+    }
+
 private:
     std::vector<Tile> tiles;
     int currentTileIndex = 0;
     std::vector<Tile> placedTiles;
+    Color color;
 
 
 };

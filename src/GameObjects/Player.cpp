@@ -11,3 +11,7 @@ Color Player::GetColor() const {
 void Player::SetColor(Color _color) {
     color = _color;
 }
+
+Tiles& Player::GetTiles() {
+    return tiles;
+}
