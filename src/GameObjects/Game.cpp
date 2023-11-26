@@ -93,26 +93,29 @@ void Game::UpdateMenu() {
 void Game::DrawGame() {
     board.Draw();
 
-    playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().DrawFollow(boardSize);
+    players.GetCurrentTiles().GetCurrentTile().DrawFollow(boardSize);
 }
 
 void Game::UpdateGame() {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        // position = {boardX, boardY}
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if(board.PlaceTile(playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile(), position)){
+// on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
+        //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
+            if(board.PlaceTile(players.GetCurrentTiles().GetCurrentTile(), position)){
                 // change tile
-                playersTiles[players.GetCurrentPlayerIndex()].NextTile();
-            }
+                players.GetCurrentTiles().NextTile();
+                players.NextPlayer();
+//            }
         }
     }
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)){
-        playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().RotateClockwise();
+        players.GetCurrentTiles().GetCurrentTile().RotateClockwise();
     }
 
     if (IsKeyPressed(KEY_F)){
-        playersTiles[players.GetCurrentPlayerIndex()].GetCurrentTile().Flip();
+        players.GetCurrentTiles().GetCurrentTile().Flip();
     }
 
     // TODO: detecter bonus recuperé
@@ -129,18 +132,9 @@ void Game::PlayButtonClick() {
     boardSize = {20,20};
     board.SetBoardSize(boardSize);
 
-
-
-
-
+    //Inits
     players.Init(numberOfPlayer, colorChoice, allColors);
-
     board.InitBoard(players);
-
-    // init tiles
-    playersTiles.resize(numberOfPlayer);
-    playersTiles[0].SetTilesColor(colorChoice);
-
 
     // all button turn off
     playButton.TurnOff();

@@ -27,6 +27,8 @@ namespace GameEngine {
 
     void DrawTriangleUp(Vec2<int> position, Vec2<int> size, Color color);
     void DrawTriangleDown(Vec2<int> position, Vec2<int> size, Color color);
+
+    bool ColorEquals(Color color1, Color color2);
 }
 
 

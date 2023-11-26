@@ -23,6 +23,16 @@ public:
 
     int GetCurrentPlayerIndex() const;
 
+    void NextPlayer();
+
+    void InitAllTiles(){
+        for (int i = 0; i < players.size(); ++i) {
+            players[i].InitTiles();
+        }
+    }
+
+    Tiles& GetCurrentTiles();
+
 private:
     std::vector<Player> players;
     Player currentPlayer;

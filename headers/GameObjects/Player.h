@@ -14,6 +14,7 @@ class Player {
 private:
     std::string name;
     Color color;
+    Tiles tiles;
 
 public:
     Player() : name(""), color(WHITE) {};
@@ -22,6 +23,12 @@ public:
     [[nodiscard]] Color GetColor() const;
 
     void SetColor(Color _color);
+
+    void InitTiles(){
+        tiles.SetTilesColor(color);
+    }
+
+    Tiles& GetTiles();
 };
 
 

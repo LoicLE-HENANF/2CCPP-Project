@@ -123,21 +123,24 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
     for (int x = 0; x < tile.GetDimension(); ++x) {
         for (int y = 0; y < tile.GetDimension(); ++y) {
             // check if ousite the board
-            if (position.GetX() + x >= 0 && position.GetY() + y >= 0 && position.GetX() + x <width && position.GetY() + y < height){
-                if (tile.GetValue(x, y) && cells[(position.GetY() + y) * width + (position.GetX() + x)].Placed()){
+            if (position.GetX() + x >= 0 && position.GetY() + y >= 0 && position.GetX() + x < width && position.GetY() + y < height){
+                if (tile.GetValue(x, y) && (cells[(position.GetY() + y) * width + (position.GetX() + x)].Placed())){
                     return false;
                 }
             }else{
-                return false;
+                if (tile.GetValue(x, y) == 0){
+                    continue;
+                }else{
+                    return false;
+                }
             }
-
         }
     }
     return true;
 }
 
 bool Board::PlaceTile(Tile tile, Vec2<int> position) {
-    if (CanPlaceTile(tile, position)){
+    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position) && !OposingTile(tile, position)){
         SetCells(tile, position);
         return true;
     }
@@ -146,6 +149,81 @@ bool Board::PlaceTile(Tile tile, Vec2<int> position) {
 
 Vec2<int> Board::GetSize() const {
     return {width, height};
+}
+
+bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
+    bool cellFound = false;
+    for (int y = 0; y < tile.GetDimension(); ++y) {
+        for (int x = 0; x < tile.GetDimension(); ++x) {
+            // si la case de la tile est vide, check si une tile de meme couleur est presente
+            Color tileColor = tile.GetColor();
+            Color cellColor = GetCell(position.GetX() + x, position.GetY() + y).GetColor();
+            auto cellUpColor = BROWN;
+            auto cellDownColor = BROWN;
+            auto cellLeftColor = BROWN;
+            auto cellRightColor = BROWN;
+            if (position.GetY() + y + 1 < height){
+                cellUpColor = GetCell(position.GetX() + x, position.GetY() + y+1).GetColor();
+            }
+            if (position.GetY() + y - 1 >= 0){
+                cellDownColor = GetCell(position.GetX() + x, position.GetY() + y-1).GetColor();
+            }
+            if (position.GetX() + x + 1 < width){
+                cellLeftColor = GetCell(position.GetX() + x+1, position.GetY() + y).GetColor();
+            }
+            if (position.GetX() + x - 1 >= 0){
+                cellRightColor = GetCell(position.GetX() + x-1, position.GetY() + y).GetColor();
+            }
+
+            // si la case est de la meme couleur que la tile
+            bool checkTileCellColor = GameEngine::ColorEquals(tileColor, cellColor);
+            bool checkTileCellUpColor = GameEngine::ColorEquals(tileColor, cellUpColor);
+            bool checkTileCellDownColor = GameEngine::ColorEquals(tileColor, cellDownColor);
+            bool checkTileCellLeftColor = GameEngine::ColorEquals(tileColor, cellLeftColor);
+            bool checkTileCellRightColor = GameEngine::ColorEquals(tileColor, cellRightColor);
+
+            // si la case est de la couleur de base des cases
+            bool checkBaseCellColor = GameEngine::ColorEquals(cellBaseColor, cellColor);
+            bool checkBaseCellUpColor = GameEngine::ColorEquals(cellBaseColor, cellUpColor);
+            bool checkBaseCellDownColor = GameEngine::ColorEquals(cellBaseColor, cellDownColor);
+            bool checkBaseCellLeftColor = GameEngine::ColorEquals(cellBaseColor, cellLeftColor);
+            bool checkBaseCellRightColor = GameEngine::ColorEquals(cellBaseColor, cellRightColor);
+            
+            std::cout << "check for neighbor tile number: " << y * tile.GetDimension() + x << std::endl;
+            // si la case de la tile est vide (0) et que ca couleur correspond
+            if (!tile.GetValue(x, y) && checkTileCellColor){
+                cellFound = true;
+            }else if(tile.GetValue(x, y) && (checkTileCellUpColor
+                                            || checkTileCellDownColor
+                                            || checkTileCellLeftColor
+                                            || checkTileCellRightColor)){
+                cellFound = true;
+            } // si la case est d'une autre couleur que la couleur de base
+            else if(!tile.GetValue(x, y) && !checkBaseCellColor){
+                std::cout << "cant place here because tileValue = 0 and different color inside" << std::endl;
+                return false;
+            }else if(tile.GetValue(x, y) && (!checkBaseCellUpColor
+                                             || !checkBaseCellDownColor
+                                             || !checkBaseCellLeftColor
+                                             || !checkBaseCellRightColor)){
+                std::cout << "cant place here because tileValue = 1 and different color detected" << std::endl;
+                return false;
+            }
+
+        }
+    }
+    if (cellFound){
+        return true;
+    }
+    return false;
+}
+
+Board::Cell &Board::GetCell(int x, int y) {
+    return cells[y * boardSize.GetX() + x];
+}
+
+bool Board::OposingTile(Tile tile, Vec2<int> position) {
+    return false;
 }
 
 

@@ -48,11 +48,6 @@ private:
     Vec2<int> boardSize{};
 
     int tickCounter = 0;
-    // -> Tiles
-
-//    Tiles tiles{GREEN};
-
-    std::vector<Tiles> playersTiles;
 
 
     //player info
