@@ -51,6 +51,8 @@ public:
             currentTileIndex++;
         }
     }
+    void DrawNextTiles(Vec2<int> position);
+
 
     void SetTilesColor(Color _color){
         color = _color;

@@ -32,6 +32,9 @@ namespace settings
 
     // Cell settings
     inline constexpr Color cellBaseColor = BROWN;
+
+    // Colors creation
+    inline constexpr Color c1{ 85, 249, 242, 255 };   // sky blue
 }
 
 #endif //INC_2CCPP_PROJECT_SETTINGS_H

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "../../headers/GameObjects/Tiles.h"
+#include "../../headers/Settings.h"
 
 Tiles::Tiles() : color(WHITE) {
     // On ajoute à tiles toutes les Tiles
@@ -95,4 +96,24 @@ Tiles::Tiles() : color(WHITE) {
     tiles.push_back(Tile85{color, {0,0}});
     tiles.push_back(Tile86{color, {0,0}});
 
+}
+
+void Tiles::DrawNextTiles(Vec2<int> position) {
+    std::vector<Tile> nextTiles = GetFiveTiles();
+
+    int dimensionTotal = 0;
+
+    for (Tile iTile:nextTiles) {
+        Vec2<int> tilePosition = position + Vec2<int>{0,  dimensionTotal * (settings::cellSize + settings::padding)};
+        dimensionTotal += iTile.GetDimension();
+        for (int y = 0; y < iTile.GetDimension(); ++y) {
+            for (int x = 0; x <iTile.GetDimension(); ++x) {
+                if (iTile.GetValue(x,y)) {
+                    iTile.Draw(tilePosition, {x, y});
+                }
+            }
+
+        }
+
+    }
 }
