@@ -35,7 +35,7 @@ private:
     std::vector<Player> players;
     Player currentPlayer;
     int currentPlayerIndex = 0;
-    int turn;
+    int turn =0;
 
 };
 

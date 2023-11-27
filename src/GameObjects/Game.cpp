@@ -61,9 +61,9 @@ void Game::Draw() {
     }else if(starting){
         DrawingStarting();
     } else
-//        if(gameOver){
-//
-//    } else
+        if(gameOver){
+
+    } else
     {
         DrawMenu();
     }
@@ -76,9 +76,9 @@ void Game::Update() {
     } else if(starting){
         UpdateStarting();
     }else
-//        if(gameOver){
+        if(gameOver){
 
-//    } else
+    } else
     {
         UpdateMenu();
     }
@@ -108,13 +108,10 @@ void Game::UpdateMenu() {
 
 // starting phase functions (placing starting tiles)
 void Game::UpdateStarting() {
-    std::cout << "lol "<< std::endl;
-
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-        std::cout << "pos " << position.GetX() << ", " << position.GetY() << std::endl;
 
-        if (board.CanPlaceCell(position, players.GetCurrentPlayerColor())){
+        if (board.CanPlaceCell(position)){
             board.SetCell(position, players.GetCurrentPlayerColor());
             placedStartingCell++;
             players.NextPlayer();
@@ -146,6 +143,8 @@ void Game::DrawGame() {
     // drawing player names
     std::string playerText = players.GetCurrentPlayerName() + " is playing...";
     DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
+
+
 }
 
 void Game::UpdateGame() {
@@ -160,14 +159,14 @@ void Game::UpdateGame() {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             // position = {boardX, boardY}
             Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-            // on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
-            //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
+
+            bool placed = board.PlaceTile(tiles.GetCurrentTile(), position);
+
+            if (placed) {
                 // change tile
                 tiles.NextTile();
                 players.NextPlayer();
                 tiles.SetTilesColor(players.GetCurrentPlayerColor());
-                //            }
             }
         }
 
@@ -180,13 +179,15 @@ void Game::UpdateGame() {
         }
 
         // TODO: detecter bonus recuperé
+        // faire fonctionCheckbonus
         // TODO: detecter bonus utilisé
+        // si tel bonus activé, lancer une fonction associé
 
-        // TODO: detecter click pour flip
 
 
         // TODO: fin de partie
-        if (players.GetTurn() == 9){
+        if (players.GetTurn() >= 10){
+            placedStartingCell = 0;
             playing = false;
             gameOver = true;
         }

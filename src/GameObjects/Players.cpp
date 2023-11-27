@@ -2,6 +2,7 @@
 // Created by lehen on 23/11/2023.
 //
 
+#include <iostream>
 #include "../../headers/GameObjects/Players.h"
 
 void Players::Init(int numberOfPlayers, std::vector<Color> colors, std::vector<std::string> names) {
@@ -30,9 +31,11 @@ int Players::GetCurrentPlayerIndex() const {
 void Players::NextPlayer() {
     if (currentPlayerIndex < (int)players.size() - 1){
         currentPlayerIndex++;
-    } else if (currentPlayerIndex == (int)players.size()){
+    } else{
         currentPlayerIndex = 0;
+
         turn++;
+        std::cout << "turn: " << turn<<std::endl;
     }
 
 }
