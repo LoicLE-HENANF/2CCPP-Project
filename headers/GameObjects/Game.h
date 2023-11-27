@@ -61,8 +61,8 @@ private:
     //player info
     int numberOfPlayer = 2;
     Players players;
-    Color* playersColor = new Color[numberOfPlayer];
-    const char** playersNames = new const char*[numberOfPlayer];
+    Color* playersColor;
+    const char** playersNames;
 
     // UI (options)
 
