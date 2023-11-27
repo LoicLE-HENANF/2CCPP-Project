@@ -10,25 +10,13 @@
 #include "Players.h"
 #include "Tile.h"
 #include "../Settings.h"
+#include "Cell.h"
 
 class Board {
-private:
-    // Cell class only used in board, its implementation can be found in the Board.cpp file
-    class Cell
-            {
-        public:
-            Cell();
-            void Remove();
-            void SetColor(Color color);
-            Color GetColor() const;
-
-        int Placed();
-
-    private:
-            Color c;
-            bool placed = false;
-    };
 public:
+    // Cell class only used in board, its implementation can be found in the Board.cpp file
+
+
     Board(): boardPos(settings::boardPosition),
             width(settings::boardSize.GetX()),
             height(settings::boardSize.GetY()),
@@ -66,15 +54,12 @@ public:
         height = boardSize.GetY();
         cells.resize(width*height);
     };
-
     void SetBoardPadding(int newPadding){ padding = newPadding; };
     void SetBoardCellSize(int newCellSize){ cellSize = newCellSize; };
+    Vec2<int> GetSize() const;
 
     // Tile placement
-    bool CanPlaceTile(Tile tile, Vec2<int> position);
     bool PlaceTile(Tile tile, Vec2<int> position);
-
-    Vec2<int> GetSize() const;
 
 private:
     std::vector<Cell> cells;
@@ -85,6 +70,7 @@ private:
     int padding;
     int cellSize;
 
+    bool CanPlaceTile(Tile tile, Vec2<int> position);
     bool NeighboringTile(Tile tile, Vec2<int> position);
 
     Cell &GetCell(int x, int y);

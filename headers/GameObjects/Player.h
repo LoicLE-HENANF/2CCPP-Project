@@ -40,10 +40,6 @@ public:
         isAI = _isDistant;
     };
 
-    void InitTiles(){
-        tiles.SetTilesColor(color);
-    }
-
     Tiles& GetTiles();
 
     std::string GetPlayerName();
