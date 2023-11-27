@@ -15,3 +15,11 @@ void Player::SetColor(Color _color) {
 Tiles& Player::GetTiles() {
     return tiles;
 }
+
+std::string Player::GetPlayerName() {
+    return name;
+}
+
+void Player::SetName(std::string _name) {
+    name = _name;
+}

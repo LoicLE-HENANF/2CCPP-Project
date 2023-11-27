@@ -43,8 +43,8 @@ void Board::InitBoard(const Players& players) {
     // generation des emplacements de départ
     while(startingPos.size() < players.GetSize()) {
         Vec2<int> newPos {
-                std::rand() % boardSize.GetX(),
-                std::rand() % boardSize.GetY()
+                std::rand() % width,
+                std::rand() % height
         };
 
         // check if element in vector
@@ -220,7 +220,7 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
 }
 
 Board::Cell &Board::GetCell(int x, int y) {
-    return cells[y * boardSize.GetX() + x];
+    return cells[y * width + x];
 }
 
 

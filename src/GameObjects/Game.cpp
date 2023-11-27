@@ -7,6 +7,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include "cstring"
 
 using namespace settings;
 
@@ -15,7 +16,8 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(_fps);
-    InitWindow(width, height, _title.c_str());
+    InitWindow(0, 0, _title.c_str());
+//    ToggleFullscreen();
 
     areChoicesMade = false;
 
@@ -76,7 +78,7 @@ void Game::DrawMenu() {
     // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
     playButton.Draw();
     numberChoice.Draw();
-    colorChoiceButton.Draw();
+    playersChoice.Draw();
 }
 
 void Game::UpdateMenu() {
@@ -85,7 +87,11 @@ void Game::UpdateMenu() {
         PlayButtonClick();
     }
 
-    colorChoice = colorChoiceButton.DetectClick();
+    playersChoice.SetNumberOfPlayer(numberOfPlayer);
+    playersColor = new Color[numberOfPlayer];
+    playersNames = new const char*[numberOfPlayer];
+    playersChoice.DetectClick(playersColor, playersNames);
+    colorChoice = playersColor[0];
 
     numberOfPlayer = numberChoice.DetectClick();
 }
@@ -94,6 +100,11 @@ void Game::DrawGame() {
     board.Draw();
 
     players.GetCurrentTiles().GetCurrentTile().DrawFollow(boardSize);
+
+    // drawing player names
+    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
+    DrawText(playerText.c_str(),0, 0, 20, BLACK);
+
 }
 
 void Game::UpdateGame() {
@@ -144,14 +155,42 @@ void Game::UpdateGame() {
 }
 
 void Game::PlayButtonClick() {
-    areChoicesMade = true;
-    boardSize = {20,20};
-    board.SetBoardSize(boardSize);
+    bool canPlay = true;
+    for (int i = 0; i < numberOfPlayer; ++i) {
+        if (strlen(playersNames[i]) == 0 ){
+            canPlay = false;
+        }
+    }
 
-    //Inits
-    players.Init(numberOfPlayer, colorChoice, allColors);
-    board.InitBoard(players);
+    if (canPlay){
+        areChoicesMade = true;
 
-    // all button turn off
-    playButton.TurnOff();
+        // board size from player number
+        if(players.GetSize() < 5){
+            boardSize = {20,20};
+        }else{
+            boardSize = {30,30};
+        }
+
+        board.SetBoardSize(boardSize);
+
+        //Inits
+        // changing types of color list and names list to std::vector<Color> and std::vector<std::string>
+        std::vector<Color> colorToUse;
+        for (int i = 0; i < numberOfPlayer; ++i) {
+            colorToUse.push_back(playersColor[i]);
+        }
+        std::vector<std::string> namesToUse;
+        for (int i = 0; i < numberOfPlayer; ++i) {
+            namesToUse.push_back((std::string)playersNames[i]);
+        }
+
+        players.Init(numberOfPlayer, colorToUse, namesToUse);
+        board.InitBoard(players);
+
+        // all button turn off
+        playButton.TurnOff();
+    }
+
+
 }

@@ -15,8 +15,8 @@ namespace settings
     // constexpr = calculate at compile time (not at running time)
     // Game settings
     inline const std::string title = "Laying Grass";
-    inline constexpr int screenWidth = 800;
-    inline constexpr int screenHeight = 600;
+    inline constexpr int screenWidth = 1200;
+    inline constexpr int screenHeight = 1000;
     inline constexpr int fps = 60;
 
     // Board settings
@@ -27,13 +27,6 @@ namespace settings
 
     // Cell settings
     inline constexpr Color cellBaseColor = BROWN;
-
-    // GameStates
-    inline constexpr int MENU_PRINCIPAL_STATE = 0;
-    inline constexpr int PLAYING_STATE = 1;
-    inline constexpr int GAME_OPTIONS_STATE = 2;
-    inline constexpr int MENU_STATE = 3;
-    inline constexpr int MENU_STATE2 = 4;
 }
 
 #endif //INC_2CCPP_PROJECT_SETTINGS_H
