@@ -12,16 +12,12 @@
 using namespace settings;
 
 // Game class implementation
-Game::Game(int width, int height, int _fps, const std::string &_title)
+Game::Game()
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
-    SetTargetFPS(_fps);
-    InitWindow(settings::screenWidth, settings::screenHeight, _title.c_str());
+    SetTargetFPS(settings::fps);
+    InitWindow(settings::screenWidth, settings::screenHeight, settings::title.c_str());
 //    ToggleFullscreen();
-
-    playing = false;
-
-
 }
 
 Game::~Game() noexcept {
@@ -62,9 +58,8 @@ void Game::Draw() {
         DrawingStarting();
     } else
         if(gameOver){
-
-    } else
-    {
+// TODO: fin de partie
+    } else {
         DrawMenu();
     }
 
@@ -75,11 +70,9 @@ void Game::Update() {
         UpdateGame();
     } else if(starting){
         UpdateStarting();
-    }else
-        if(gameOver){
-
-    } else
-    {
+    }else if(gameOver){
+// TODO: fin de partie
+    } else {
         UpdateMenu();
     }
 }
@@ -119,8 +112,7 @@ void Game::UpdateStarting() {
     }
 
     if (placedStartingCell == numberOfPlayer){
-        starting = false;
-        playing = true;
+        BeginGame();
     }
 }
 
@@ -185,11 +177,9 @@ void Game::UpdateGame() {
 
 
 
-        // TODO: fin de partie
+
         if (players.GetTurn() >= 10){
-            placedStartingCell = 0;
-            playing = false;
-            gameOver = true;
+            EndGame();
         }
 
         // multiplayer send data
@@ -246,6 +236,17 @@ void Game::PlayButtonClick() {
     }
 
 
+}
+
+void Game::EndGame() {
+    placedStartingCell = 0;
+    playing = false;
+    gameOver = true;
+}
+
+void Game::BeginGame() {
+    starting = false;
+    playing = true;
 }
 
 

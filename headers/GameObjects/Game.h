@@ -16,7 +16,7 @@
 class Game {
 
 public:
-    Game(int width, int height, int fps, const std::string &title);
+    Game();
     ~Game() noexcept; // noexcept to avoid stack unwinding
     Game(const Game& other) = delete; //copy constructor deleted
     Game& operator=(const Game& other) = delete; //copy assignment deleted
@@ -50,7 +50,6 @@ private:
     Board board;
     Vec2<int> boardSize = settings::boardSize;
     int placedStartingCell = 0;
-    int turn;
 
     int tickCounter = 0;
 
@@ -117,6 +116,10 @@ private:
     void UpdateStarting();
 
     void DrawingStarting();
+
+    void EndGame();
+
+    void BeginGame();
 };
 
 
