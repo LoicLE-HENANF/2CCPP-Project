@@ -56,6 +56,7 @@ private:
     std::vector<Cell> startingCells;
 
 
+
     //player info
     int numberOfPlayer = 2;
     Players players;
@@ -104,6 +105,8 @@ private:
         nameChoiceSize,
         10
     };
+
+
 
     // UI (game)
     // TODO: next tiles

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "../Utilities/Vec2.h"
 #include "raylib.h"
+#include"../Settings.h"
 
 class PlayersChoice { ;
 public:
@@ -58,6 +59,7 @@ private:
         DARKBLUE_,
         VIOLET_,
         BEIGE_,
+        c1_,
     };
     
     int numberOfPlayer = 2;
@@ -70,7 +72,10 @@ private:
                              AllColor::ORANGE_,
                              AllColor::PINK_,
                              AllColor::SKYBLUE_,
-                             AllColor::DARKBLUE_};
+                             AllColor::DARKBLUE_,
+                             AllColor::BEIGE_,
+                             AllColor::VIOLET_,
+                             AllColor::c1_};
 
     std::vector<std::string> playerNames;
     bool isTyping = false;
@@ -102,14 +107,17 @@ private:
                 return VIOLET;
             case AllColor::BEIGE_:
                 return BEIGE;
+            case AllColor::c1_:
+                return settings::c1;
             default:
                 std::cout << "default color reached" << std::endl;
                 return WHITE;
+
         }
     };
 
     void NextColor(int index){
-        playerColors[index] = AllColor((int(playerColors[index]) + 1) % 11);
+        playerColors[index] = AllColor((int(playerColors[index]) + 1) % 12);
         bool same = true;
         // while same color already in use, search for an other color
         while(same){
@@ -122,7 +130,7 @@ private:
                 }
             }
             if (same){
-                playerColors[index] = AllColor((int(playerColors[index]) + 1) % 11);
+                playerColors[index] = AllColor((int(playerColors[index]) + 1) % 12);
             }
         }
     };

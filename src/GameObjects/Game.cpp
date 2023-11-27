@@ -103,10 +103,20 @@ void Game::DrawGame() {
 
     tiles.GetCurrentTile().DrawFollow(boardSize);
 
+    tiles.DrawNextTiles({650,100});
+
     // drawing player names
     std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
-    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
+    DrawText(playerText.c_str(), 50, 25, 50, players.GetCurrentPlayerColor());
+    // TODO : DrawingNextTiles
+    // j'ai tiles, dans tiles j'ai current tiles, j'ai une fonction qui s'appelle (en vrai faudrait faire une fonction nexttiles)
 }
+
+
+    // drawing tiles exchanges coupon
+    // TODO : DrawingTEC
+    //
+
 
 void Game::UpdateGame() {
     // if player is ai
