@@ -43,14 +43,17 @@ private:
     bool isClient = false;
 
     // Game variables
-    bool areChoicesMade;
+    bool areChoicesMade = false;
+    bool starting = false;
     Board board;
     Vec2<int> boardSize = settings::boardSize;
+    int placedStartingCell = 0;
 
     int tickCounter = 0;
 
     // tiles
     Tiles tiles;
+    std::vector<Cell> startingCells;
 
 
     //player info
@@ -58,21 +61,6 @@ private:
     Players players;
     Color* playersColor = new Color[numberOfPlayer];
     const char** playersNames = new const char*[numberOfPlayer];
-    Color colorChoice = RED;
-
-    std::vector<Color> allColors = {RED,
-                                    BLUE,
-                                    GREEN,
-                                    YELLOW,
-                                    PURPLE,
-                                    BLACK,
-                                    ORANGE,
-                                    PINK,
-                                    SKYBLUE,
-                                    DARKBLUE,
-                                    VIOLET,
-                                    BEIGE};
-
 
     // UI (options)
 
@@ -123,6 +111,9 @@ private:
 
 
 
+    void UpdateStarting();
+
+    void DrawingStarting();
 };
 
 

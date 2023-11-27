@@ -30,7 +30,7 @@ int Cell::Placed() {
 void Cell::DrawCellFollow(Vec2<int> _boardSize, Color color) {
     Vec2<int> mousePos = GameEngine::GetMousePosition();
     Vec2<int> pos = mousePos - (mousePos % _boardSize);
-    GameEngine::DrawRectangle(pos,
+    GameEngine::DrawRectangle(pos + settings::padding,
                               Vec2<int>{settings::cellSize, settings::cellSize} - settings::padding,
                               color);
 }

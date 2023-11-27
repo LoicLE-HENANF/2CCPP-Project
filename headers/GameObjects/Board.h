@@ -61,6 +61,8 @@ public:
     // Tile placement
     bool PlaceTile(Tile tile, Vec2<int> position);
 
+    bool CanPlaceCell(Vec2<int> position, Color color);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
