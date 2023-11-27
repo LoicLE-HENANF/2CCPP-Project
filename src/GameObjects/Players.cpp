@@ -9,14 +9,10 @@ void Players::Init(int numberOfPlayers, std::vector<Color> colors, std::vector<s
     players.resize(numberOfPlayers);
     currentPlayerIndex = 0;
 
-    int colorCounter = 0;
-    int colorToRemove = 0;
     for (int i = 0; i < numberOfPlayers; ++i) {
         players[i].SetColor(colors[i]);
         players[i].SetName(names[i]);
     }
-
-    InitAllTiles();
 }
 
 int Players::GetSize() const{
@@ -33,10 +29,6 @@ int Players::GetCurrentPlayerIndex() const {
 
 void Players::NextPlayer() {
     currentPlayerIndex = (currentPlayerIndex + 1) % (int)players.size();
-}
-
-Tiles& Players::GetCurrentTiles() {
-    return players[currentPlayerIndex].GetTiles();
 }
 
 Player Players::GetCurrentPlayer() {

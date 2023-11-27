@@ -49,6 +49,9 @@ private:
 
     int tickCounter = 0;
 
+    // tiles
+    Tiles tiles;
+
 
     //player info
     int numberOfPlayer = 2;

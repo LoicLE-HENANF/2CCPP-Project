@@ -25,14 +25,6 @@ public:
 
     void NextPlayer();
 
-    void InitAllTiles(){
-        for (int i = 0; i < players.size(); ++i) {
-            players[i].InitTiles();
-        }
-    }
-
-    Tiles& GetCurrentTiles();
-
     Player GetCurrentPlayer();
 
 private:

@@ -11,27 +11,6 @@
 
 using namespace settings;
 
-// Cell implementation
-Board::Cell::Cell()
-    :
-    c(settings::cellBaseColor)
-{
-
-}
-
-void Board::Cell::SetColor(Color color) {
-    c = color;
-    placed = true;
-}
-
-Color Board::Cell::GetColor() const {
-    return c;
-}
-
-int Board::Cell::Placed() {
-    return placed;
-}
-
 // Board implementation
 void Board::InitBoard(const Players& players) {
     // clearing board
@@ -98,14 +77,11 @@ void Board::Draw() const {
     // Drawing cells
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-//            std::cout << "drawing cell at " << x << ", " << y << std::endl;
             DrawCell(Vec2<int>{x, y});
         }
     }
-
     // Drawing board borders
     DrawBorder();
-
 }
 
 void Board::SetCells(Tile tile, Vec2<int> position) {
@@ -219,7 +195,7 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
     return false;
 }
 
-Board::Cell &Board::GetCell(int x, int y) {
+Cell &Board::GetCell(int x, int y) {
     return cells[y * width + x];
 }
 

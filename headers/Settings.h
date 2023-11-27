@@ -19,6 +19,8 @@ namespace settings
     inline constexpr int screenHeight = 1000;
     inline constexpr int fps = 60;
 
+    inline constexpr int maxCharName = 15;
+
     // Board settings
     inline constexpr int cellSize = 20;
     inline constexpr int padding = 2;

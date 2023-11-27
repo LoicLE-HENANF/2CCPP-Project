@@ -4,6 +4,7 @@
 
 #include "../../headers/UI/PlayersChoice.h"
 #include "../../headers/GameEngine/RaylibWrapper.h"
+#include "../../headers/Settings.h"
 
 void PlayersChoice::Draw() {
     // pour tout les joueurs, on affiche un rectangle pour le choix de couleur, et son nom
@@ -75,13 +76,15 @@ void PlayersChoice::DetectClick(Color* colorsToReturn, const char** namesToRetur
         int key = GetCharPressed();
 
         while (key > 0){
-            if ((key >= 32) && (key <= 125)){
+            if ((key >= 32) && (key <= 125) && (playerNames[nameClicked].size() < settings::maxCharName)){
                 playerNames[nameClicked] += (char)key;
             }
             key = GetCharPressed();
         }
         if (IsKeyPressed(KEY_BACKSPACE)){
-            playerNames[nameClicked].pop_back();
+            if (!playerNames[nameClicked].empty()){
+                playerNames[nameClicked].pop_back();
+            }
         }
         if (IsKeyPressed(KEY_ENTER)){
             isTyping = false;

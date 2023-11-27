@@ -91,7 +91,6 @@ void Game::UpdateMenu() {
     playersColor = new Color[numberOfPlayer];
     playersNames = new const char*[numberOfPlayer];
     playersChoice.DetectClick(playersColor, playersNames);
-    colorChoice = playersColor[0];
 
     numberOfPlayer = numberChoice.DetectClick();
 }
@@ -99,11 +98,11 @@ void Game::UpdateMenu() {
 void Game::DrawGame() {
     board.Draw();
 
-    players.GetCurrentTiles().GetCurrentTile().DrawFollow(boardSize);
+    tiles.GetCurrentTile().DrawFollow(boardSize);
 
     // drawing player names
     std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
-    DrawText(playerText.c_str(),0, 0, 20, BLACK);
+    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
 
 }
 
@@ -121,20 +120,21 @@ void Game::UpdateGame() {
             Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
             // on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
             //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if (board.PlaceTile(players.GetCurrentTiles().GetCurrentTile(), position)) {
+            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
                 // change tile
-                players.GetCurrentTiles().NextTile();
+                tiles.NextTile();
                 players.NextPlayer();
+                tiles.SetTilesColor(players.GetCurrentPlayerColor());
                 //            }
             }
         }
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
-            players.GetCurrentTiles().GetCurrentTile().RotateClockwise();
+            tiles.GetCurrentTile().RotateClockwise();
         }
 
         if (IsKeyPressed(KEY_F)) {
-            players.GetCurrentTiles().GetCurrentTile().Flip();
+            tiles.GetCurrentTile().Flip();
         }
 
         // TODO: detecter bonus recuperé
@@ -187,6 +187,8 @@ void Game::PlayButtonClick() {
 
         players.Init(numberOfPlayer, colorToUse, namesToUse);
         board.InitBoard(players);
+
+        tiles.SetTilesColor(players.GetCurrentPlayerColor());
 
         // all button turn off
         playButton.TurnOff();
