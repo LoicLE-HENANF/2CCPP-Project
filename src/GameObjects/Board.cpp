@@ -237,6 +237,36 @@ bool Board::CanPlaceCell(Vec2<int> position) {
     return false;
 }
 
+int Board::CheckForBonuses(Tile tile, Vec2<int> position) {
+    for (int y = 0; y < tile.GetDimension(); ++y) {
+        for (int x = 0; x < tile.GetDimension(); ++x) {
+            Color cellUpColor = cellBaseColor;
+            Color cellDownColor = cellBaseColor;
+            Color cellLeftColor = cellBaseColor;
+            Color cellRightColor = cellBaseColor;
+
+            if (position.GetY() + y + 1 < height) {
+                cellUpColor = GetCell(position.GetX() + x, position.GetY() + y + 1).GetColor();
+            }
+            if (position.GetY() + y - 1 >= 0) {
+                cellDownColor = GetCell(position.GetX() + x, position.GetY() + y - 1).GetColor();
+            }
+            if (position.GetX() + x + 1 < width) {
+                cellLeftColor = GetCell(position.GetX() + x + 1, position.GetY() + y).GetColor();
+            }
+            if (position.GetX() + x - 1 >= 0) {
+                cellRightColor = GetCell(position.GetX() + x - 1, position.GetY() + y).GetColor();
+            }
+
+            // si la case est de la meme couleur que la couleur des TEC
+            bool checkTECCellUpColor = GameEngine::ColorEquals(settings::bonusTEC, cellUpColor);
+            bool checkTECCellDownColor = GameEngine::ColorEquals(settings::bonusTEC, cellDownColor);
+            bool checkTECCellLeftColor = GameEngine::ColorEquals(settings::bonusTEC, cellLeftColor);
+            bool checkTECCellRightColor = GameEngine::ColorEquals(settings::bonusTEC, cellRightColor);
+        }
+    }
+}
+
 
 
 
