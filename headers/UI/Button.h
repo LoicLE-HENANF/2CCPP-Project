@@ -9,7 +9,7 @@
 #include <utility>
 #include <string>
 
-#include "../Vec2.h"
+#include "../Utilities/Vec2.h"
 #include "raylib.h"
 
 

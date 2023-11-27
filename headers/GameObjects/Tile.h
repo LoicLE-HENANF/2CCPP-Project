@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_TILE_H
 
 #include "raylib.h"
-#include "../Vec2.h"
+#include "../Utilities/Vec2.h"
 
 class Tile {
 public:

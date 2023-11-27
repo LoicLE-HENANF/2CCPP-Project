@@ -6,7 +6,7 @@
 #define INC_2CCPP_PROJECT_NUMBERCHOICE_H
 
 
-#include "../Vec2.h"
+#include "../Utilities/Vec2.h"
 #include "raylib.h"
 
 class NumberChoice {

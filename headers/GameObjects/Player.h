@@ -45,6 +45,10 @@ public:
     }
 
     Tiles& GetTiles();
+
+    std::string GetPlayerName();
+
+    void SetName(std::string _name);
 };
 
 

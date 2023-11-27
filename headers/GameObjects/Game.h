@@ -11,7 +11,7 @@
 #include "Tiles.h"
 #include "../UI/Button.h"
 #include "../UI/NumberChoice.h"
-#include "../UI/ColorChoice.h"
+#include "../UI/PlayersChoice.h"
 
 class Game {
 
@@ -45,17 +45,30 @@ private:
     // Game variables
     bool areChoicesMade;
     Board board;
-    Vec2<int> boardSize{};
+    Vec2<int> boardSize = settings::boardSize;
 
     int tickCounter = 0;
 
 
     //player info
-    int numberOfPlayer = 4;
+    int numberOfPlayer = 2;
     Players players;
+    Color* playersColor = new Color[numberOfPlayer];
+    const char** playersNames = new const char*[numberOfPlayer];
     Color colorChoice = RED;
 
-    std::vector<Color> allColors = {RED,BLUE,GREEN, YELLOW, PURPLE, BLACK, ORANGE};
+    std::vector<Color> allColors = {RED,
+                                    BLUE,
+                                    GREEN,
+                                    YELLOW,
+                                    PURPLE,
+                                    BLACK,
+                                    ORANGE,
+                                    PINK,
+                                    SKYBLUE,
+                                    DARKBLUE,
+                                    VIOLET,
+                                    BEIGE};
 
 
     // UI (options)
@@ -75,8 +88,8 @@ private:
     void PlayButtonClick();
 
     Vec2<int> numberChoicePos = {
-            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) - 100};
+            (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
+            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) - 100};
 
     NumberChoice numberChoice{numberChoicePos,
                               Vec2{100,100},
@@ -86,14 +99,19 @@ private:
                               9};
 
     Vec2<int> colorChoiceSize = {50,50};
+    Vec2<int> nameChoiceSize = {300,50};
 
     Vec2<int> colorChoicePos = {
-            (settings::screenWidth / 2) - (colorChoiceSize.GetX() / 2),
-            (settings::screenHeight / 2) - (colorChoiceSize.GetY() / 2) + 100
+            (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
+            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) + 50
     };
-    ColorChoice colorChoiceButton{
+
+
+    PlayersChoice playersChoice{
         colorChoicePos,
-        colorChoiceSize
+        colorChoiceSize,
+        nameChoiceSize,
+        10
     };
 
     // UI (game)

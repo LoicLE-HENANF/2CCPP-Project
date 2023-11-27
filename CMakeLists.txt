@@ -40,20 +40,16 @@ endif ()
 add_executable(${PROJECT_NAME} main.cpp
         headers/GameObjects/Board.h
         headers/GameObjects/Game.h
-        headers/GameState.h
-        headers/GameStates.h
-        headers/IState.h
         headers/GameObjects/Player.h
         headers/GameEngine/RaylibWrapper.h
 
         headers/settings.h
         headers/GameEngine/ThreadHandler.h
-        headers/Vec2.h
+        headers/Utilities/Vec2.h
         headers/GameObjects/Tile.h
         headers/UI/CheckBox.h
 
         src/GameObjects/Game.cpp
-        src/GameStates.cpp
         src/GameObjects/Player.cpp
         src/GameEngine/RaylibWrapper.cpp
         src/GameEngine/ThreadHandler.cpp
@@ -62,7 +58,7 @@ add_executable(${PROJECT_NAME} main.cpp
 
         src/GameObjects/Tile.cpp
 
-        src/UI/CheckBox.cpp src/UI/NumberChoice.cpp src/GameObjects/Tiles.cpp src/GameObjects/Players.cpp src/UI/ColorChoice.cpp)
+        src/UI/CheckBox.cpp src/UI/NumberChoice.cpp src/GameObjects/Tiles.cpp src/GameObjects/Players.cpp src/UI/PlayersChoice.cpp)
 
 
 set(raylib_VERBOSE 1)

@@ -5,7 +5,11 @@
 
 int main()
 {
-    Game game{settings::screenWidth, settings::screenHeight, settings::fps, settings::title};
+    Game game{settings::screenWidth,
+              settings::screenHeight,
+              settings::fps,
+              settings::title};
+
 
     while (!game.GameShouldClose()){
         game.Tick();

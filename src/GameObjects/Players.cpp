@@ -4,34 +4,19 @@
 
 #include "../../headers/GameObjects/Players.h"
 
-void Players::Init(int numberOfPlayers, Color color, std::vector<Color> allColors) {
+void Players::Init(int numberOfPlayers, std::vector<Color> colors, std::vector<std::string> names) {
     players.clear();
     players.resize(numberOfPlayers);
     currentPlayerIndex = 0;
-    players[currentPlayerIndex].SetColor(color);
 
     int colorCounter = 0;
     int colorToRemove = 0;
-    for (Color iColor : allColors) {
-        if (color.r == iColor.r && color.a == iColor.a && color.g == iColor.g && color.b == iColor.b){
-            colorToRemove = colorCounter;
-            allColors[colorToRemove] = WHITE;
-        }
-        colorCounter++;
-    }
-
-    int skip = 0;
-    for (int playerIndex = 0; playerIndex < players.size(); ++playerIndex) {
-        Color playerColor = allColors[playerIndex];
-        if (playerColor.r == 255 && playerColor.g == 255 && playerColor.b == 255 &&playerColor.a == 255){
-            skip = 1;
-        }
-        players[playerIndex+1].SetColor(allColors[playerIndex + skip]);
+    for (int i = 0; i < numberOfPlayers; ++i) {
+        players[i].SetColor(colors[i]);
+        players[i].SetName(names[i]);
     }
 
     InitAllTiles();
-
-
 }
 
 int Players::GetSize() const{
