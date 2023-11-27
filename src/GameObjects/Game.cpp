@@ -16,7 +16,7 @@ Game::Game(int width, int height, int _fps, const std::string &_title)
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
     SetTargetFPS(_fps);
-    InitWindow(0, 0, _title.c_str());
+    InitWindow(settings::screenWidth, settings::screenHeight, _title.c_str());
 //    ToggleFullscreen();
 
     areChoicesMade = false;
@@ -54,14 +54,15 @@ void Game::Tick() {
 }
 
 void Game::Draw() {
-    // Draw basic logic ? maybe
     ClearBackground(GRAY);
 
     if(areChoicesMade){
-        // les choix sont fait
         DrawGame();
-    }else{
+    }else if(starting){
+        DrawingStarting();
+    } else {
         DrawMenu();
+        
     }
 
 }
@@ -69,7 +70,9 @@ void Game::Draw() {
 void Game::Update() {
     if(areChoicesMade){
         UpdateGame();
-    } else {
+    } else if(starting){
+        UpdateStarting();
+    }else {
         UpdateMenu();
     }
 }
@@ -103,7 +106,6 @@ void Game::DrawGame() {
     // drawing player names
     std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
     DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
-
 }
 
 void Game::UpdateGame() {
@@ -163,7 +165,6 @@ void Game::PlayButtonClick() {
     }
 
     if (canPlay){
-        areChoicesMade = true;
 
         // board size from player number
         if(players.GetSize() < 5){
@@ -177,22 +178,54 @@ void Game::PlayButtonClick() {
         //Inits
         // changing types of color list and names list to std::vector<Color> and std::vector<std::string>
         std::vector<Color> colorToUse;
-        for (int i = 0; i < numberOfPlayer; ++i) {
-            colorToUse.push_back(playersColor[i]);
-        }
         std::vector<std::string> namesToUse;
         for (int i = 0; i < numberOfPlayer; ++i) {
+            colorToUse.push_back(playersColor[i]);
             namesToUse.push_back((std::string)playersNames[i]);
         }
 
         players.Init(numberOfPlayer, colorToUse, namesToUse);
         board.InitBoard(players);
 
+        // init tiles and starting cells
         tiles.SetTilesColor(players.GetCurrentPlayerColor());
+        startingCells.resize(numberOfPlayer);
 
-        // all button turn off
-        playButton.TurnOff();
+        for (int i = 0; i < numberOfPlayer; ++i) {
+            startingCells[i].SetColor(colorToUse[i]);
+        }
+        
+        starting = true;
     }
 
+
+}
+
+void Game::UpdateStarting() {
+    std::cout << "lol "<< std::endl;
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+        std::cout << "pos " << position.GetX() << ", " << position.GetY() << std::endl;
+
+        if (board.CanPlaceCell(position, players.GetCurrentPlayerColor())){
+            board.SetCell(position, players.GetCurrentPlayerColor());
+            placedStartingCell++;
+            players.NextPlayer();
+        }
+    }
+
+    if (placedStartingCell == numberOfPlayer){
+        starting = false;
+        areChoicesMade = true;
+    }
+}
+
+void Game::DrawingStarting() {
+    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
+    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
+    board.Draw();
+
+    startingCells[players.GetCurrentPlayerIndex()].DrawCellFollow(board.GetSize(), players.GetCurrentPlayerColor());
 
 }

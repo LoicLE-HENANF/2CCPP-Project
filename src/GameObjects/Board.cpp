@@ -17,27 +17,27 @@ void Board::InitBoard(const Players& players) {
     cells.clear();
     cells.resize(width*height);
     // determining starting positions
-    std::vector<Vec2<int>> startingPos;
+//    std::vector<Vec2<int>> startingPos;
 
-    // generation des emplacements de départ
-    while(startingPos.size() < players.GetSize()) {
-        Vec2<int> newPos {
-                std::rand() % width,
-                std::rand() % height
-        };
-
-        // check if element in vector
-        if (std::find(startingPos.begin(), startingPos.end(), newPos) == startingPos.end()){
-            startingPos.push_back(newPos);
-        }
-    }
+    // generation des emplacements de départ random (plus d'actu)
+//    while(startingPos.size() < players.GetSize()) {
+//        Vec2<int> newPos {
+//                std::rand() % width,
+//                std::rand() % height
+//        };
+//
+//        // check if element in vector
+//        if (std::find(startingPos.begin(), startingPos.end(), newPos) == startingPos.end()){
+//            startingPos.push_back(newPos);
+//        }
+//    }
 
     // placing starting cells
-    for (int i = 0; i < players.GetSize(); ++i) {
-        Color color = players.GetPlayer(i).GetColor();
-        Vec2<int> position = startingPos[i];
-        cells[position.GetY() * width + position.GetX()].SetColor(color);
-    }
+//    for (int i = 0; i < players.GetSize(); ++i) {
+//        Color color = players.GetPlayer(i).GetColor();
+//        Vec2<int> position = startingPos[i];
+//        cells[position.GetY() * width + position.GetX()].SetColor(color);
+//    }
 
 
 
@@ -49,7 +49,6 @@ void Board::InitBoard(const Players& players) {
 void Board::SetCell(Vec2<int> position, Color c) {
     if(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height){
         cells[position.GetY() * width + position.GetX()].SetColor(c);
-
     }
 }
 
@@ -197,6 +196,37 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
 
 Cell &Board::GetCell(int x, int y) {
     return cells[y * width + x];
+}
+
+bool Board::CanPlaceCell(Vec2<int> position, Color color) {
+    bool checkBaseColor = GameEngine::ColorEquals(cells[position.GetY() * width + position.GetX()].GetColor(), cellBaseColor);
+
+    bool checkIfDifCellUp = true;
+    bool checkIfDifCellDown = true;
+    bool checkIfDifCellRight = true;
+    bool checkIfDifCellLeft = true;
+
+    if (position.GetY()+1 < height){
+        checkIfDifCellUp = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+    }
+    if (position.GetY()-1 >= 0){
+        checkIfDifCellDown = GameEngine::ColorEquals(cells[(position.GetY()-1) * width + position.GetX()].GetColor(), cellBaseColor);
+
+    }
+    if (position.GetX()+1 < width){
+        checkIfDifCellRight = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+
+    }
+    if (position.GetX()-1 >= 0){
+        checkIfDifCellLeft = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+
+    }
+
+    if (checkBaseColor && checkIfDifCellUp && checkIfDifCellDown && checkIfDifCellRight && checkIfDifCellLeft){
+        return true;
+    }
+
+    return false;
 }
 
 
