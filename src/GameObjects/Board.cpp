@@ -164,7 +164,7 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
             bool checkBaseCellLeftColor = GameEngine::ColorEquals(cellBaseColor, cellLeftColor);
             bool checkBaseCellRightColor = GameEngine::ColorEquals(cellBaseColor, cellRightColor);
             
-            std::cout << "check for neighbor tile number: " << y * tile.GetDimension() + x << std::endl;
+//            std::cout << "check for neighbor tile number: " << y * tile.GetDimension() + x << std::endl;
 
             // si la case de la tile est vide (0) et que ca couleur correspond
             if (!tile.GetValue(x, y) && checkTileCellColor){
@@ -176,13 +176,13 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
                 cellFound = true;
             } // si la case est d'une autre couleur que la couleur de base
             else if(!tile.GetValue(x, y) && !checkBaseCellColor){
-                std::cout << "cant place here because tileValue = 0 and different color inside" << std::endl;
+//                std::cout << "cant place here because tileValue = 0 and different color inside" << std::endl;
                 return false;
             }else if(tile.GetValue(x, y) && (!checkBaseCellUpColor
                                              || !checkBaseCellDownColor
                                              || !checkBaseCellLeftColor
                                              || !checkBaseCellRightColor)){
-                std::cout << "cant place here because tileValue = 1 and different color detected" << std::endl;
+//                std::cout << "cant place here because tileValue = 1 and different color detected" << std::endl;
                 return false;
             }
 

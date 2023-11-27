@@ -27,10 +27,15 @@ public:
 
     Player GetCurrentPlayer();
 
+    int GetTurn() const;
+
+    std::string GetCurrentPlayerName();
+
 private:
     std::vector<Player> players;
     Player currentPlayer;
     int currentPlayerIndex = 0;
+    int turn;
 
 };
 

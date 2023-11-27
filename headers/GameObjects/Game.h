@@ -43,11 +43,14 @@ private:
     bool isClient = false;
 
     // Game variables
-    bool areChoicesMade = false;
+    bool playing = false;
     bool starting = false;
+    bool gameOver = false;
+
     Board board;
     Vec2<int> boardSize = settings::boardSize;
     int placedStartingCell = 0;
+    int turn;
 
     int tickCounter = 0;
 
