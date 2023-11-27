@@ -12,16 +12,12 @@
 using namespace settings;
 
 // Game class implementation
-Game::Game(int width, int height, int _fps, const std::string &_title)
+Game::Game()
 {
     assert(!GetWindowHandle()); //If assertion triggers : windows is already opened
-    SetTargetFPS(_fps);
-    InitWindow(settings::screenWidth, settings::screenHeight, _title.c_str());
+    SetTargetFPS(settings::fps);
+    InitWindow(settings::screenWidth, settings::screenHeight, settings::title.c_str());
 //    ToggleFullscreen();
-
-    areChoicesMade = false;
-
-
 }
 
 Game::~Game() noexcept {
@@ -56,27 +52,32 @@ void Game::Tick() {
 void Game::Draw() {
     ClearBackground(GRAY);
 
-    if(areChoicesMade){
+    if(playing){
         DrawGame();
     }else if(starting){
         DrawingStarting();
+    } else
+        if(gameOver){
+// TODO: fin de partie
     } else {
         DrawMenu();
-        
     }
 
 }
 
 void Game::Update() {
-    if(areChoicesMade){
+    if(playing){
         UpdateGame();
     } else if(starting){
         UpdateStarting();
-    }else {
+    }else if(gameOver){
+// TODO: fin de partie
+    } else {
         UpdateMenu();
     }
 }
 
+// menu phase functions (when choosing game options)
 void Game::DrawMenu() {
     // afficher bouton et slider pour que l'utilisateur choisisse ses parametres
     playButton.Draw();
@@ -98,6 +99,34 @@ void Game::UpdateMenu() {
     numberOfPlayer = numberChoice.DetectClick();
 }
 
+// starting phase functions (placing starting tiles)
+void Game::UpdateStarting() {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+
+        if (board.CanPlaceCell(position)){
+            board.SetCell(position, players.GetCurrentPlayerColor());
+            placedStartingCell++;
+            players.NextPlayer();
+        }
+    }
+
+    if (placedStartingCell == numberOfPlayer){
+        BeginGame();
+    }
+}
+
+void Game::DrawingStarting() {
+    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
+    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
+    board.Draw();
+
+    startingCells[players.GetCurrentPlayerIndex()].DrawCellFollow(board.GetSize(), players.GetCurrentPlayerColor());
+
+}
+
+
+// playing phase functions (when placing tiles)
 void Game::DrawGame() {
     board.Draw();
 
@@ -106,10 +135,12 @@ void Game::DrawGame() {
     tiles.DrawNextTiles({650,100});
 
     // drawing player names
-    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
-    DrawText(playerText.c_str(), 50, 25, 50, players.GetCurrentPlayerColor());
-    // TODO : DrawingNextTiles
-    // j'ai tiles, dans tiles j'ai current tiles, j'ai une fonction qui s'appelle (en vrai faudrait faire une fonction nexttiles)
+
+    std::string playerText = players.GetCurrentPlayerName() + " is playing...";
+    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
+
+
+
 }
 
 
@@ -130,14 +161,14 @@ void Game::UpdateGame() {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             // position = {boardX, boardY}
             Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-            // on ne check pas si la souris est sur le board car certaine piece on besoin de cette fonctionnalié pour etre jouer
-            //        if (((GameEngine::GetMousePosition() - board.GetBoardPos()) > Vec2<int>{0,0}) && ((GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize()) <= board.GetSize())){
-            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
+
+            int placed = board.PlaceTile(tiles.GetCurrentTile(), position);
+
+            if (placed) {
                 // change tile
                 tiles.NextTile();
                 players.NextPlayer();
                 tiles.SetTilesColor(players.GetCurrentPlayerColor());
-                //            }
             }
         }
 
@@ -150,12 +181,16 @@ void Game::UpdateGame() {
         }
 
         // TODO: detecter bonus recuperé
+        // faire fonctionCheckbonus
         // TODO: detecter bonus utilisé
+        // si tel bonus activé, lancer une fonction associé
 
-        // TODO: detecter click pour flip
 
 
-        // TODO: fin de partie
+
+        if (players.GetTurn() >= 10){
+            EndGame();
+        }
 
         // multiplayer send data
         if (isServer){
@@ -165,6 +200,8 @@ void Game::UpdateGame() {
         }
     }
 }
+
+// end phase functions (when game is over and players get their scores)
 
 void Game::PlayButtonClick() {
     bool canPlay = true;
@@ -211,31 +248,15 @@ void Game::PlayButtonClick() {
 
 }
 
-void Game::UpdateStarting() {
-    std::cout << "lol "<< std::endl;
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
-        std::cout << "pos " << position.GetX() << ", " << position.GetY() << std::endl;
-
-        if (board.CanPlaceCell(position, players.GetCurrentPlayerColor())){
-            board.SetCell(position, players.GetCurrentPlayerColor());
-            placedStartingCell++;
-            players.NextPlayer();
-        }
-    }
-
-    if (placedStartingCell == numberOfPlayer){
-        starting = false;
-        areChoicesMade = true;
-    }
+void Game::EndGame() {
+    placedStartingCell = 0;
+    playing = false;
+    gameOver = true;
 }
 
-void Game::DrawingStarting() {
-    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
-    DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
-    board.Draw();
-
-    startingCells[players.GetCurrentPlayerIndex()].DrawCellFollow(board.GetSize(), players.GetCurrentPlayerColor());
-
+void Game::BeginGame() {
+    starting = false;
+    playing = true;
 }
+
+

@@ -14,8 +14,6 @@ class Player {
 private:
     std::string name;
     Color color;
-    Tiles tiles;
-
     bool isAI = false;
     bool isDistant = false;
 

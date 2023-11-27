@@ -59,9 +59,11 @@ public:
     Vec2<int> GetSize() const;
 
     // Tile placement
-    bool PlaceTile(Tile tile, Vec2<int> position);
+    int PlaceTile(Tile tile, Vec2<int> position);
 
-    bool CanPlaceCell(Vec2<int> position, Color color);
+    bool CanPlaceCell(Vec2<int> position);
+
+    int CheckForBonuses(Tile tile, Vec2<int> position);
 
 private:
     std::vector<Cell> cells;

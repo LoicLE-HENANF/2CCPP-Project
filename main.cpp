@@ -5,10 +5,7 @@
 
 int main()
 {
-    Game game{settings::screenWidth,
-              settings::screenHeight,
-              settings::fps,
-              settings::title};
+    Game game{};
 
 
     while (!game.GameShouldClose()){

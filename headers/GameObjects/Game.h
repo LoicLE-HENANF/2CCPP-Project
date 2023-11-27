@@ -16,7 +16,7 @@
 class Game {
 
 public:
-    Game(int width, int height, int fps, const std::string &title);
+    Game();
     ~Game() noexcept; // noexcept to avoid stack unwinding
     Game(const Game& other) = delete; //copy constructor deleted
     Game& operator=(const Game& other) = delete; //copy assignment deleted
@@ -43,8 +43,10 @@ private:
     bool isClient = false;
 
     // Game variables
-    bool areChoicesMade = false;
+    bool playing = false;
     bool starting = false;
+    bool gameOver = false;
+
     Board board;
     Vec2<int> boardSize = settings::boardSize;
     int placedStartingCell = 0;
@@ -60,8 +62,8 @@ private:
     //player info
     int numberOfPlayer = 2;
     Players players;
-    Color* playersColor = new Color[numberOfPlayer];
-    const char** playersNames = new const char*[numberOfPlayer];
+    Color* playersColor;
+    const char** playersNames;
 
     // UI (options)
 
@@ -117,6 +119,10 @@ private:
     void UpdateStarting();
 
     void DrawingStarting();
+
+    void EndGame();
+
+    void BeginGame();
 };
 
 

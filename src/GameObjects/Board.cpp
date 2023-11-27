@@ -8,6 +8,7 @@
 #include <cassert>
 #include "../../headers/GameEngine/RaylibWrapper.h"
 #include <algorithm>
+#include <cmath>
 
 using namespace settings;
 
@@ -16,34 +17,40 @@ void Board::InitBoard(const Players& players) {
     // clearing board
     cells.clear();
     cells.resize(width*height);
-    // determining starting positions
-//    std::vector<Vec2<int>> startingPos;
-
-    // generation des emplacements de départ random (plus d'actu)
-//    while(startingPos.size() < players.GetSize()) {
-//        Vec2<int> newPos {
-//                std::rand() % width,
-//                std::rand() % height
-//        };
-//
-//        // check if element in vector
-//        if (std::find(startingPos.begin(), startingPos.end(), newPos) == startingPos.end()){
-//            startingPos.push_back(newPos);
-//        }
-//    }
-
-    // placing starting cells
-//    for (int i = 0; i < players.GetSize(); ++i) {
-//        Color color = players.GetPlayer(i).GetColor();
-//        Vec2<int> position = startingPos[i];
-//        cells[position.GetY() * width + position.GetX()].SetColor(color);
-//    }
-
-
-
     // determining bonuses positions
+    std::vector<Vec2<int>> BonusesPos;
+    int numberOfStone = (int)players.GetSize();
+    int numberOfRob = (int)std::ceil(players.GetSize() * 0.5);
+    int numberOfTEC = (int)std::ceil(players.GetSize() * 1.5);
 
-    //
+//     generation des emplacements de départ random (plus d'actu)
+    while(BonusesPos.size() < numberOfRob
+                            + numberOfStone
+                            + numberOfTEC) {
+        Vec2<int> newPos {
+                std::rand() % width,
+                std::rand() % height
+        };
+
+        // check if element in vector
+        if (std::find(BonusesPos.begin(), BonusesPos.end(), newPos) == BonusesPos.end()){
+            BonusesPos.push_back(newPos);
+        }
+    }
+
+    for (int i = 0; i < numberOfStone; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusStone);
+    }
+    for (int i = numberOfStone; i < numberOfStone + numberOfRob; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusRobbery);
+    }
+    for (int i = numberOfStone + numberOfRob; i < numberOfStone + numberOfRob + numberOfTEC; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusTEC);
+    }
+
 }
 
 void Board::SetCell(Vec2<int> position, Color c) {
@@ -114,12 +121,14 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
     return true;
 }
 
-bool Board::PlaceTile(Tile tile, Vec2<int> position) {
-    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position)){
+int Board::PlaceTile(Tile tile, Vec2<int> position) {
+    int returnValue = 0;
+
+    if (CanPlaceTile(tile, position)&& NeighboringTile(tile, position)){
         SetCells(tile, position);
-        return true;
+        returnValue++;
     }
-    return false;
+    return returnValue;
 }
 
 Vec2<int> Board::GetSize() const {
@@ -128,10 +137,10 @@ Vec2<int> Board::GetSize() const {
 
 bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
     bool cellFound = false;
+    bool otherCellFound = false;
     for (int y = 0; y < tile.GetDimension(); ++y) {
         for (int x = 0; x < tile.GetDimension(); ++x) {
             Color tileColor = tile.GetColor();
-            Color cellColor = GetCell(position.GetX() + x, position.GetY() + y).GetColor();
             Color cellUpColor = cellBaseColor;
             Color cellDownColor = cellBaseColor;
             Color cellLeftColor = cellBaseColor;
@@ -151,42 +160,41 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
             }
 
             // si la case est de la meme couleur que la tile
-            bool checkTileCellColor = GameEngine::ColorEquals(tileColor, cellColor);
             bool checkTileCellUpColor = GameEngine::ColorEquals(tileColor, cellUpColor);
             bool checkTileCellDownColor = GameEngine::ColorEquals(tileColor, cellDownColor);
             bool checkTileCellLeftColor = GameEngine::ColorEquals(tileColor, cellLeftColor);
             bool checkTileCellRightColor = GameEngine::ColorEquals(tileColor, cellRightColor);
 
             // si la case est de la couleur de base des cases
-            bool checkBaseCellColor = GameEngine::ColorEquals(cellBaseColor, cellColor);
             bool checkBaseCellUpColor = GameEngine::ColorEquals(cellBaseColor, cellUpColor);
             bool checkBaseCellDownColor = GameEngine::ColorEquals(cellBaseColor, cellDownColor);
             bool checkBaseCellLeftColor = GameEngine::ColorEquals(cellBaseColor, cellLeftColor);
             bool checkBaseCellRightColor = GameEngine::ColorEquals(cellBaseColor, cellRightColor);
-            
-            std::cout << "check for neighbor tile number: " << y * tile.GetDimension() + x << std::endl;
 
-            // si la case de la tile est vide (0) et que ca couleur correspond
-            if (!tile.GetValue(x, y) && checkTileCellColor){
+
+            // si les cases autour de la case en question sont de la meme couleur que la tile
+            if(!tile.GetValue(x, y)){
+//                std::cout << "vide" << std::endl;
+            } else if(tile.GetValue(x, y) && (checkTileCellUpColor
+                                              || checkTileCellDownColor
+                                              || checkTileCellLeftColor
+                                              || checkTileCellRightColor)){
                 cellFound = true;
-            }else if(tile.GetValue(x, y) && (checkTileCellUpColor
-                                            || checkTileCellDownColor
-                                            || checkTileCellLeftColor
-                                            || checkTileCellRightColor)){
-                cellFound = true;
-            } // si la case est d'une autre couleur que la couleur de base
-            else if(!tile.GetValue(x, y) && !checkBaseCellColor){
-                std::cout << "cant place here because tileValue = 0 and different color inside" << std::endl;
-                return false;
-            }else if(tile.GetValue(x, y) && (!checkBaseCellUpColor
-                                             || !checkBaseCellDownColor
-                                             || !checkBaseCellLeftColor
-                                             || !checkBaseCellRightColor)){
-                std::cout << "cant place here because tileValue = 1 and different color detected" << std::endl;
-                return false;
             }
-
+            // si les cases autour de la case ne sont ni de la meme couleur que tile, ni de la couleur de base
+            if(!tile.GetValue(x, y)){
+//                std::cout << "vide" << std::endl;
+            }else if(tile.GetValue(x, y) && (!checkTileCellUpColor && !checkBaseCellUpColor
+                                            || !checkTileCellDownColor && !checkBaseCellDownColor
+                                            || !checkTileCellLeftColor && !checkBaseCellLeftColor
+                                            || !checkTileCellRightColor && !checkBaseCellRightColor)){
+//                std::cout << "pos lol: "<< x << ", " << y << std::endl;
+                otherCellFound = true;
+            }
         }
+    }
+    if (otherCellFound){
+        return false;
     }
     if (cellFound){
         return true;
@@ -198,7 +206,7 @@ Cell &Board::GetCell(int x, int y) {
     return cells[y * width + x];
 }
 
-bool Board::CanPlaceCell(Vec2<int> position, Color color) {
+bool Board::CanPlaceCell(Vec2<int> position) {
     bool checkBaseColor = GameEngine::ColorEquals(cells[position.GetY() * width + position.GetX()].GetColor(), cellBaseColor);
 
     bool checkIfDifCellUp = true;
@@ -227,6 +235,36 @@ bool Board::CanPlaceCell(Vec2<int> position, Color color) {
     }
 
     return false;
+}
+
+int Board::CheckForBonuses(Tile tile, Vec2<int> position) {
+    for (int y = 0; y < tile.GetDimension(); ++y) {
+        for (int x = 0; x < tile.GetDimension(); ++x) {
+            Color cellUpColor = cellBaseColor;
+            Color cellDownColor = cellBaseColor;
+            Color cellLeftColor = cellBaseColor;
+            Color cellRightColor = cellBaseColor;
+
+            if (position.GetY() + y + 1 < height) {
+                cellUpColor = GetCell(position.GetX() + x, position.GetY() + y + 1).GetColor();
+            }
+            if (position.GetY() + y - 1 >= 0) {
+                cellDownColor = GetCell(position.GetX() + x, position.GetY() + y - 1).GetColor();
+            }
+            if (position.GetX() + x + 1 < width) {
+                cellLeftColor = GetCell(position.GetX() + x + 1, position.GetY() + y).GetColor();
+            }
+            if (position.GetX() + x - 1 >= 0) {
+                cellRightColor = GetCell(position.GetX() + x - 1, position.GetY() + y).GetColor();
+            }
+
+            // si la case est de la meme couleur que la couleur des TEC
+            bool checkTECCellUpColor = GameEngine::ColorEquals(settings::bonusTEC, cellUpColor);
+            bool checkTECCellDownColor = GameEngine::ColorEquals(settings::bonusTEC, cellDownColor);
+            bool checkTECCellLeftColor = GameEngine::ColorEquals(settings::bonusTEC, cellLeftColor);
+            bool checkTECCellRightColor = GameEngine::ColorEquals(settings::bonusTEC, cellRightColor);
+        }
+    }
 }
 
 
