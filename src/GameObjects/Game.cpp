@@ -214,7 +214,7 @@ void Game::PlayButtonClick() {
     if (canPlay){
 
         // board size from player number
-        if(players.GetSize() < 5){
+        if(numberOfPlayer < 5){
             boardSize = {20,20};
         }else{
             boardSize = {30,30};

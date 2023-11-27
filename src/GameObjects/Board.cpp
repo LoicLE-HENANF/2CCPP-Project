@@ -222,11 +222,11 @@ bool Board::CanPlaceCell(Vec2<int> position) {
 
     }
     if (position.GetX()+1 < width){
-        checkIfDifCellRight = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+        checkIfDifCellRight = GameEngine::ColorEquals(cells[(position.GetY()) * width + position.GetX()+1].GetColor(), cellBaseColor);
 
     }
     if (position.GetX()-1 >= 0){
-        checkIfDifCellLeft = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+        checkIfDifCellLeft = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()-1].GetColor(), cellBaseColor);
 
     }
 
