@@ -63,6 +63,8 @@ public:
 
     bool CanPlaceCell(Vec2<int> position);
 
+    int CheckForBonuses(Tile tile, Vec2<int> position);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
