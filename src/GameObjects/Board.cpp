@@ -8,6 +8,7 @@
 #include <cassert>
 #include "../../headers/GameEngine/RaylibWrapper.h"
 #include <algorithm>
+#include <cmath>
 
 using namespace settings;
 
@@ -16,34 +17,40 @@ void Board::InitBoard(const Players& players) {
     // clearing board
     cells.clear();
     cells.resize(width*height);
-    // determining starting positions
-//    std::vector<Vec2<int>> startingPos;
-
-    // generation des emplacements de départ random (plus d'actu)
-//    while(startingPos.size() < players.GetSize()) {
-//        Vec2<int> newPos {
-//                std::rand() % width,
-//                std::rand() % height
-//        };
-//
-//        // check if element in vector
-//        if (std::find(startingPos.begin(), startingPos.end(), newPos) == startingPos.end()){
-//            startingPos.push_back(newPos);
-//        }
-//    }
-
-    // placing starting cells
-//    for (int i = 0; i < players.GetSize(); ++i) {
-//        Color color = players.GetPlayer(i).GetColor();
-//        Vec2<int> position = startingPos[i];
-//        cells[position.GetY() * width + position.GetX()].SetColor(color);
-//    }
-
-
-
     // determining bonuses positions
+    std::vector<Vec2<int>> BonusesPos;
+    int numberOfStone = (int)players.GetSize();
+    int numberOfRob = (int)std::ceil(players.GetSize() * 0.5);
+    int numberOfTEC = (int)std::ceil(players.GetSize() * 1.5);
 
-    //
+//     generation des emplacements de départ random (plus d'actu)
+    while(BonusesPos.size() < numberOfRob
+                            + numberOfStone
+                            + numberOfTEC) {
+        Vec2<int> newPos {
+                std::rand() % width,
+                std::rand() % height
+        };
+
+        // check if element in vector
+        if (std::find(BonusesPos.begin(), BonusesPos.end(), newPos) == BonusesPos.end()){
+            BonusesPos.push_back(newPos);
+        }
+    }
+
+    for (int i = 0; i < numberOfStone; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusStone);
+    }
+    for (int i = numberOfStone; i < numberOfStone + numberOfRob; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusRobbery);
+    }
+    for (int i = numberOfStone + numberOfRob; i < numberOfStone + numberOfRob + numberOfTEC; ++i) {
+        Vec2<int> position = BonusesPos[i];
+        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusTEC);
+    }
+
 }
 
 void Board::SetCell(Vec2<int> position, Color c) {
@@ -114,12 +121,14 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
     return true;
 }
 
-bool Board::PlaceTile(Tile tile, Vec2<int> position) {
-    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position)){
+int Board::PlaceTile(Tile tile, Vec2<int> position) {
+    int returnValue = 0;
+
+    if (CanPlaceTile(tile, position)&& NeighboringTile(tile, position)){
         SetCells(tile, position);
-        return true;
+        returnValue++;
     }
-    return false;
+    return returnValue;
 }
 
 Vec2<int> Board::GetSize() const {
@@ -172,7 +181,6 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
                                               || checkTileCellRightColor)){
                 cellFound = true;
             }
-
             // si les cases autour de la case ne sont ni de la meme couleur que tile, ni de la couleur de base
             if(!tile.GetValue(x, y)){
 //                std::cout << "vide" << std::endl;

@@ -152,7 +152,7 @@ void Game::UpdateGame() {
             // position = {boardX, boardY}
             Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
 
-            bool placed = board.PlaceTile(tiles.GetCurrentTile(), position);
+            int placed = board.PlaceTile(tiles.GetCurrentTile(), position);
 
             if (placed) {
                 // change tile
