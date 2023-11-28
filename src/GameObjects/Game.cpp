@@ -159,12 +159,33 @@ void Game::UpdateGame() {
         // if player is neither distant nor ai
     } else if(!players.GetCurrentPlayer().GetIsDistant() && !players.GetCurrentPlayer().GetIsAI()) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            // position = {boardX, boardY}
-            Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+            // position = {boardX, boardY} dependant de si la souris est sur le board ou non
+            Vec2<int> mousePos = GameEngine::GetMousePosition();
+            Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
+            // si la souris est au dessus du board
+            if (mousePos.GetY() < boardPosition.GetY()){
+                position += Vec2<int>{0, -1};
+            }
+            // si la souris est en dessous du board
+            if (mousePos.GetY() > boardPosition.GetY() + (boardSize.GetY() * (cellSize + padding))){
+                position += Vec2<int>{0, 1};
+            }
+            // si la souris est a gauche du board
+            if (mousePos.GetX() < boardPosition.GetX()){
+                position += Vec2<int>{-1, 0};
+            }
+            // si la souris est a droite du board
+            if (mousePos.GetX() > boardPosition.GetX() + (boardSize.GetX() * (cellSize + padding))){
+                position += Vec2<int>{1, 0};
+            }
 
-            int placed = board.PlaceTile(tiles.GetCurrentTile(), position);
+            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
+                // TODO: check if bonus
 
-            if (placed) {
+                // TODO: use bonus (stone rob)
+
+                // TODO: if TEC, add one to the value in currentplayer
+
                 // change tile
                 tiles.NextTile();
                 players.NextPlayer();
@@ -185,9 +206,7 @@ void Game::UpdateGame() {
         // TODO: detecter bonus utilisé
         // si tel bonus activé, lancer une fonction associé
 
-
-
-
+        
         if (players.GetTurn() >= 10){
             EndGame();
         }

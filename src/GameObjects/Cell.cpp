@@ -9,7 +9,8 @@
 
 Cell::Cell()
         :
-        c(settings::cellBaseColor)
+        c(settings::cellBaseColor),
+        placed(false)
 {
 
 }
@@ -33,4 +34,21 @@ void Cell::DrawCellFollow(Color color) {
     GameEngine::DrawRectangle(pos + settings::padding,
                               Vec2<int>{settings::cellSize, settings::cellSize} - settings::padding,
                               color);
+}
+
+void Cell::SetBonus(const int i) {
+    isBonus = i;
+    placed = true;
+}
+
+int Cell::GetIsBonus() const {
+    return isBonus;
+}
+
+void Cell::SetTaken(bool _taken) {
+    taken = _taken;
+}
+
+bool Cell::GetTaken() {
+    return taken;
 }
