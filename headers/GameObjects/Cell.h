@@ -20,9 +20,19 @@ public:
     int Placed();
     void DrawCellFollow(Color color);
 
+    void SetBonus(const int i);
+
+    int GetIsBonus() const;
+
+    void SetTaken(bool _taken);
+
+    bool GetTaken();
+
 private:
     Color c;
     bool placed = false;
+    int isBonus = 0;
+    bool taken = false;
 };
 
 

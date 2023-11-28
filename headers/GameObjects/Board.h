@@ -7,6 +7,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <map>
 #include "Players.h"
 #include "Tile.h"
 #include "../Settings.h"
@@ -60,7 +61,7 @@ public:
 
     bool CanPlaceCell(Vec2<int> position);
 
-    int CheckForBonuses(Tile tile, Vec2<int> position);
+    std::map<int, int> CheckForBonuses(Color PlayerColor);
 
 private:
     std::vector<Cell> cells;

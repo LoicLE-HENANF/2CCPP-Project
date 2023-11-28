@@ -9,6 +9,7 @@
 #include "../../headers/GameEngine/RaylibWrapper.h"
 #include <algorithm>
 #include <cmath>
+#include <map>
 
 using namespace settings;
 
@@ -40,15 +41,15 @@ void Board::InitBoard(const Players& players) {
 
     for (int i = 0; i < numberOfStone; ++i) {
         Vec2<int> position = BonusesPos[i];
-        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusStone);
+        cells[position.GetY() * width + position.GetX()].SetBonus(settings::bonusStone);
     }
     for (int i = numberOfStone; i < numberOfStone + numberOfRob; ++i) {
         Vec2<int> position = BonusesPos[i];
-        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusRobbery);
+        cells[position.GetY() * width + position.GetX()].SetBonus(settings::bonusRobbery);
     }
     for (int i = numberOfStone + numberOfRob; i < numberOfStone + numberOfRob + numberOfTEC; ++i) {
         Vec2<int> position = BonusesPos[i];
-        cells[position.GetY() * width + position.GetX()].SetColor(settings::bonusTEC);
+        cells[position.GetY() * width + position.GetX()].SetBonus(settings::bonusTEC);
     }
 
 }
@@ -83,7 +84,22 @@ void Board::Draw() const {
     // Drawing cells
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-            DrawCell(Vec2<int>{x, y});
+            if (!cells[y * width + x].GetIsBonus()){
+                DrawCell(Vec2<int>{x, y});
+            }else{
+                switch (cells[y * width + x].GetIsBonus()) {
+                    case 1:
+                        // if cell is bonus = 1: draw texture for bonus 1
+                        break;
+                    case 2:
+                        // if cell is bonus = 2: draw texture for bonus 2
+                        break;
+                    case 3:
+                        // if cell is bonus = 3: draw texture for bonus 3
+                        break;
+                }
+            }
+
         }
     }
     // Drawing board borders
@@ -102,22 +118,26 @@ void Board::SetCells(Tile tile, Vec2<int> position) {
 
 bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
     // check if tile can be place by comparing tile 1 and 0 to the clicked groupe of cells
-    for (int x = 0; x < tile.GetDimension(); ++x) {
-        for (int y = 0; y < tile.GetDimension(); ++y) {
+    for (int y = 0; y < tile.GetDimension(); ++y) {
+        for (int x = 0; x < tile.GetDimension(); ++x) {
             // check if ousite the board
-            if (position.GetX() + x >= 0 && position.GetY() + y >= 0 && position.GetX() + x < width && position.GetY() + y < height){
+            if (position.GetX() - x >= 0 && position.GetY() - y >= 0 && position.GetX() + x < width && position.GetY() + y < height){
                 if (tile.GetValue(x, y) && (cells[(position.GetY() + y) * width + (position.GetX() + x)].Placed())){
-                    return false;
-                }
-            }else{
-                if (tile.GetValue(x, y) == 0){
-                    continue;
-                }else{
+                    std::cout << "CanPlaceTile: placed cell found" << std::endl;
                     return false;
                 }
             }
+//            else{
+//                if (tile.GetValue(x, y) == 0){
+//                    continue;
+//                }
+//                else{
+//                    return false;
+//                }
+//            }
         }
     }
+    std::cout << "CanPlaceTile: no problem" << std::endl;
     return true;
 }
 
@@ -194,11 +214,14 @@ bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
         }
     }
     if (otherCellFound){
+        std::cout << "other cell found" << std::endl;
         return false;
+
     }
     if (cellFound){
         return true;
     }
+    std::cout << "no correct cell cell found" << std::endl;
     return false;
 }
 
@@ -207,64 +230,77 @@ Cell &Board::GetCell(int x, int y) {
 }
 
 bool Board::CanPlaceCell(Vec2<int> position) {
-    bool checkBaseColor = GameEngine::ColorEquals(cells[position.GetY() * width + position.GetX()].GetColor(), cellBaseColor);
+    bool checkCellPlaced = cells[(position.GetY() * width) + position.GetX()].Placed();
 
-    bool checkIfDifCellUp = true;
-    bool checkIfDifCellDown = true;
-    bool checkIfDifCellRight = true;
-    bool checkIfDifCellLeft = true;
+    bool checkCellUpPlaced = false;
+    bool checkCellDownPlaced = false;
+    bool checkCellRightPlaced = false;
+    bool checkCellLeftPlaced = false;
 
     if (position.GetY()+1 < height){
-        checkIfDifCellUp = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()].GetColor(), cellBaseColor);
+        checkCellUpPlaced = cells[(position.GetY()+1) * width + position.GetX()].Placed();
     }
     if (position.GetY()-1 >= 0){
-        checkIfDifCellDown = GameEngine::ColorEquals(cells[(position.GetY()-1) * width + position.GetX()].GetColor(), cellBaseColor);
+        checkCellDownPlaced = cells[(position.GetY()-1) * width + position.GetX()].Placed();
 
     }
     if (position.GetX()+1 < width){
-        checkIfDifCellRight = GameEngine::ColorEquals(cells[(position.GetY()) * width + position.GetX()+1].GetColor(), cellBaseColor);
+        checkCellRightPlaced = cells[(position.GetY()) * width + position.GetX()+1].Placed();
 
     }
     if (position.GetX()-1 >= 0){
-        checkIfDifCellLeft = GameEngine::ColorEquals(cells[(position.GetY()+1) * width + position.GetX()-1].GetColor(), cellBaseColor);
+        checkCellLeftPlaced = cells[(position.GetY()) * width + position.GetX()-1].Placed();
 
     }
 
-    if (checkBaseColor && checkIfDifCellUp && checkIfDifCellDown && checkIfDifCellRight && checkIfDifCellLeft){
+    if (!checkCellPlaced && !checkCellUpPlaced && !checkCellDownPlaced && !checkCellRightPlaced && !checkCellLeftPlaced){
         return true;
     }
 
     return false;
 }
+// return a map of bonuses count that got capture by player
+std::map<int, int> Board::CheckForBonuses(Color PlayerColor) {
+    std::map<int, int> output = {{settings::bonusStone, 0},
+                                 {settings::bonusRobbery, 0},
+                                 {settings::bonusTEC, 0}};
 
-int Board::CheckForBonuses(Tile tile, Vec2<int> position) {
-    for (int y = 0; y < tile.GetDimension(); ++y) {
-        for (int x = 0; x < tile.GetDimension(); ++x) {
-            Color cellUpColor = cellBaseColor;
-            Color cellDownColor = cellBaseColor;
-            Color cellLeftColor = cellBaseColor;
-            Color cellRightColor = cellBaseColor;
+    for (int y = 0; y < width; ++y) {
+        for (int x = 0; x < height; ++x) {
+            // si une case est un bonus
+            if (cells[y * width + x].GetIsBonus() != 0){
+                // recupération des couleurs des cases adjacentes
+                Color cellUpColor = cellBaseColor;
+                Color cellDownColor = cellBaseColor;
+                Color cellLeftColor = cellBaseColor;
+                Color cellRightColor = cellBaseColor;
 
-            if (position.GetY() + y + 1 < height) {
-                cellUpColor = GetCell(position.GetX() + x, position.GetY() + y + 1).GetColor();
-            }
-            if (position.GetY() + y - 1 >= 0) {
-                cellDownColor = GetCell(position.GetX() + x, position.GetY() + y - 1).GetColor();
-            }
-            if (position.GetX() + x + 1 < width) {
-                cellLeftColor = GetCell(position.GetX() + x + 1, position.GetY() + y).GetColor();
-            }
-            if (position.GetX() + x - 1 >= 0) {
-                cellRightColor = GetCell(position.GetX() + x - 1, position.GetY() + y).GetColor();
-            }
+                if (y + 1 < height){
+                    cellUpColor = GetCell(x, y+1).GetColor();
+                }
+                if (y - 1 >= 0){
+                    cellDownColor = GetCell(x, y-1).GetColor();
+                }
+                if (x + 1 < width){
+                    cellLeftColor = GetCell(x+1, y).GetColor();
+                }
+                if (x - 1 >= 0){
+                    cellRightColor = GetCell(x-1, y).GetColor();
+                }
+                bool checkTileCellUpColor = GameEngine::ColorEquals(PlayerColor, cellUpColor);
+                bool checkTileCellDownColor = GameEngine::ColorEquals(PlayerColor, cellDownColor);
+                bool checkTileCellLeftColor = GameEngine::ColorEquals(PlayerColor, cellLeftColor);
+                bool checkTileCellRightColor = GameEngine::ColorEquals(PlayerColor, cellRightColor);
 
-            // si la case est de la meme couleur que la couleur des TEC
-            bool checkTECCellUpColor = GameEngine::ColorEquals(settings::bonusTEC, cellUpColor);
-            bool checkTECCellDownColor = GameEngine::ColorEquals(settings::bonusTEC, cellDownColor);
-            bool checkTECCellLeftColor = GameEngine::ColorEquals(settings::bonusTEC, cellLeftColor);
-            bool checkTECCellRightColor = GameEngine::ColorEquals(settings::bonusTEC, cellRightColor);
+                if (checkTileCellUpColor && checkTileCellDownColor &&
+                        checkTileCellLeftColor && checkTileCellRightColor){
+                    output.at(cells[y * width + x].GetIsBonus()) += 1;
+                    cells[y * width + x].SetTaken(true);
+                }
+            }
         }
     }
+    return output;
 }
 
 
