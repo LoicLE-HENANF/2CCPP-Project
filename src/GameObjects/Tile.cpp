@@ -24,11 +24,11 @@ void Tile::Draw(Vec2<int> pos, Vec2<int> cellPos) {
                               color);
 }
 
-void Tile::DrawFollow(Vec2<int> boardSize) {
+void Tile::DrawFollow() {
     for (int x= 0; x< dimension; ++x) {
         for (int y = 0; y < dimension; ++y) {
             Vec2<int> mousePos = GameEngine::GetMousePosition();
-            Vec2<int> pos = mousePos - (mousePos % boardSize);
+            Vec2<int> pos = mousePos - (mousePos % settings::cellSize);
 
             if(GetValue(x,y)){
                 Draw(pos, {x, y});

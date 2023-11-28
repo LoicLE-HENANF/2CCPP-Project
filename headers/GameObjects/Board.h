@@ -18,11 +18,8 @@ public:
 
 
     Board(): boardPos(settings::boardPosition),
-            width(settings::boardSize.GetX()),
-            height(settings::boardSize.GetY()),
             padding(settings::padding),
             cellSize(settings::cellSize){
-        assert(width > 0 && height > 0); // If assertion triggers : the width or height is below 0
         assert(cellSize > 0); // If assertion triggers : the width or height is below 0
         cells.resize(width*height);
         std::cout << "nb of cells: " << cells.size() << std::endl;
@@ -49,9 +46,9 @@ public:
     void SetBoardPos(Vec2<int> newBoardPos){
         boardPos = newBoardPos;
     };
-    void SetBoardSize(Vec2<int> boardSize){
-        width = boardSize.GetX();
-        height = boardSize.GetY();
+    void SetBoardSize(Vec2<int> boardSize_){
+        width = boardSize_.GetX();
+        height = boardSize_.GetY();
         cells.resize(width*height);
     };
     void SetBoardPadding(int newPadding){ padding = newPadding; };
@@ -69,8 +66,8 @@ private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
 
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
     int padding;
     int cellSize;
 
