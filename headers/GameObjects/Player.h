@@ -18,7 +18,7 @@ private:
     bool isDistant = false;
 
 public:
-    Player() : name(""), color(WHITE) {};
+    Player() : name("a"), color(WHITE) {};
     ~Player() = default;
 
     [[nodiscard]] Color GetColor() const;

@@ -102,7 +102,7 @@ void Game::UpdateMenu() {
 // starting phase functions (placing starting tiles)
 void Game::UpdateStarting() {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / (board.GetSize());
+        Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / settings::cellSize;
 
         if (board.CanPlaceCell(position)){
             board.SetCell(position, players.GetCurrentPlayerColor());
@@ -121,7 +121,7 @@ void Game::DrawingStarting() {
     DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
     board.Draw();
 
-    startingCells[players.GetCurrentPlayerIndex()].DrawCellFollow(board.GetSize(), players.GetCurrentPlayerColor());
+    startingCells[players.GetCurrentPlayerIndex()].DrawCellFollow(players.GetCurrentPlayerColor());
 
 }
 
@@ -130,7 +130,7 @@ void Game::DrawingStarting() {
 void Game::DrawGame() {
     board.Draw();
 
-    tiles.GetCurrentTile().DrawFollow(boardSize);
+    tiles.GetCurrentTile().DrawFollow();
 
     tiles.DrawNextTiles({650,100});
 

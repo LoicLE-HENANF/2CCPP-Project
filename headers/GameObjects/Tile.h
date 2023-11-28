@@ -13,7 +13,7 @@ public:
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
 
     void Draw(Vec2<int> pos, Vec2<int> cellPos);
-    void DrawFollow(Vec2<int> boardSize); // Comme draw mais pour suivre la souris
+    void DrawFollow(); // Comme draw mais pour suivre la souris
 
     void SetPosition(Vec2<int> _position){
         position = _position;

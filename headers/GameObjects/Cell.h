@@ -18,7 +18,7 @@ public:
     Color GetColor() const;
 
     int Placed();
-    void DrawCellFollow(Vec2<int> _boardSize, Color color);
+    void DrawCellFollow(Color color);
 
 private:
     Color c;

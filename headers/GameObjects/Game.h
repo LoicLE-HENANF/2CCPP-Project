@@ -48,7 +48,7 @@ private:
     bool gameOver = false;
 
     Board board;
-    Vec2<int> boardSize = settings::boardSize;
+    Vec2<int> boardSize = {20,20};
     int placedStartingCell = 0;
 
     int tickCounter = 0;

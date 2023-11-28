@@ -25,7 +25,6 @@ namespace settings
     inline constexpr int cellSize = 20;
     inline constexpr int padding = 2;
     inline constexpr  Vec2<int> boardPosition{200, 100};
-    inline constexpr  Vec2<int> boardSize{20, 20};
     inline constexpr Color bonusStone = GRAY;
     inline constexpr Color bonusRobbery = {255, 10, 10, 200};
     inline constexpr Color bonusTEC = WHITE;
