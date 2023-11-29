@@ -28,11 +28,14 @@ public:
 
     bool GetTaken();
 
+    void SetIsStone(bool value);
+
 private:
     Color c;
     bool placed = false;
     int isBonus = 0;
     bool taken = false;
+    bool isStone = false;
 };
 
 

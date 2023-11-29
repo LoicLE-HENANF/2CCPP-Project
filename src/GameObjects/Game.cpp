@@ -101,7 +101,7 @@ void Game::UpdateMenu() {
 
 // starting phase functions (placing starting tiles)
 void Game::UpdateStarting() {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
         Vec2<int> position = (GameEngine::GetMousePosition() - board.GetBoardPos()) / settings::cellSize;
 
         if (board.CanPlaceCell(position)){
@@ -130,7 +130,13 @@ void Game::DrawingStarting() {
 void Game::DrawGame() {
     board.Draw();
 
-    tiles.GetCurrentTile().DrawFollow();
+    if (!CheckPlayerHasBonuses()){
+        tiles.GetCurrentTile().DrawFollow();
+    }
+    else{
+        // draw text : player has to placed stone or robbery
+    }
+
 
     tiles.DrawNextTiles({650,100});
 
@@ -139,14 +145,12 @@ void Game::DrawGame() {
     std::string playerText = players.GetCurrentPlayerName() + " is playing...";
     DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
 
-
-
-}
-
-
     // drawing tiles exchanges coupon
     // TODO : DrawingTEC
     //
+
+}
+
 
 
 void Game::UpdateGame() {
@@ -158,42 +162,85 @@ void Game::UpdateGame() {
 
         // if player is neither distant nor ai
     } else if(!players.GetCurrentPlayer().GetIsDistant() && !players.GetCurrentPlayer().GetIsAI()) {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+
+        // si aucun bonus
+
+        if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
             // position = {boardX, boardY} dependant de si la souris est sur le board ou non
             Vec2<int> mousePos = GameEngine::GetMousePosition();
             Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
-            // si la souris est au dessus du board
-            if (mousePos.GetY() < boardPosition.GetY()){
-                position += Vec2<int>{0, -1};
-            }
-            // si la souris est en dessous du board
-            if (mousePos.GetY() > boardPosition.GetY() + (boardSize.GetY() * (cellSize + padding))){
-                position += Vec2<int>{0, 1};
-            }
-            // si la souris est a gauche du board
-            if (mousePos.GetX() < boardPosition.GetX()){
-                position += Vec2<int>{-1, 0};
-            }
-            // si la souris est a droite du board
-            if (mousePos.GetX() > boardPosition.GetX() + (boardSize.GetX() * (cellSize + padding))){
-                position += Vec2<int>{1, 0};
+
+            // check if player got bonus
+            if (CheckPlayerHasBonuses()) {
+                // use bonus (stone)
+                if (bonuses.at(1) != 0) {
+                    // placement des stones
+                    if (board.SetCellToStone(position)) {
+                        bonuses.at(1)--;
+                    }
+                }
+
+                    // use bonus (rob)
+                else if (bonuses.at(2) != 0) {
+                    if (board.Robbery(position, players.GetCurrentPlayerColor())) {
+                        bonuses.at(2)--;
+                    }
+                }
+
+                    // if TEC, add one to the value in currentplayer
+                else if (bonuses.at(3) != 0) {
+                    while(bonuses.at(3) != 0){
+                        players.AddTECToCurrentPlayer();
+                        bonuses.at(3)--;
+                    }
+                }
             }
 
-            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
-                // TODO: check if bonus
+            if (!CheckPlayerHasBonuses()) {
+                // si la souris est au dessus du board
+                if (mousePos.GetY() < boardPosition.GetY()) {
+                    position += Vec2<int>{0, -1};
+                }
+                // si la souris est en dessous du board
+                if (mousePos.GetY() > boardPosition.GetY() + (boardSize.GetY() * (cellSize + padding))) {
+                    position += Vec2<int>{0, 1};
+                }
+                // si la souris est a gauche du board
+                if (mousePos.GetX() < boardPosition.GetX()) {
+                    position += Vec2<int>{-1, 0};
+                }
+                // si la souris est a droite du board
+                if (mousePos.GetX() > boardPosition.GetX() + (boardSize.GetX() * (cellSize + padding))) {
+                    position += Vec2<int>{1, 0};
+                }
 
-                // TODO: use bonus (stone rob)
+                if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
+                    bonuses = board.CheckForBonuses(players.GetCurrentPlayerColor());
 
-                // TODO: if TEC, add one to the value in currentplayer
-
-                // change tile
-                tiles.NextTile();
-                players.NextPlayer();
-                tiles.SetTilesColor(players.GetCurrentPlayerColor());
+                    // player has played = true
+                    playerHasPlayed = true;
+                    for (const auto &x: bonuses) {
+                        std::cout << x.first << ": " << x.second << std::endl;
+                    }
+                }
             }
+
+            if (CheckPlayerHasBonuses()) {
+                // if TEC, add one to the value in currentplayer
+                if (bonuses.at(3) != 0) {
+                    while(bonuses.at(3) != 0){
+                        players.AddTECToCurrentPlayer();
+                        bonuses.at(3)--;
+                    }
+                }
+            }
+
+            NextPlayer();
         }
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+
+
+        if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
             tiles.GetCurrentTile().RotateClockwise();
         }
 
@@ -201,24 +248,23 @@ void Game::UpdateGame() {
             tiles.GetCurrentTile().Flip();
         }
 
-        // TODO: detecter bonus recuperé
-        // faire fonctionCheckbonus
         // TODO: detecter bonus utilisé
         // si tel bonus activé, lancer une fonction associé
 
-        
-        if (players.GetTurn() >= 10){
+
+        if (players.GetTurn() >= 10) {
             EndGame();
         }
 
         // multiplayer send data
-        if (isServer){
+        if (isServer) {
 
-        }else if(isClient){
+        } else if (isClient) {
 
         }
     }
 }
+
 
 // end phase functions (when game is over and players get their scores)
 
@@ -276,6 +322,19 @@ void Game::EndGame() {
 void Game::BeginGame() {
     starting = false;
     playing = true;
+}
+
+void Game::NextPlayer() {
+    if (!CheckPlayerHasBonuses() && playerHasPlayed){
+        tiles.NextTile();
+        players.NextPlayer();
+        tiles.SetTilesColor(players.GetCurrentPlayerColor());
+        playerHasPlayed = false;
+    }
+}
+
+bool Game::CheckPlayerHasBonuses() {
+    return bonuses.at(1) + bonuses.at(2) + bonuses.at(3);
 }
 
 

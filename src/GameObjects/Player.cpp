@@ -21,3 +21,7 @@ std::string Player::GetPlayerName() {
 void Player::SetName(std::string _name) {
     name = std::move(_name);
 }
+
+void Player::AddTEC() {
+    numberOfTEC ++;
+}

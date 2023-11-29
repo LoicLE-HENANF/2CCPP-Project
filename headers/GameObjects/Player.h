@@ -16,6 +16,7 @@ private:
     Color color;
     bool isAI = false;
     bool isDistant = false;
+    int numberOfTEC = 1;
 
 public:
     Player() : name("a"), color(WHITE) {};
@@ -43,6 +44,8 @@ public:
     std::string GetPlayerName();
 
     void SetName(std::string _name);
+
+    void AddTEC();
 };
 
 

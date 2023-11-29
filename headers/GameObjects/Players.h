@@ -31,6 +31,8 @@ public:
 
     std::string GetCurrentPlayerName();
 
+    void AddTECToCurrentPlayer();
+
 private:
     std::vector<Player> players;
     Player currentPlayer;
