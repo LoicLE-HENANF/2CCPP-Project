@@ -8,36 +8,114 @@
 #include "raylib.h"
 #include "../Utilities/Vec2.h"
 
+/**
+ * @brief Represents a tile in the game.
+ *
+ * The Tile class manages information about a game tile, including its shape, color, position, and various operations.
+ */
 class Tile {
 public:
+
+    /**
+     * @brief Constructor for the Tile class.
+     *
+     * @param shape The shape of the tile represented as a 1D array.
+     * @param dimension The dimension of the square-shaped tile.
+     * @param color The color of the tile.
+     * @param position The position of the tile on the game board.
+     */
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
 
+    /**
+     * @brief Draws the tile at the specified position on the game board.
+     *
+     * @param pos The position to draw the tile.
+     * @param cellPos The position of the cell on the game board.
+     */
     void Draw(Vec2<int> pos, Vec2<int> cellPos);
-    void DrawFollow(); // Comme draw mais pour suivre la souris
 
+    /**
+     * @brief Draws the tile following the mouse cursor.
+     *
+     * Similar to Draw but for following the mouse cursor.
+     */
+    void DrawFollow(); // Like Draw but to follow the user's mouse
+
+    /**
+     * @brief Sets the position of the tile on the game board.
+     *
+     * @param _position The new position of the tile.
+     */
     void SetPosition(Vec2<int> _position){
         position = _position;
     }
 
+    /**
+     * @brief Gets the position of the tile on the game board.
+     *
+     * @return The position of the tile.
+     */
     Vec2<int> GetPosition(){
         return position;
     }
 
+    /**
+     * @brief Gets the dimension of the tile.
+     *
+     * @return The dimension of the tile.
+     */
     int GetDimension();
 
+    /**
+     * @brief Gets the value of the tile at the specified coordinates.
+     *
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
+     * @return The value of the tile at the specified coordinates.
+     */
     const int GetValue(int x, int y);
+
+    /**
+     * @brief Gets the shape of the tile.
+     *
+     * @return A pointer to the "1D array" representing the shape of the tile.
+     */
     const int * GetShape();
 
+    /**
+     * @brief Rotates the tile clockwise.
+     */
     void RotateClockwise();
+
+    /**
+     * @brief Rotates the tile counterclockwise.
+     */
     void RotateCounterClockwise();
 
+    /**
+     * @brief Gets the color of the tile.
+     *
+     * @return The color of the tile.
+     */
     Color GetColor();
 
+    /**
+     * @brief Flips the tile.
+     */
     void Flip();
 
+    /**
+     * @brief Sets the color of the tile.
+     *
+     * @param color The color to set for the tile.
+     */
     void SetColor(Color color);
 
 private:
+
+    /**
+     * @brief Enumeration representing the rotation state of the tile.
+     */
     enum class Rotation{
         UP,
         RIGHT,
@@ -53,13 +131,35 @@ private:
     Vec2<int> position;
 };
 
+/**
+ * @brief Represents a specific type of tile in the game.
+ *
+ * The Tile1 class is a subclass of Tile and represents a specific tile configuration.
+ */
 class Tile1 : public Tile{
 public:
+
+    /**
+     * @brief Constructor for the Tile1 class.
+     *
+     * @param color The color of the tile.
+     * @param position The position of the tile on the game board.
+     */
     Tile1(Color color, Vec2<int> position);
 private:
+
+    /**
+     * @brief 1D array representing the shape of the Tile1.
+     */
     static constexpr int shape[] = {1,0,0,
                                      1,1,1,
                                      0,0,0};
+
+    /**
+     * @brief The dimension of the Tile1.
+     *
+     * To keep track of the size of the tile.
+     */
     static constexpr int dimension = 3; //pour garder en mémoire la taille de la tuile
 };
 

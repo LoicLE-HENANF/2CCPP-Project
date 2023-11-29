@@ -13,29 +13,79 @@
 #include "../UI/NumberChoice.h"
 #include "../UI/PlayersChoice.h"
 
+/**
+ * @brief Represents the game and its logic.
+ *
+ * The Game class manages the overall game state, including drawing, updating, multiplayer logic, and UI elements.
+ */
 class Game {
 
 public:
+
+    /**
+     * @brief Default constructor for the Game class.
+     */
     Game();
+
+    /**
+     * @brief Destructor for the Game class.
+     */
     ~Game() noexcept; // noexcept to avoid stack unwinding
+
+    /**
+     * @brief Deleted copy constructor to prevent copying Game objects.
+     */
     Game(const Game& other) = delete; //copy constructor deleted
+
+    /**
+     * @brief Deleted copy assignment operator to prevent copying Game objects.
+     */
     Game& operator=(const Game& other) = delete; //copy assignment deleted
 
+    /**
+    * @brief Checks if the game should close.
+    *
+    * @return True if the game should close, false otherwise.
+    */
     [[nodiscard]] static bool GameShouldClose() ;
 
+    /**
+     * @brief Performs a game tick, including drawing and updating.
+     */
     void Tick();
 
 
 
 private:
     // Draw and Update
+    /**
+    * @brief Draws the game.
+    */
     void Draw();
+
+    /**
+     * @brief Updates the game logic.
+     */
     void Update();
 
+    /**
+     * @brief Draws the main menu.
+     */
     void DrawMenu();
+
+    /**
+     * @brief Updates the main menu logic.
+     */
     void UpdateMenu();
 
+    /**
+     * @brief Draws the game when in progress.
+     */
     void DrawGame();
+
+    /**
+     * @brief Updates the game logic when in progress.
+     */
     void UpdateGame();
 
     // multiplayer logic
@@ -79,6 +129,8 @@ private:
             "Play",
             RED
     };
+
+
     void PlayButtonClick();
 
     Vec2<int> numberChoicePos = {
@@ -116,12 +168,24 @@ private:
 
 
 
+    /**
+     * @brief Updates the game logic during the starting phase.
+     */
     void UpdateStarting();
 
+    /**
+     * @brief Draws elements during the starting phase.
+     */
     void DrawingStarting();
 
+    /**
+     * @brief Ends the game.
+     */
     void EndGame();
 
+    /**
+     * @brief Begins the game.
+     */
     void BeginGame();
 };
 
