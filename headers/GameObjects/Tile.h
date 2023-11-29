@@ -116,8 +116,8 @@ class Tile7 : public Tile{
 public:
     Tile7(Color color, Vec2<int> position);
 private:
-    static constexpr int shape[] = {1,0,1,
-                                     1,1,1,
+    static constexpr int shape[] = {1,1,1,
+                                     1,0,1,
                                      0,0,0}; // la forme de la tuile
     static constexpr int dimension = 3; //pour garder en mémoire la taille du pattern
 };
