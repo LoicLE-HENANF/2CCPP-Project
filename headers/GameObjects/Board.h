@@ -63,6 +63,10 @@ public:
 
     std::map<int, int> CheckForBonuses(Color PlayerColor);
 
+    bool SetCellToStone(Vec2<int> position);
+
+    bool Robbery(Vec2<int> position, Color playerColor);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;

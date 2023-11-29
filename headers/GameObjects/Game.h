@@ -53,6 +53,12 @@ private:
 
     int tickCounter = 0;
 
+    bool playerHasPlayed = false;
+
+    std::map<int, int> bonuses = {{settings::bonusStone, 0},
+                                  {settings::bonusRobbery, 0},
+                                  {settings::bonusTEC, 0}};
+
     // tiles
     Tiles tiles;
     std::vector<Cell> startingCells;
@@ -123,6 +129,10 @@ private:
     void EndGame();
 
     void BeginGame();
+
+    void NextPlayer();
+
+    bool CheckPlayerHasBonuses();
 };
 
 

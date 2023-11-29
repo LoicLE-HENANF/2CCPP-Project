@@ -52,3 +52,9 @@ void Cell::SetTaken(bool _taken) {
 bool Cell::GetTaken() {
     return taken;
 }
+
+void Cell::SetIsStone(bool value) {
+    isStone = value;
+    placed = true;
+}
+

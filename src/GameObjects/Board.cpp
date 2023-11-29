@@ -268,7 +268,7 @@ std::map<int, int> Board::CheckForBonuses(Color PlayerColor) {
     for (int y = 0; y < width; ++y) {
         for (int x = 0; x < height; ++x) {
             // si une case est un bonus
-            if (cells[y * width + x].GetIsBonus() != 0){
+            if (cells[y * width + x].GetIsBonus() != 0 && !cells[y * width + x].GetTaken()){
                 // recupération des couleurs des cases adjacentes
                 Color cellUpColor = cellBaseColor;
                 Color cellDownColor = cellBaseColor;
@@ -301,6 +301,28 @@ std::map<int, int> Board::CheckForBonuses(Color PlayerColor) {
         }
     }
     return output;
+}
+
+bool Board::SetCellToStone(Vec2<int> position) {
+    if(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height){
+        if (!cells[position.GetY() * width + position.GetX()].Placed() && cells[position.GetY() * width + position.GetX()].GetIsBonus() == 0){
+            cells[position.GetY() * width + position.GetX()].SetIsStone(true);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Board::Robbery(Vec2<int> position, Color playerColor) {
+    if(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height){
+        Color cellColor = cells[position.GetY() * width + position.GetX()].GetColor();
+        bool colorCheck = GameEngine::ColorEquals(cellColor, playerColor);
+        if (cells[position.GetY() * width + position.GetX()].Placed() && cells[position.GetY() * width + position.GetX()].GetIsBonus() == 0 && !colorCheck){
+            cells[position.GetY() * width + position.GetX()].SetColor(playerColor);
+            return true;
+        }
+    }
+    return false;
 }
 
 
