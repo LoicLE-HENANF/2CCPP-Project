@@ -13,8 +13,23 @@
 #include "raylib.h"
 #include"../Settings.h"
 
+/**
+ * @brief Represents a player choice interface in the game.
+ *
+ * The PlayersChoice class manages information about a player choice interface, including its position, size, padding,
+ * color choices, and name inputs.
+ */
 class PlayersChoice { ;
 public:
+
+    /**
+     * @brief Constructor for the PlayersChoice class.
+     *
+     * @param position The position of the player choice interface.
+     * @param colorSize The size of the color choices.
+     * @param nameSize The size of the name inputs.
+     * @param padding The padding between different elements.
+     */
     PlayersChoice(Vec2<int> position,
                   Vec2<int> colorSize,
                   Vec2<int> nameSize,
@@ -27,14 +42,46 @@ public:
     {
         playerNames.resize(numberOfPlayer);
     }
+
+    /**
+     * @brief Destructor for the PlayersChoice class.
+     */
     ~PlayersChoice() = default;
 
+    /**
+     * @brief Draws the player choice interface on the screen.
+     */
     void Draw();
 
+    /**
+     * @brief Checks if a color choice can be clicked.
+     *
+     * @param offset The offset from the player choice interface position.
+     * @return True if the color choice can be clicked, false otherwise.
+     */
     bool CanClickColor(Vec2<int> offset);
+
+    /**
+     * @brief Checks if a name input can be clicked.
+     *
+     * @param offset The offset from the player choice interface position.
+     * @return True if the name input can be clicked, false otherwise.
+     */
     bool CanClickName(Vec2<int> offset);
+
+    /**
+     * @brief Detects a click on the player choice interface and returns selected colors and names.
+     *
+     * @param colorsToReturn Pointer to an array to store selected colors.
+     * @param namesToReturn Pointer to an array to store entered names.
+     */
     void  DetectClick(Color* colorsToReturn, const char** namesToReturn);
 
+    /**
+     * @brief Sets the number of players and resizes the playerNames vector accordingly.
+     *
+     * @param nb The number of players.
+     */
     void SetNumberOfPlayer(int nb){
         numberOfPlayer = nb;
         playerNames.resize(numberOfPlayer);
@@ -80,8 +127,13 @@ private:
     std::vector<std::string> playerNames;
     bool isTyping = false;
     int nameClicked;
-    
 
+    /**
+     * @brief Gets the Color associated with the given AllColor enumeration value.
+     *
+     * @param color The AllColor value.
+     * @return The corresponding Color.
+     */
     Color GetColor(AllColor color){
         switch (color) {
 
@@ -116,6 +168,11 @@ private:
         }
     };
 
+    /**
+     * @brief Moves to the next color in the sequence for a specific player.
+     *
+     * @param index The index of the player.
+     */
     void NextColor(int index){
         playerColors[index] = AllColor((int(playerColors[index]) + 1) % 12);
         bool same = true;
