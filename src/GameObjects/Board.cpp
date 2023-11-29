@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <cmath>
 #include <map>
+#include <random>
 
 using namespace settings;
 
@@ -18,19 +19,34 @@ void Board::InitBoard(const Players& players) {
     // clearing board
     cells.clear();
     cells.resize(width*height);
+
+    stoneTexture = LoadTexture(settings::stonePath);
+    robberyTexture = LoadTexture(settings::robberyPath);
+    TECTexture = LoadTexture(settings::TECPath);
+
+
     // determining bonuses positions
     std::vector<Vec2<int>> BonusesPos;
-    int numberOfStone = (int)players.GetSize();
-    int numberOfRob = (int)std::ceil(players.GetSize() * 0.5);
+    int numberOfStone = (int)std::ceil(players.GetSize() * 0.5);
+    int numberOfRob = (int)players.GetSize();
     int numberOfTEC = (int)std::ceil(players.GetSize() * 1.5);
 
-//     generation des emplacements de départ random (plus d'actu)
+    // rng maker
+    std::random_device seeder;
+    int min = 1;
+    int max = width - 2;
+
+    std::mt19937 rng(seeder());
+    std::uniform_int_distribution<int> gen(min, max);
+
+    // Generating bonus squares position
     while(BonusesPos.size() < numberOfRob
                             + numberOfStone
                             + numberOfTEC) {
+
         Vec2<int> newPos {
-                std::rand() % width,
-                std::rand() % height
+                gen(rng),
+                gen(rng)
         };
 
         // check if element in vector
@@ -67,16 +83,16 @@ void Board::DrawCell(Vec2<int> position) const {
 
 void Board::DrawCell(Vec2<int> position, Color c) const {
     assert(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height); // If assertion triggers : x or y is out of bounds
-    Vec2<int> origin = boardPos + padding + (position * cellSize);
+    Vec2<int> origin = boardPos + padding + (position *settings::cellSize);
     GameEngine::DrawRectangle(origin,
-                              Vec2<int>{cellSize, cellSize} - padding,
+                              Vec2<int>{cellSize,settings::cellSize} - padding,
                               c);
 }
 
 void Board::DrawBorder() const {
     GameEngine::DrawRectangleLinesEx(boardPos - (cellSize / 2),
-                                     Vec2{width*cellSize, height*cellSize} + cellSize + padding,
-                                     cellSize/2,
+                                     Vec2{width*cellSize, height*cellSize} +settings::cellSize + padding,
+                                    settings::cellSize/2,
                                      BLACK);
 }
 
@@ -84,22 +100,28 @@ void Board::Draw() const {
     // Drawing cells
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-            if (!cells[y * width + x].GetIsBonus()){
-                DrawCell(Vec2<int>{x, y});
-            }else{
+            Vec2<int> origin = boardPos + padding + (Vec2<int>{ x,y } *settings::cellSize);
+            if (cells[y * width + x].GetIsBonus()){
                 switch (cells[y * width + x].GetIsBonus()) {
                     case 1:
-                        // if cell is bonus = 1: draw texture for bonus 1
+                        GameEngine::DrawTexture(stoneTexture, origin);
                         break;
                     case 2:
                         // if cell is bonus = 2: draw texture for bonus 2
+                        GameEngine::DrawTexture(robberyTexture, origin);
                         break;
                     case 3:
+                        GameEngine::DrawTexture(TECTexture, origin);
                         // if cell is bonus = 3: draw texture for bonus 3
                         break;
                 }
+            }else if(cells[y * width + x].IsStone()){
+                // if cell is stone: draw texture for stone
+                GameEngine::DrawTexture(stoneTexture, origin);
+            }else{
+                // if cell is normal: draw with Draw function (based on color)
+                DrawCell(Vec2<int>{x, y});
             }
-
         }
     }
     // Drawing board borders
@@ -122,7 +144,7 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
         for (int x = 0; x < tile.GetDimension(); ++x) {
             // check if ousite the board
             if (position.GetX() - x >= 0 && position.GetY() - y >= 0 && position.GetX() + x < width && position.GetY() + y < height){
-                if (tile.GetValue(x, y) && (cells[(position.GetY() + y) * width + (position.GetX() + x)].Placed())){
+                if (tile.GetValue(x, y) && (GetCell(position.GetX() + x, position.GetY() + y).Placed())){
                     std::cout << "CanPlaceTile: placed cell found" << std::endl;
                     return false;
                 }
@@ -260,7 +282,7 @@ bool Board::CanPlaceCell(Vec2<int> position) {
     return false;
 }
 // return a map of bonuses count that got capture by player
-std::map<int, int> Board::CheckForBonuses(Color PlayerColor) {
+std::map<int, int> Board::CheckForBonuses(Color playerColor) {
     std::map<int, int> output = {{settings::bonusStone, 0},
                                  {settings::bonusRobbery, 0},
                                  {settings::bonusTEC, 0}};
@@ -287,15 +309,17 @@ std::map<int, int> Board::CheckForBonuses(Color PlayerColor) {
                 if (x - 1 >= 0){
                     cellRightColor = GetCell(x-1, y).GetColor();
                 }
-                bool checkTileCellUpColor = GameEngine::ColorEquals(PlayerColor, cellUpColor);
-                bool checkTileCellDownColor = GameEngine::ColorEquals(PlayerColor, cellDownColor);
-                bool checkTileCellLeftColor = GameEngine::ColorEquals(PlayerColor, cellLeftColor);
-                bool checkTileCellRightColor = GameEngine::ColorEquals(PlayerColor, cellRightColor);
+                bool checkTileCellUpColor = GameEngine::ColorEquals(playerColor, cellUpColor);
+                bool checkTileCellDownColor = GameEngine::ColorEquals(playerColor, cellDownColor);
+                bool checkTileCellLeftColor = GameEngine::ColorEquals(playerColor, cellLeftColor);
+                bool checkTileCellRightColor = GameEngine::ColorEquals(playerColor, cellRightColor);
 
                 if (checkTileCellUpColor && checkTileCellDownColor &&
                         checkTileCellLeftColor && checkTileCellRightColor){
                     output.at(cells[y * width + x].GetIsBonus()) += 1;
-                    cells[y * width + x].SetTaken(true);
+                    GetCell(x,y).SetTaken(true);
+                    GetCell(x,y).SetColor(playerColor);
+                    GetCell(x,y).SetBonus(0);
                 }
             }
         }

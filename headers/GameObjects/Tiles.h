@@ -47,7 +47,7 @@ public:
      */
     std::vector<Tile> GetFiveTiles(){
         std::vector<Tile> outTiles;
-        for (int i = currentTileIndex; i < currentTileIndex + 5; ++i) {
+        for (int i = currentTileIndex + 1; i < currentTileIndex + 6; ++i) {
             outTiles.push_back(tiles[i]);
         }
         return outTiles;

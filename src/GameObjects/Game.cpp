@@ -134,6 +134,7 @@ void Game::DrawGame() {
         tiles.GetCurrentTile().DrawFollow();
     }
     else{
+        // draw cell
         // draw text : player has to placed stone or robbery
     }
 
