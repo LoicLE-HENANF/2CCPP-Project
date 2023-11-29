@@ -154,116 +154,99 @@ void Game::DrawGame() {
 
 
 void Game::UpdateGame() {
-    // if player is ai
-    if (players.GetCurrentPlayer().GetIsAI()) {
+    // Click souris gauche
+    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        // position = {boardX, boardY} dependant de si la souris est sur le board ou non
+        Vec2<int> mousePos = GameEngine::GetMousePosition();
+        Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
 
-        // if player is distant (multiplayer)
-    } else if(players.GetCurrentPlayer().GetIsDistant()){
-
-        // if player is neither distant nor ai
-    } else if(!players.GetCurrentPlayer().GetIsDistant() && !players.GetCurrentPlayer().GetIsAI()) {
-
-        // si aucun bonus
-
-        if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-            // position = {boardX, boardY} dependant de si la souris est sur le board ou non
-            Vec2<int> mousePos = GameEngine::GetMousePosition();
-            Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
-
-            // check if player got bonus
-            if (CheckPlayerHasBonuses()) {
-                // use bonus (stone)
-                if (bonuses.at(1) != 0) {
-                    // placement des stones
-                    if (board.SetCellToStone(position)) {
-                        bonuses.at(1)--;
-                    }
-                }
-
-                    // use bonus (rob)
-                else if (bonuses.at(2) != 0) {
-                    if (board.Robbery(position, players.GetCurrentPlayerColor())) {
-                        bonuses.at(2)--;
-                    }
-                }
-
-                    // if TEC, add one to the value in currentplayer
-                else if (bonuses.at(3) != 0) {
-                    while(bonuses.at(3) != 0){
-                        players.AddTECToCurrentPlayer();
-                        bonuses.at(3)--;
-                    }
+        // check if player got bonus
+        if (CheckPlayerHasBonuses()) {
+            // use bonus (stone)
+            if (bonuses.at(1) != 0) {
+                // placement des stones
+                if (board.SetCellToStone(position)) {
+                    bonuses.at(1)--;
                 }
             }
-
-            if (!CheckPlayerHasBonuses()) {
-                // si la souris est au dessus du board
-                if (mousePos.GetY() < boardPosition.GetY()) {
-                    position += Vec2<int>{0, -1};
-                }
-                // si la souris est en dessous du board
-                if (mousePos.GetY() > boardPosition.GetY() + (boardSize.GetY() * (cellSize + padding))) {
-                    position += Vec2<int>{0, 1};
-                }
-                // si la souris est a gauche du board
-                if (mousePos.GetX() < boardPosition.GetX()) {
-                    position += Vec2<int>{-1, 0};
-                }
-                // si la souris est a droite du board
-                if (mousePos.GetX() > boardPosition.GetX() + (boardSize.GetX() * (cellSize + padding))) {
-                    position += Vec2<int>{1, 0};
-                }
-
-                if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
-                    bonuses = board.CheckForBonuses(players.GetCurrentPlayerColor());
-
-                    // player has played = true
-                    playerHasPlayed = true;
-                    for (const auto &x: bonuses) {
-                        std::cout << x.first << ": " << x.second << std::endl;
-                    }
+            // use bonus (rob)
+            else if (bonuses.at(2) != 0) {
+                if (board.Robbery(position, players.GetCurrentPlayerColor())) {
+                    bonuses.at(2)--;
                 }
             }
-
-            if (CheckPlayerHasBonuses()) {
-                // if TEC, add one to the value in currentplayer
-                if (bonuses.at(3) != 0) {
-                    while(bonuses.at(3) != 0){
-                        players.AddTECToCurrentPlayer();
-                        bonuses.at(3)--;
-                    }
+            // if TEC, add one to the value in currentplayer
+            else if (bonuses.at(3) != 0) {
+                while(bonuses.at(3) != 0){
+                    players.AddTECToCurrentPlayer();
+                    bonuses.at(3)--;
                 }
             }
-
-            NextPlayer();
         }
 
+        if (!CheckPlayerHasBonuses()) {
+            // si la souris est au dessus du board
+            if (mousePos.GetY() < boardPosition.GetY()) {
+                position += Vec2<int>{0, -1};
+            }
+            // si la souris est en dessous du board
+            if (mousePos.GetY() > boardPosition.GetY() + (boardSize.GetY() * (cellSize + padding))) {
+                position += Vec2<int>{0, 1};
+            }
+            // si la souris est a gauche du board
+            if (mousePos.GetX() < boardPosition.GetX()) {
+                position += Vec2<int>{-1, 0};
+            }
+            // si la souris est a droite du board
+            if (mousePos.GetX() > boardPosition.GetX() + (boardSize.GetX() * (cellSize + padding))) {
+                position += Vec2<int>{1, 0};
+            }
 
+            if (board.PlaceTile(tiles.GetCurrentTile(), position)) {
+                bonuses = board.CheckForBonuses(players.GetCurrentPlayerColor());
 
-        if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
-            tiles.GetCurrentTile().RotateClockwise();
+                // player has played = true
+                playerHasPlayed = true;
+                for (const auto &x: bonuses) {
+                    std::cout << x.first << ": " << x.second << std::endl;
+                }
+            }
         }
 
-        if (IsKeyPressed(KEY_F)) {
-            tiles.GetCurrentTile().Flip();
+        if (CheckPlayerHasBonuses()) {
+            // if TEC, add one to the value in currentplayer
+            if (bonuses.at(3) != 0) {
+                while(bonuses.at(3) != 0){
+                    players.AddTECToCurrentPlayer();
+                    bonuses.at(3)--;
+                }
+            }
         }
 
-        // TODO: detecter bonus utilisé
-        // si tel bonus activé, lancer une fonction associé
+        // passage du joueur
+        NextPlayer();
+    }
 
 
-        if (players.GetTurn() >= 10) {
-            EndGame();
-        }
+    // Click souris droite
+    if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
+        tiles.GetCurrentTile().RotateClockwise();
+    }
 
-        // multiplayer send data
-        if (isServer) {
+    // Click F key
+    if (IsKeyPressed(KEY_F)) {
+        tiles.GetCurrentTile().Flip();
+    }
 
-        } else if (isClient) {
+    // TODO: detecter bonus TEC utilisé
+    // si tel bonus activé, lancer une fonction associé
 
-        }
+
+    if (players.GetTurn() >= 10) {
+        EndGame();
     }
 }
+
 
 
 // end phase functions (when game is over and players get their scores)
@@ -314,7 +297,10 @@ void Game::PlayButtonClick() {
 }
 
 void Game::EndGame() {
+    // re init parametres important à 0
     placedStartingCell = 0;
+
+    // game logic
     playing = false;
     gameOver = true;
 }
@@ -324,6 +310,7 @@ void Game::BeginGame() {
     playing = true;
 }
 
+// si pas de bonus en cours et que le joueur a placer sa tile
 void Game::NextPlayer() {
     if (!CheckPlayerHasBonuses() && playerHasPlayed){
         tiles.NextTile();

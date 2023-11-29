@@ -88,10 +88,6 @@ private:
      */
     void UpdateGame();
 
-    // multiplayer logic
-    bool isServer = false;
-    bool isClient = false;
-
     // Game variables
     bool playing = false;
     bool starting = false;
