@@ -81,6 +81,14 @@ namespace GameEngine {
     * @return True if the colors are equal, false otherwise.
     */
     bool ColorEquals(Color color1, Color color2);
+
+    /**
+    * @brief Draw an image.
+    *
+    * @param image The image to draw.
+    * @param position The position of the top left corner of the image.
+    */
+    void DrawTexture(Texture2D texture, Vec2<int> position);
 }
 
 

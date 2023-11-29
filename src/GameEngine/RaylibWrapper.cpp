@@ -3,6 +3,7 @@
 //
 
 #include "../../headers/GameEngine/RaylibWrapper.h"
+#include "../../headers/Settings.h"
 #include <cassert>
 
 namespace GameEngine{
@@ -70,6 +71,14 @@ namespace GameEngine{
                 && (color1.a == color2.a)
                 && (color1.b == color2.b)
                 && (color1.g == color2.g)) ;
+    }
+
+    void DrawTexture(Texture2D texture, Vec2<int> position){
+        DrawTexturePro(texture, { 0.0f, 0.0f, (float)texture.width, (float)texture.height },
+                       {(float)position.GetX(), (float)position.GetY(),
+                        settings::cellSize - settings::padding, settings::cellSize - settings::padding},
+                        {0 , 0},
+                        0, WHITE);
     }
 
 }

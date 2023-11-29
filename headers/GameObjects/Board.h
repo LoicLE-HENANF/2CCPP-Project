@@ -174,10 +174,10 @@ public:
     /**
      * @brief Checks for bonuses of a specified player color on the board.
      *
-     * @param PlayerColor The color of the player to check for bonuses.
+     * @param playerColor The color of the player to check for bonuses.
      * @return A map of bonuses and their counts.
      */
-    std::map<int, int> CheckForBonuses(Color PlayerColor);
+    std::map<int, int> CheckForBonuses(Color playerColor);
 
     bool SetCellToStone(Vec2<int> position);
 
@@ -191,6 +191,10 @@ private:
     int height = 0;
     int padding;
     int cellSize;
+
+    Texture2D stoneTexture;
+    Texture2D robberyTexture;
+    Texture2D TECTexture;
 
     /**
      * @brief Checks if a tile can be placed at the specified position.

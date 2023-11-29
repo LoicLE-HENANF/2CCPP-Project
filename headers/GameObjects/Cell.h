@@ -88,6 +88,8 @@ public:
 
     void SetIsStone(bool value);
 
+    bool IsStone() const;
+
 private:
     Color c;
     bool placed = false;

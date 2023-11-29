@@ -25,12 +25,13 @@ namespace settings
     inline constexpr int cellSize = 20;
     inline constexpr int padding = 2;
     inline constexpr  Vec2<int> boardPosition{200, 100};
-    inline constexpr Color bonusStoneColor = GRAY;
-    inline constexpr Color bonusRobberyColor = {255, 10, 10, 200};
-    inline constexpr Color bonusTECColor = WHITE;
     inline constexpr int bonusStone = 1;
     inline constexpr int bonusRobbery = 2;
     inline constexpr int bonusTEC = 3;
+    inline const char* stonePath = "../images/stoneImage.png";
+    inline const char* robberyPath = "../images/robberyImage.png";
+    inline const char* TECPath = "../images/TECImage.png";
+
 
     // Cell settings
     inline constexpr Color cellBaseColor = BROWN;

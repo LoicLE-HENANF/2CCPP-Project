@@ -58,3 +58,7 @@ void Cell::SetIsStone(bool value) {
     placed = true;
 }
 
+bool Cell::IsStone() const {
+    return isStone;
+}
+
