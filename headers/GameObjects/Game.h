@@ -30,12 +30,12 @@ public:
     /**
      * @brief Destructor for the Game class.
      */
-    ~Game() noexcept; // noexcept to avoid stack unwinding
+    ~Game() noexcept;
 
     /**
      * @brief Deleted copy constructor to prevent copying Game objects.
      */
-    Game(const Game& other) = delete; //copy constructor deleted
+    Game(const Game& other) = delete;
 
     /**
      * @brief Deleted copy assignment operator to prevent copying Game objects.
@@ -57,7 +57,6 @@ public:
 
 
 private:
-    // Draw and Update
     /**
     * @brief Draws the game.
     */
@@ -89,64 +88,68 @@ private:
     void UpdateGame();
 
     // Game variables
+    int tickCounter = 0; // for testing
     bool playing = false;
     bool starting = false;
     bool gameOver = false;
-
-    Board board;
-    Vec2<int> boardSize = {20,20};
-    int placedStartingCell = 0;
-
-    int tickCounter = 0;
-
     bool playerHasPlayed = false;
     bool playerIsUsingTEC = false;
     bool playerIsRemovingStone = false;
     bool playerIsSkippingTurn = false;
 
+    Vec2<int> boardSize = {20,20};
+    Board board;
+    Tiles tiles;
+    std::vector<Cell> startingCells;
 
-    Vec2<int> nextTilesPosition = {settings::screenWidth - 150, settings::boardPosition.GetY()};
-    Vec2<int> nextTilesTextPosition = nextTilesPosition - Vec2<int>{0, 25};
+    int placedStartingCell = 0;
 
     std::map<int, int> bonuses = {{settings::bonusStone, 0},
                                   {settings::bonusRobbery, 0},
                                   {settings::bonusTEC, 0}};
 
-    // tiles
-    Tiles tiles;
-    std::vector<Cell> startingCells;
-
-
-
-    //player info
+    //players info
     int numberOfPlayer = 2;
     Players players;
     Color* playersColor;
     const char** playersNames;
 
-    // basic UI
-    Vec2<int> buttonSize = {70,30};
-
-    // before starting ui
+    // Positions
+    Vec2<int> nextTilesPosition = {settings::screenWidth - 150, settings::boardPosition.GetY()};
+    Vec2<int> nextTilesTextPosition = nextTilesPosition - Vec2<int>{0, 25};
     Vec2<int> numberChoicePos = {
             (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
-            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) - 100};
+            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) - 100
+    };
+    Vec2<int> colorChoicePos = {
+            (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
+            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) + 50
+    };
+    Vec2<int> playButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) + 350
+    };
 
+    Vec2<int> TECTextPos = nextTilesPosition + Vec2<int>{-200,  600};
+    Vec2<int> TECButtonPos = nextTilesPosition + Vec2<int>{-200,  650};
+    Vec2<int> removeStoneButtonPos = nextTilesPosition + Vec2<int>{-200,  700};
+    Vec2<int> skipButtonPos = nextTilesPosition + Vec2<int>{-200,  750};
+
+
+    // Sizes
+    Vec2<int> buttonSize = {70,30};
+    Vec2<int> colorChoiceSize = {50,50};
+    Vec2<int> nameChoiceSize = {300,50};
+    Vec2<int> gameButtonSize = {275,30};
+
+
+    // UI elements
     NumberChoice numberChoice{numberChoicePos,
                               Vec2{100,100},
                               BLACK,
                               WHITE,
                               2,
                               9};
-
-    Vec2<int> colorChoiceSize = {50,50};
-    Vec2<int> nameChoiceSize = {300,50};
-
-    Vec2<int> colorChoicePos = {
-            (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
-            (settings::screenHeight / 4) - (buttonSize.GetY() / 4) + 50
-    };
-
 
     PlayersChoice playersChoice{
             colorChoicePos,
@@ -155,24 +158,12 @@ private:
             10
     };
 
-    // Game UI
-
-    Vec2<int> playButtonPos = {
-            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) + 350
-    };
     Button playButton{
             playButtonPos,
             buttonSize,
             "Play",
             RED
     };
-
-    Vec2<int> gameButtonSize = {275,30};
-    Vec2<int> TECTextPos = nextTilesPosition + Vec2<int>{-200,  600};
-    Vec2<int> TECButtonPos = nextTilesPosition + Vec2<int>{-200,  650};
-    Vec2<int> removeStoneButtonPos = nextTilesPosition + Vec2<int>{-200,  700};
-    Vec2<int> skipButtonPos = nextTilesPosition + Vec2<int>{-200,  750};
 
     Button TECButton{
             TECButtonPos,

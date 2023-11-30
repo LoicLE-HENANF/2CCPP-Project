@@ -73,7 +73,7 @@ public:
 
     void SetScore(int playerScore);
 
-    std::string GetScore() const;
+    [[nodiscard]] std::string GetScore() const;
 };
 
 

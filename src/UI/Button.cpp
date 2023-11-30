@@ -14,7 +14,7 @@ void Button::Draw() {
 }
 
 int Button::CanClick() {
-    return activated && GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
+    return GameEngine::CheckCollisionPointRec(GameEngine::GetMousePosition(),
                                               buttonPos, buttonSize);
 }
 

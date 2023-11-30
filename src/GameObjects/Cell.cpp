@@ -47,14 +47,6 @@ int Cell::GetIsBonus() const {
     return isBonus;
 }
 
-//void Cell::SetTaken(bool _taken) {
-//    taken = _taken;
-//}
-
-//bool Cell::GetTaken() {
-//    return taken;
-//}
-
 void Cell::SetIsStone(bool value) {
     isStone = value;
     placed = true;
