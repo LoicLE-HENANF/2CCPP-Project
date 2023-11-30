@@ -65,14 +65,35 @@ public:
      */
     void SetName(std::string _name);
 
+    /**
+    * @brief Adds a TEC (Tile exchange coupon) to the game.
+    */
     void AddTEC();
 
+    /**
+ * @brief Gets the number of TECs in the game.
+ *
+ * @return The number of Tile Exchage Coupon.
+ */
     bool GetNumberOfTEC();
 
+    /**
+     * @brief Removes a TEC from the game.
+    */
     void RemoveTEC();
 
+    /**
+    * @brief Sets the score for a player.
+     *
+     * @param playerScore The score to set for the player.
+    */
     void SetScore(int playerScore);
 
+    /**
+    * @brief Gets the score as a string representation.
+    *
+    * @return A string representing the player's score.
+    */
     [[nodiscard]] std::string GetScore() const;
 };
 
