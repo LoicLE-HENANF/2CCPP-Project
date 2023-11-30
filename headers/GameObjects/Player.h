@@ -21,6 +21,7 @@ private:
     std::string name;
     Color color;
     int numberOfTEC = 1;
+    int score = 0;
 
 public:
 
@@ -69,6 +70,10 @@ public:
     bool GetNumberOfTEC();
 
     void RemoveTEC();
+
+    void SetScore(int playerScore);
+
+    std::string GetScore() const;
 };
 
 

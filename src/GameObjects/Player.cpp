@@ -3,6 +3,7 @@
 //
 
 #include <utility>
+#include <sstream>
 
 #include "../../headers/GameObjects/Player.h"
 
@@ -23,7 +24,7 @@ void Player::SetName(std::string _name) {
 }
 
 void Player::AddTEC() {
-    numberOfTEC ++;
+    numberOfTEC += 1;
 }
 
 bool Player::GetNumberOfTEC() {
@@ -31,5 +32,15 @@ bool Player::GetNumberOfTEC() {
 }
 
 void Player::RemoveTEC() {
-    numberOfTEC--;
+    numberOfTEC -= 1;
+}
+
+void Player::SetScore(int playerScore) {
+    score = playerScore;
+}
+
+std::string Player::GetScore() const {
+    std::stringstream ss;
+    ss << score;
+    return ss.str();
 }

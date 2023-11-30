@@ -367,6 +367,42 @@ bool Board::CheckIfStoneOnTheBoard() {
     return stoneSquareFound;
 }
 
+std::vector<int> Board::CalculateScore(std::vector<Player> &players) {
+    std::vector<int> playersSquareSize;
+    for (const Player& player: players) {
+        int maxSquareSize = 0;
+        // for every board coordinates
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+
+                if (GameEngine::ColorEquals(GetCell(x,y).GetColor(), player.GetColor())) {
+                    int squareSize = 1;
+                    bool isSquare = true;
+                    do {
+                        if (x + squareSize >= width || y + squareSize >= height) {
+                            break;
+                        }
+                        for (int i = x; i <= x + squareSize; ++i) {
+                            for (int j = y; j <= y + squareSize; ++j) {
+                                if (!GameEngine::ColorEquals(GetCell(i,j).GetColor(), player.GetColor())) {
+                                    isSquare = false;
+                                    break;
+                                }
+                            }
+                            if (!isSquare) break;
+                        }
+                        if (isSquare) squareSize++;
+                    } while (isSquare);
+                    maxSquareSize = std::max(maxSquareSize, squareSize);
+
+                }
+            }
+        }
+        playersSquareSize.push_back(maxSquareSize);
+    }
+    return playersSquareSize;
+}
+
 
 
 

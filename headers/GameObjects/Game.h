@@ -160,6 +160,14 @@ private:
     };
 
 
+    // End game variables
+    Vec2<int> baseTextPosition = {20, 20};
+    int endGameTextFontSize = 20;
+
+    int highestScore = 0;
+    std::string winningPlayer;
+    std::string highestScoreText;
+
 
 
     void PlayButtonClick();
@@ -222,6 +230,10 @@ private:
     void NextPlayer();
 
     bool CheckPlayerHasBonuses();
+
+    void UpdateEndGame();
+
+    void DrawEndGame();
 };
 
 

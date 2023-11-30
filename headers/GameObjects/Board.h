@@ -187,6 +187,8 @@ public:
 
     bool CheckIfStoneOnTheBoard();
 
+    std::vector<int> CalculateScore(std::vector<Player> &players);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
