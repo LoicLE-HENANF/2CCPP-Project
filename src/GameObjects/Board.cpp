@@ -164,13 +164,11 @@ bool Board::CanPlaceTile(Tile tile, Vec2<int> position) {
 }
 
 int Board::PlaceTile(Tile tile, Vec2<int> position) {
-    int returnValue = 0;
-
-    if (CanPlaceTile(tile, position)&& NeighboringTile(tile, position)){
+    if (CanPlaceTile(tile, position) && NeighboringTile(tile, position)){
         SetCells(tile, position);
-        returnValue++;
+        return true;
     }
-    return returnValue;
+    return false;
 }
 
 Vec2<int> Board::GetSize() const {
@@ -290,7 +288,7 @@ std::map<int, int> Board::CheckForBonuses(Color playerColor) {
     for (int y = 0; y < width; ++y) {
         for (int x = 0; x < height; ++x) {
             // si une case est un bonus
-            if (cells[y * width + x].GetIsBonus() != 0 && !cells[y * width + x].GetTaken()){
+            if (cells[y * width + x].GetIsBonus() != 0){
                 // recupération des couleurs des cases adjacentes
                 Color cellUpColor = cellBaseColor;
                 Color cellDownColor = cellBaseColor;
@@ -317,9 +315,7 @@ std::map<int, int> Board::CheckForBonuses(Color playerColor) {
                 if (checkTileCellUpColor && checkTileCellDownColor &&
                         checkTileCellLeftColor && checkTileCellRightColor){
                     output.at(cells[y * width + x].GetIsBonus()) += 1;
-                    GetCell(x,y).SetTaken(true);
                     GetCell(x,y).SetColor(playerColor);
-                    GetCell(x,y).SetBonus(0);
                 }
             }
         }
@@ -347,6 +343,64 @@ bool Board::Robbery(Vec2<int> position, Color playerColor) {
         }
     }
     return false;
+}
+
+bool Board::RemoveStone(Vec2<int> position) {
+    if(position.GetX() >= 0 && position.GetY() >= 0 && position.GetX()<width && position.GetY() < height){
+        if (cells[position.GetY() * width + position.GetX()].IsStone()){
+            cells[position.GetY() * width + position.GetX()].SetColor(settings::cellBaseColor);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Board::CheckIfStoneOnTheBoard() {
+    bool stoneSquareFound = false;
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            if (GetCell(x, y).IsStone()){
+                stoneSquareFound = true;
+            }
+        }
+    }
+    return stoneSquareFound;
+}
+
+std::vector<int> Board::CalculateScore(std::vector<Player> &players) {
+    std::vector<int> playersSquareSize;
+    for (const Player& player: players) {
+        int maxSquareSize = 0;
+        // for every board coordinates
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+
+                if (GameEngine::ColorEquals(GetCell(x,y).GetColor(), player.GetColor())) {
+                    int squareSize = 1;
+                    bool isSquare = true;
+                    do {
+                        if (x + squareSize >= width || y + squareSize >= height) {
+                            break;
+                        }
+                        for (int i = x; i <= x + squareSize; ++i) {
+                            for (int j = y; j <= y + squareSize; ++j) {
+                                if (!GameEngine::ColorEquals(GetCell(i,j).GetColor(), player.GetColor())) {
+                                    isSquare = false;
+                                    break;
+                                }
+                            }
+                            if (!isSquare) break;
+                        }
+                        if (isSquare) squareSize++;
+                    } while (isSquare);
+                    maxSquareSize = std::max(maxSquareSize, squareSize);
+
+                }
+            }
+        }
+        playersSquareSize.push_back(maxSquareSize);
+    }
+    return playersSquareSize;
 }
 
 

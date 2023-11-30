@@ -3,7 +3,9 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "../../headers/GameObjects/Tiles.h"
+#include "../../headers/GameEngine/RaylibWrapper.h"
 #include "../../headers/Settings.h"
 
 Tiles::Tiles() : color(WHITE) {
@@ -116,4 +118,30 @@ void Tiles::DrawNextTiles(Vec2<int> position) {
         }
 
     }
+}
+
+bool Tiles::UseTEC(Vec2<int> position) {
+    Vec2<int> mousePos = GameEngine::GetMousePosition();
+    std::vector<Tile> nextTiles = GetFiveTiles();
+
+    int dimensionTotal = 0;
+
+    for (int i = 0; i < 5; i++) {
+        Vec2<int> tilePosition = position + Vec2<int>{0,  dimensionTotal * (settings::cellSize + settings::padding)};
+        Vec2<int> tileDimension = {nextTiles[i].GetDimension() * (settings::cellSize + settings::padding),
+                                   nextTiles[i].GetDimension() * (settings::cellSize + settings::padding)};
+
+        if (i > 1){
+            if (GameEngine::CheckCollisionPointRec(mousePos, tilePosition, tileDimension)){
+                TECTileIndexOffset = i + 1;
+                currentTileIndex += TECTileIndexOffset;
+                return true;
+            }
+        }
+        dimensionTotal += nextTiles[i].GetDimension();
+
+
+
+    }
+    return false;
 }

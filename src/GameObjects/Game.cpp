@@ -8,6 +8,7 @@
 #include <cassert>
 #include <algorithm>
 #include "cstring"
+#include <sstream>
 
 using namespace settings;
 
@@ -35,6 +36,8 @@ bool Game::GameShouldClose() {
 void Game::Tick() {
     tickCounter = (tickCounter + 1) % fps;
     if (tickCounter == 1){
+//        std::cout << "number of TEC: " << players.CurrentPlayerHasTEC() << std::endl;
+
         // loop for displaying info once every {framerate} seconds
 //        std::cout << numberOfPlayer << std::endl;
 
@@ -56,9 +59,8 @@ void Game::Draw() {
         DrawGame();
     }else if(starting){
         DrawingStarting();
-    } else
-        if(gameOver){
-// TODO: fin de partie
+    } else if(gameOver){
+        DrawEndGame();
     } else {
         DrawMenu();
     }
@@ -71,7 +73,7 @@ void Game::Update() {
     } else if(starting){
         UpdateStarting();
     }else if(gameOver){
-// TODO: fin de partie
+        UpdateEndGame();
     } else {
         UpdateMenu();
     }
@@ -129,7 +131,12 @@ void Game::DrawingStarting() {
 // playing phase functions (when placing tiles)
 void Game::DrawGame() {
     board.Draw();
+    TECButton.Draw();
+    removeStoneButton.Draw();
 
+    if(playerIsRemovingStone){
+        // draw nothing
+    } else
     if (!CheckPlayerHasBonuses()){
         tiles.GetCurrentTile().DrawFollow();
     }
@@ -139,7 +146,7 @@ void Game::DrawGame() {
     }
 
 
-    tiles.DrawNextTiles({650,100});
+    tiles.DrawNextTiles(nextTilesPosition);
 
     // drawing player names
 
@@ -155,12 +162,44 @@ void Game::DrawGame() {
 
 
 void Game::UpdateGame() {
+    // position = {boardX, boardY} dependant de si la souris est sur le board ou non
+    Vec2<int> mousePos = GameEngine::GetMousePosition();
+    Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
+
+    if (!playerIsUsingTEC){
+        if (players.CurrentPlayerHasTEC()) {
+            playerIsUsingTEC = TECButton.DetectClick();
+            if (playerIsUsingTEC){
+                players.RemoveTECFromPlayer();
+            }
+
+
+        }
+    }
+    if (!playerIsRemovingStone){
+        // le joueur appuye sur le bouton remove stone
+        if (players.CurrentPlayerHasTEC()) {
+            if (board.CheckIfStoneOnTheBoard()) {
+                playerIsRemovingStone = removeStoneButton.DetectClick();
+                std::cout << "removing stone: " << playerIsRemovingStone << std::endl;
+            }
+        }
+
+    }
+
+
+
     // Click souris gauche
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-        // position = {boardX, boardY} dependant de si la souris est sur le board ou non
-        Vec2<int> mousePos = GameEngine::GetMousePosition();
-        Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
-
+        if (playerIsUsingTEC){
+            if(tiles.UseTEC(nextTilesPosition)){
+                playerIsUsingTEC = false;
+            }
+        } else if(playerIsRemovingStone){
+            if (board.RemoveStone(position)){
+                playerIsRemovingStone = false;
+            }
+        } else
         // check if player got bonus
         if (CheckPlayerHasBonuses()) {
             // use bonus (stone)
@@ -176,16 +215,9 @@ void Game::UpdateGame() {
                     bonuses.at(2)--;
                 }
             }
-            // if TEC, add one to the value in currentplayer
-            else if (bonuses.at(3) != 0) {
-                while(bonuses.at(3) != 0){
-                    players.AddTECToCurrentPlayer();
-                    bonuses.at(3)--;
-                }
-            }
         }
 
-        if (!CheckPlayerHasBonuses()) {
+        else if (!CheckPlayerHasBonuses()) {
             // si la souris est au dessus du board
             if (mousePos.GetY() < boardPosition.GetY()) {
                 position += Vec2<int>{0, -1};
@@ -217,7 +249,11 @@ void Game::UpdateGame() {
         if (CheckPlayerHasBonuses()) {
             // if TEC, add one to the value in currentplayer
             if (bonuses.at(3) != 0) {
+                std::cout << "add coupons" << std::endl;
+
                 while(bonuses.at(3) != 0){
+                    std::cout << "add  1 coupon" << std::endl;
+
                     players.AddTECToCurrentPlayer();
                     bonuses.at(3)--;
                 }
@@ -230,12 +266,12 @@ void Game::UpdateGame() {
 
 
     // Click souris droite
-    if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
+    if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT) && !playerIsUsingTEC && !playerIsRemovingStone) {
         tiles.GetCurrentTile().RotateClockwise();
     }
 
     // Click F key
-    if (IsKeyPressed(KEY_F)) {
+    if (IsKeyPressed(KEY_F) && !playerIsUsingTEC && !playerIsRemovingStone) {
         tiles.GetCurrentTile().Flip();
     }
 
@@ -304,6 +340,19 @@ void Game::EndGame() {
     // game logic
     playing = false;
     gameOver = true;
+
+    players.SetPlayersScores(board.CalculateScore(players.GetPlayers()));
+
+    for (Player& player: players.GetPlayers()) {
+        if (highestScore < std::stoi(player.GetScore())){
+            highestScore = std::stoi(player.GetScore());
+            winningPlayer = player.GetPlayerName();
+        }
+    }
+
+    std::stringstream ss;
+    ss << highestScore;
+    highestScoreText = ss.str();
 }
 
 void Game::BeginGame() {
@@ -324,5 +373,29 @@ void Game::NextPlayer() {
 bool Game::CheckPlayerHasBonuses() {
     return bonuses.at(1) + bonuses.at(2) + bonuses.at(3);
 }
+
+void Game::UpdateEndGame() {
+
+}
+
+void Game::DrawEndGame() {
+    for (int i = 0; i < players.GetSize(); ++i) {
+        Vec2<int> position = baseTextPosition + Vec2<int>{0, i * endGameTextFontSize};
+        std::string toPrint = players.GetPlayer(i).GetPlayerName() + " has a square of size " +  players.GetPlayer(i).GetScore();
+        DrawText(toPrint.c_str(),
+                 position.GetX(),
+                 position.GetY(),
+                 endGameTextFontSize,
+                 players.GetPlayer(i).GetColor());
+    }
+
+    std::string toPrintWinner = winningPlayer + " has won with a square of size " + highestScoreText;
+    DrawText(toPrintWinner.c_str(),
+             20,
+             400,
+             endGameTextFontSize,
+             BLACK);
+}
+
 
 

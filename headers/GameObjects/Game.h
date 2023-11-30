@@ -100,6 +100,10 @@ private:
     int tickCounter = 0;
 
     bool playerHasPlayed = false;
+    bool playerIsUsingTEC = false;
+    bool playerIsRemovingStone = false;
+
+    Vec2<int> nextTilesPosition = {650,100};
 
     std::map<int, int> bonuses = {{settings::bonusStone, 0},
                                   {settings::bonusRobbery, 0},
@@ -131,6 +135,39 @@ private:
             "Play",
             RED
     };
+
+    Vec2<int> gameButtonSize = {200,30};
+    Vec2<int> TECButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) + 300
+    };
+    Vec2<int> removeStoneButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) +400
+    };
+
+    Button TECButton{
+            TECButtonPos,
+            gameButtonSize,
+            "Exchange Tile",
+            RED
+    };
+    Button removeStoneButton{
+            removeStoneButtonPos,
+            gameButtonSize,
+            "Remove Stone",
+            RED
+    };
+
+
+    // End game variables
+    Vec2<int> baseTextPosition = {20, 20};
+    int endGameTextFontSize = 20;
+
+    int highestScore = 0;
+    std::string winningPlayer;
+    std::string highestScoreText;
+
 
 
     void PlayButtonClick();
@@ -193,6 +230,10 @@ private:
     void NextPlayer();
 
     bool CheckPlayerHasBonuses();
+
+    void UpdateEndGame();
+
+    void DrawEndGame();
 };
 
 

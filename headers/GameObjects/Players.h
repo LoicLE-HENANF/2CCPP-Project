@@ -92,6 +92,14 @@ public:
 
     void AddTECToCurrentPlayer();
 
+    bool CurrentPlayerHasTEC();
+
+    void RemoveTECFromPlayer();
+
+    std::vector<Player> &GetPlayers();
+
+    void SetPlayersScores(std::vector<int> playersScores);
+
 private:
     std::vector<Player> players;
     Player currentPlayer;

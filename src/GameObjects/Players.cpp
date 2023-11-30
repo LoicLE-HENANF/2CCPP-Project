@@ -55,3 +55,26 @@ std::string Players::GetCurrentPlayerName() {
 void Players::AddTECToCurrentPlayer() {
     players[currentPlayerIndex].AddTEC();
 }
+
+bool Players::CurrentPlayerHasTEC() {
+    if (players[currentPlayerIndex].GetNumberOfTEC() > 0){
+        return true;
+    }
+    return false;
+
+}
+
+void Players::RemoveTECFromPlayer() {
+    players[currentPlayerIndex].RemoveTEC();
+}
+
+std::vector<Player>& Players::GetPlayers() {
+    return players;
+}
+
+void Players::SetPlayersScores(std::vector<int> playersScores) {
+    for (int i = 0; i < players.size(); ++i) {
+        players[i].SetScore(playersScores[i]);
+    }
+}
+
