@@ -42,13 +42,6 @@ public:
     ~CheckBox() = default;
 
     /**
-     * @brief Gets the value of the checkbox.
-     *
-     * @return The value of the checkbox.
-     */
-    bool GetValue() const{ return value;};
-
-    /**
      * @brief Draws the checkbox on the screen.
      */
     void Draw();
