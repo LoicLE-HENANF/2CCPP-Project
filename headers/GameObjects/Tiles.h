@@ -96,11 +96,21 @@ public:
         }
     }
 
+    bool UseTEC(Vec2<int> position);
+
+    void SetUsingTEC(bool value);
+
+    void SetCurrentIndexWithOffset();
+
+    void PopCurrentTile();
+
 private:
     std::vector<Tile> tiles;
     int currentTileIndex = 0;
     std::vector<Tile> placedTiles;
     Color color;
+    bool isUsingTEC = false;
+    int TECTileIndexOffset = 0;
 
 };
 

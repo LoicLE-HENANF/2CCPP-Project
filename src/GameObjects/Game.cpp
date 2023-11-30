@@ -129,7 +129,12 @@ void Game::DrawingStarting() {
 // playing phase functions (when placing tiles)
 void Game::DrawGame() {
     board.Draw();
+    TECButton.Draw();
+    removeStoneButton.Draw();
 
+    if(playerIsRemovingStone){
+        // draw nothing
+    } else
     if (!CheckPlayerHasBonuses()){
         tiles.GetCurrentTile().DrawFollow();
     }
@@ -139,7 +144,7 @@ void Game::DrawGame() {
     }
 
 
-    tiles.DrawNextTiles({650,100});
+    tiles.DrawNextTiles(nextTilesPosition);
 
     // drawing player names
 
@@ -155,12 +160,46 @@ void Game::DrawGame() {
 
 
 void Game::UpdateGame() {
+    // position = {boardX, boardY} dependant de si la souris est sur le board ou non
+    Vec2<int> mousePos = GameEngine::GetMousePosition();
+    Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
+
+    if (!playerIsUsingTEC){
+        std::cout << "number of TEC: " << players.CurrentPlayerHasTEC() << std::endl;
+        if (players.CurrentPlayerHasTEC()) {
+            playerIsUsingTEC = TECButton.DetectClick();
+            if (playerIsUsingTEC){
+                players.RemoveTECFromPlayer();
+            }
+
+
+        }
+    }
+    if (!playerIsRemovingStone){
+        // le joueur appuye sur le bouton remove stone
+        if (players.CurrentPlayerHasTEC()) {
+            if (board.CheckIfStoneOnTheBoard()) {
+                playerIsRemovingStone = removeStoneButton.DetectClick();
+                std::cout << "removing stone: " << playerIsRemovingStone << std::endl;
+            }
+        }
+
+    }
+
+
+
+
     // Click souris gauche
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-        // position = {boardX, boardY} dependant de si la souris est sur le board ou non
-        Vec2<int> mousePos = GameEngine::GetMousePosition();
-        Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
-
+        if (playerIsUsingTEC){
+            if(tiles.UseTEC(nextTilesPosition)){
+                playerIsUsingTEC = false;
+            }
+        } else if(playerIsRemovingStone){
+            if (board.RemoveStone(position)){
+                playerIsRemovingStone = false;
+            }
+        } else
         // check if player got bonus
         if (CheckPlayerHasBonuses()) {
             // use bonus (stone)
@@ -185,7 +224,7 @@ void Game::UpdateGame() {
             }
         }
 
-        if (!CheckPlayerHasBonuses()) {
+        else if (!CheckPlayerHasBonuses()) {
             // si la souris est au dessus du board
             if (mousePos.GetY() < boardPosition.GetY()) {
                 position += Vec2<int>{0, -1};
@@ -230,12 +269,12 @@ void Game::UpdateGame() {
 
 
     // Click souris droite
-    if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
+    if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT) && !playerIsUsingTEC && !playerIsRemovingStone) {
         tiles.GetCurrentTile().RotateClockwise();
     }
 
     // Click F key
-    if (IsKeyPressed(KEY_F)) {
+    if (IsKeyPressed(KEY_F) && !playerIsUsingTEC && !playerIsRemovingStone) {
         tiles.GetCurrentTile().Flip();
     }
 

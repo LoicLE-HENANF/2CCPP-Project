@@ -18,6 +18,8 @@ Cell::Cell()
 void Cell::SetColor(Color color) {
     c = color;
     placed = true;
+    isStone = false;
+    isBonus = 0;
 }
 
 Color Cell::GetColor() const {
@@ -45,13 +47,13 @@ int Cell::GetIsBonus() const {
     return isBonus;
 }
 
-void Cell::SetTaken(bool _taken) {
-    taken = _taken;
-}
+//void Cell::SetTaken(bool _taken) {
+//    taken = _taken;
+//}
 
-bool Cell::GetTaken() {
-    return taken;
-}
+//bool Cell::GetTaken() {
+//    return taken;
+//}
 
 void Cell::SetIsStone(bool value) {
     isStone = value;

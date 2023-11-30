@@ -183,6 +183,10 @@ public:
 
     bool Robbery(Vec2<int> position, Color playerColor);
 
+    bool RemoveStone(Vec2<int> position);
+
+    bool CheckIfStoneOnTheBoard();
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;

@@ -55,3 +55,15 @@ std::string Players::GetCurrentPlayerName() {
 void Players::AddTECToCurrentPlayer() {
     players[currentPlayerIndex].AddTEC();
 }
+
+bool Players::CurrentPlayerHasTEC() {
+    if (players[currentPlayerIndex].GetNumberOfTEC() > 0){
+        return true;
+    }
+    return false;
+
+}
+
+void Players::RemoveTECFromPlayer() {
+    players[currentPlayerIndex].RemoveTEC();
+}

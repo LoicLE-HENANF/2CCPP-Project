@@ -92,6 +92,10 @@ public:
 
     void AddTECToCurrentPlayer();
 
+    bool CurrentPlayerHasTEC();
+
+    void RemoveTECFromPlayer();
+
 private:
     std::vector<Player> players;
     Player currentPlayer;

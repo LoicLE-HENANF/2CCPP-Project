@@ -25,3 +25,11 @@ void Player::SetName(std::string _name) {
 void Player::AddTEC() {
     numberOfTEC ++;
 }
+
+bool Player::GetNumberOfTEC() {
+    return numberOfTEC;
+}
+
+void Player::RemoveTEC() {
+    numberOfTEC--;
+}

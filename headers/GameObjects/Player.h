@@ -65,6 +65,10 @@ public:
     void SetName(std::string _name);
 
     void AddTEC();
+
+    bool GetNumberOfTEC();
+
+    void RemoveTEC();
 };
 
 

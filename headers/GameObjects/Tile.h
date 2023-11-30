@@ -25,7 +25,6 @@ public:
      * @param position The position of the tile on the game board.
      */
     Tile(const int *shape, int dimension, Color color, Vec2<int> position);
-
     /**
      * @brief Draws the tile at the specified position on the game board.
      *
@@ -126,7 +125,7 @@ private:
     bool flipped = false;
 
     const int* shape;
-    const int dimension;
+    int dimension;
     Color color;
     Vec2<int> position;
 };
