@@ -119,7 +119,7 @@ void Game::UpdateStarting() {
 }
 
 void Game::DrawingStarting() {
-    std::string playerText = players.GetCurrentPlayer().GetPlayerName() + " is playing...";
+    std::string playerText = players.GetCurrentPlayer().GetName() + " is playing...";
     DrawText(playerText.c_str(),50, 25, 50, players.GetCurrentPlayerColor());
     board.Draw();
 
@@ -358,15 +358,28 @@ void Game::EndGame() {
 
     players.SetPlayersScores(board.CalculateScore(players.GetPlayers()));
 
+
+
     for (Player& player: players.GetPlayers()) {
         if (highestScore < std::stoi(player.GetScore())){
             highestScore = std::stoi(player.GetScore());
-            winningPlayer = player.GetPlayerName();
+            winningPlayer = player.GetName();
         }
     }
 
+    std::vector<Player> playersWithSameScores;
+    for (const Player& player: players.GetPlayers()) {
+        if (std::stoi(player.GetScore()) == highestScore){
+            playersWithSameScores.push_back(player);
+        }
+    }
+
+    Player winner = board.FindTrueWinner(playersWithSameScores);
+
+    winningPlayer = winner.GetName();
+
     std::stringstream ss;
-    ss << highestScore;
+    ss << winner.GetScore();
     highestScoreText = ss.str();
 }
 
@@ -400,7 +413,8 @@ void Game::DrawEndGame() {
 
     for (int i = 0; i < players.GetSize(); ++i) {
         Vec2<int> position = baseTextPosition + Vec2<int>{0, i * endGameTextFontSize};
-        std::string toPrint = players.GetPlayer(i).GetPlayerName() + " has a square of size " +  players.GetPlayer(i).GetScore();
+        std::string toPrint =
+                players.GetPlayer(i).GetName() + " has a square of size " + players.GetPlayer(i).GetScore();
         DrawText(toPrint.c_str(),
                  position.GetX(),
                  position.GetY(),

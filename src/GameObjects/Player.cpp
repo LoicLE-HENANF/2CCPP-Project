@@ -15,7 +15,7 @@ void Player::SetColor(Color _color) {
     color = _color;
 }
 
-std::string Player::GetPlayerName() {
+std::string Player::GetName() {
     return name;
 }
 
