@@ -41,15 +41,6 @@ public:
     void DrawFollow(); // Like Draw but to follow the user's mouse
 
     /**
-     * @brief Sets the position of the tile on the game board.
-     *
-     * @param _position The new position of the tile.
-     */
-    void SetPosition(Vec2<int> _position){
-        position = _position;
-    }
-
-    /**
      * @brief Gets the position of the tile on the game board.
      *
      * @return The position of the tile.
@@ -74,22 +65,12 @@ public:
      */
     const int GetValue(int x, int y);
 
-    /**
-     * @brief Gets the shape of the tile.
-     *
-     * @return A pointer to the "1D array" representing the shape of the tile.
-     */
-    const int * GetShape();
 
     /**
      * @brief Rotates the tile clockwise.
      */
     void RotateClockwise();
 
-    /**
-     * @brief Rotates the tile counterclockwise.
-     */
-    void RotateCounterClockwise();
 
     /**
      * @brief Gets the color of the tile.

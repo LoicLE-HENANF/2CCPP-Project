@@ -75,21 +75,12 @@ const int Tile::GetValue(int x, int y) {
 }
 
 
-const int * Tile::GetShape() {
-    return shape;
-}
+
 
 void Tile::RotateClockwise() {
     currentRotation = Rotation((int(currentRotation) + 1) % 4);
 }
 
-void Tile::RotateCounterClockwise() {
-    if (currentRotation == Rotation::UP){
-        currentRotation = Rotation::LEFT;
-    }else{
-        currentRotation = Rotation(int(currentRotation) - 1);
-    }
-}
 
 Color Tile::GetColor() {
     return color;
