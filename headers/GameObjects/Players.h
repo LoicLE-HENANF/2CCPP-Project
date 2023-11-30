@@ -90,14 +90,35 @@ public:
      */
     std::string GetCurrentPlayerName();
 
+    /**
+    * @brief Adds a TEC (Tile Exchange Coupon) to the current player.
+     */
     void AddTECToCurrentPlayer();
 
+    /**
+    * @brief Checks if the current player has a TEC.
+    *
+    * @return True if the current player has a Tile Exchange Coupon, false otherwise.
+    */
     bool CurrentPlayerHasTEC();
 
+    /**
+     * @brief Removes a TEC from the current player.
+    */
     void RemoveTECFromPlayer();
 
+    /**
+    * @brief Gets the vector of players in the game.
+    *
+    * @return Reference to the vector of players.
+    */
     std::vector<Player> &GetPlayers();
 
+    /**
+    * @brief Sets the scores for all players in the game.
+    *
+    * @param playersScores Vector containing scores for each player.
+    */
     void SetPlayersScores(std::vector<int> playersScores);
 
 private:
