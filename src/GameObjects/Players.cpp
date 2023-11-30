@@ -6,6 +6,7 @@
 #include "../../headers/GameObjects/Players.h"
 
 void Players::Init(int numberOfPlayers, std::vector<Color> colors, std::vector<std::string> names) {
+    turn = 0;
     players.clear();
     players.resize(numberOfPlayers);
     currentPlayerIndex = 0;

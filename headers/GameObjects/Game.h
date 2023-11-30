@@ -102,8 +102,11 @@ private:
     bool playerHasPlayed = false;
     bool playerIsUsingTEC = false;
     bool playerIsRemovingStone = false;
+    bool playerIsSkippingTurn = false;
 
-    Vec2<int> nextTilesPosition = {650,100};
+
+    Vec2<int> nextTilesPosition = {settings::screenWidth - 150, settings::boardPosition.GetY()};
+    Vec2<int> nextTilesTextPosition = nextTilesPosition - Vec2<int>{0, 25};
 
     std::map<int, int> bonuses = {{settings::bonusStone, 0},
                                   {settings::bonusRobbery, 0},
@@ -121,57 +124,10 @@ private:
     Color* playersColor;
     const char** playersNames;
 
-    // UI (options)
-
+    // basic UI
     Vec2<int> buttonSize = {70,30};
 
-    Vec2<int> playButtonPos = {
-            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) +200
-    };
-    Button playButton{
-            playButtonPos,
-            buttonSize,
-            "Play",
-            RED
-    };
-
-    Vec2<int> gameButtonSize = {200,30};
-    Vec2<int> TECButtonPos = {
-            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) + 300
-    };
-    Vec2<int> removeStoneButtonPos = {
-            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
-            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) +400
-    };
-
-    Button TECButton{
-            TECButtonPos,
-            gameButtonSize,
-            "Exchange Tile",
-            RED
-    };
-    Button removeStoneButton{
-            removeStoneButtonPos,
-            gameButtonSize,
-            "Remove Stone",
-            RED
-    };
-
-
-    // End game variables
-    Vec2<int> baseTextPosition = {20, 20};
-    int endGameTextFontSize = 20;
-
-    int highestScore = 0;
-    std::string winningPlayer;
-    std::string highestScoreText;
-
-
-
-    void PlayButtonClick();
-
+    // before starting ui
     Vec2<int> numberChoicePos = {
             (settings::screenWidth / 4) - (buttonSize.GetX() / 4),
             (settings::screenHeight / 4) - (buttonSize.GetY() / 4) - 100};
@@ -193,18 +149,71 @@ private:
 
 
     PlayersChoice playersChoice{
-        colorChoicePos,
-        colorChoiceSize,
-        nameChoiceSize,
-        10
+            colorChoicePos,
+            colorChoiceSize,
+            nameChoiceSize,
+            10
+    };
+
+    // Game UI
+
+    Vec2<int> playButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            (settings::screenHeight / 2) - (buttonSize.GetY() / 2) + 350
+    };
+    Button playButton{
+            playButtonPos,
+            buttonSize,
+            "Play",
+            RED
+    };
+
+    Vec2<int> gameButtonSize = {275,30};
+    Vec2<int> TECTextPos = nextTilesPosition + Vec2<int>{-200,  600};
+    Vec2<int> TECButtonPos = nextTilesPosition + Vec2<int>{-200,  650};
+    Vec2<int> removeStoneButtonPos = nextTilesPosition + Vec2<int>{-200,  700};
+    Vec2<int> skipButtonPos = nextTilesPosition + Vec2<int>{-200,  750};
+
+    Button TECButton{
+            TECButtonPos,
+            gameButtonSize,
+            "Exchange Tile (use 1TEC)",
+            RED
+    };
+    Button removeStoneButton{
+            removeStoneButtonPos,
+            gameButtonSize,
+            "Remove Stone (use 1TEC)",
+            RED
+    };
+
+    Button skipButton{
+            skipButtonPos,
+            gameButtonSize,
+            "Skip Turn",
+            RED
     };
 
 
+    // End game variables
+    Vec2<int> baseTextPosition = {20, 20};
+    int endGameTextFontSize = 30;
 
-    // UI (game)
-    // TODO: next tiles
-    // TODO: bouton pour utiliser bonus
+    int highestScore = 0;
+    std::string winningPlayer;
+    std::string highestScoreText;
 
+    Vec2<int> restartButtonPos = {
+            (settings::screenWidth / 2) - (buttonSize.GetX() / 2),
+            settings::screenHeight - 100
+    };
+
+    Button restartButton = {
+        restartButtonPos,
+        gameButtonSize,
+        "Return to Main Menu",
+        RED
+    };
 
 
     /**
@@ -234,6 +243,12 @@ private:
     void UpdateEndGame();
 
     void DrawEndGame();
+
+    void SkipTurn();
+
+    void PlayButtonClick();
+
+    void RestartGame();
 };
 
 

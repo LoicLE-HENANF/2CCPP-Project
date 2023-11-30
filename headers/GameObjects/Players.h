@@ -100,6 +100,8 @@ public:
 
     void SetPlayersScores(std::vector<int> playersScores);
 
+    void SetTurn(int value);
+
 private:
     std::vector<Player> players;
     Player currentPlayer;
