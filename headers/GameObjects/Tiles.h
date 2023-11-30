@@ -78,6 +78,12 @@ public:
         }
     }
 
+    /**
+    * @brief Attempts to use a TEC (Tile Exchange Coupon) at the specified position.
+    *
+    * @param position The position at which to use the TEC.
+    * @return True if the TEC was successfully used, false otherwise.
+    */
     bool UseTEC(Vec2<int> position);
 
 private:
