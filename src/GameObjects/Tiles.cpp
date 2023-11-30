@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <random>
 #include "../../headers/GameObjects/Tiles.h"
 #include "../../headers/GameEngine/RaylibWrapper.h"
 #include "../../headers/Settings.h"
@@ -97,6 +98,11 @@ Tiles::Tiles() : color(WHITE) {
     tiles.push_back(Tile84{color, {0,0}});
     tiles.push_back(Tile85{color, {0,0}});
     tiles.push_back(Tile86{color, {0,0}});
+
+
+    auto rd = std::random_device {};
+    auto rng = std::default_random_engine { rd() };
+    std::shuffle(std::begin(tiles), std::end(tiles), rng);
 
 }
 

@@ -131,8 +131,17 @@ void Game::DrawingStarting() {
 // playing phase functions (when placing tiles)
 void Game::DrawGame() {
     board.Draw();
+
+
+    std::stringstream ss;
+    ss << players.GetCurrentPlayer().GetNumberOfTEC();
+    std::string TECNumberText = ss.str();
+
+    std::string TECText = "You have " + TECNumberText + " Tile Exchange Coupon.";
+    DrawText(TECText.c_str(), TECTextPos.GetX(), TECTextPos.GetY(), 20, BLACK);
     TECButton.Draw();
     removeStoneButton.Draw();
+    skipButton.Draw();
 
     if(playerIsRemovingStone){
         // draw nothing
@@ -145,7 +154,7 @@ void Game::DrawGame() {
         // draw text : player has to placed stone or robbery
     }
 
-
+    DrawText("Next Tiles:", nextTilesTextPosition.GetX(), nextTilesTextPosition.GetY(), 20, BLACK);
     tiles.DrawNextTiles(nextTilesPosition);
 
     // drawing player names
@@ -165,6 +174,12 @@ void Game::UpdateGame() {
     // position = {boardX, boardY} dependant de si la souris est sur le board ou non
     Vec2<int> mousePos = GameEngine::GetMousePosition();
     Vec2<int> position = (mousePos - board.GetBoardPos()) / (settings::cellSize);
+
+    playerIsSkippingTurn = skipButton.DetectClick();
+    if (playerIsSkippingTurn){
+        playerHasPlayed = true;
+        SkipTurn();
+    }
 
     if (!playerIsUsingTEC){
         if (players.CurrentPlayerHasTEC()) {
@@ -375,10 +390,14 @@ bool Game::CheckPlayerHasBonuses() {
 }
 
 void Game::UpdateEndGame() {
-
+    if (restartButton.DetectClick()){
+        RestartGame();
+    }
 }
 
 void Game::DrawEndGame() {
+    restartButton.Draw();
+
     for (int i = 0; i < players.GetSize(); ++i) {
         Vec2<int> position = baseTextPosition + Vec2<int>{0, i * endGameTextFontSize};
         std::string toPrint = players.GetPlayer(i).GetPlayerName() + " has a square of size " +  players.GetPlayer(i).GetScore();
@@ -389,12 +408,28 @@ void Game::DrawEndGame() {
                  players.GetPlayer(i).GetColor());
     }
 
-    std::string toPrintWinner = winningPlayer + " has won with a square of size " + highestScoreText;
+    std::string toPrintWinner = winningPlayer + " won with a square of size " + highestScoreText;
     DrawText(toPrintWinner.c_str(),
              20,
              400,
              endGameTextFontSize,
              BLACK);
+}
+
+void Game::SkipTurn() {
+    NextPlayer();
+    playerIsSkippingTurn = false;
+}
+
+void Game::RestartGame() {
+    playing = false;
+    starting = false;
+    gameOver = false;
+    placedStartingCell = 0;
+    playerHasPlayed = false;
+    playerIsUsingTEC = false;
+    playerIsRemovingStone = false;
+    playerIsSkippingTurn = false;
 }
 
 
