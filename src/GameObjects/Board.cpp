@@ -171,7 +171,6 @@ int Board::PlaceTile(Tile tile, Vec2<int> position) {
     return false;
 }
 
-
 bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
     bool cellFound = false;
     bool otherCellFound = false;
