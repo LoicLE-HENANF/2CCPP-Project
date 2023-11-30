@@ -236,18 +236,42 @@ private:
      */
     void BeginGame();
 
+    /**
+    * @brief Advances to the next player in the game.
+    */
     void NextPlayer();
 
+    /**
+    * @brief Checks if the current player has any bonuses.
+    *
+    * @return True if the current player has bonuses, false otherwise.
+    */
     bool CheckPlayerHasBonuses();
 
+    /**
+    * @brief Updates the game state at the end of the game.
+    */
     void UpdateEndGame();
 
+    /**
+    * @brief Draws the end game screen.
+    */
     void DrawEndGame();
 
+
+    /**
+     * @brief Skips the turn in the game.
+    */
     void SkipTurn();
 
+    /**
+    * @brief Handles the button click event for the "Play" button.
+     */
     void PlayButtonClick();
 
+    /**
+    * @brief Restarts the game.
+    */
     void RestartGame();
 };
 
