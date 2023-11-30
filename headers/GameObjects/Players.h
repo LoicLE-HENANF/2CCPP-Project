@@ -47,7 +47,7 @@ public:
      *
      * @return The total number of players.
      */
-    int GetSize() const;
+    [[nodiscard]] int GetSize() const;
 
     /**
      * @brief Gets the player at the specified index.
@@ -55,14 +55,14 @@ public:
      * @param i The index of the player to retrieve.
      * @return The Player object at the specified index.
      */
-    Player GetPlayer(int i) const;
+    [[nodiscard]] Player GetPlayer(int i) const;
 
     /**
      * @brief Gets the index of the current player.
      *
      * @return The index of the current player.
      */
-    int GetCurrentPlayerIndex() const;
+    [[nodiscard]] int GetCurrentPlayerIndex() const;
 
     /**
      * @brief Moves to the next player in the sequence.
@@ -81,7 +81,7 @@ public:
      *
      * @return The current turn in the game.
      */
-    int GetTurn() const;
+    [[nodiscard]] int GetTurn() const;
 
     /**
      * @brief Gets the name of the current player.
@@ -99,8 +99,6 @@ public:
     std::vector<Player> &GetPlayers();
 
     void SetPlayersScores(std::vector<int> playersScores);
-
-    void SetTurn(int value);
 
 private:
     std::vector<Player> players;

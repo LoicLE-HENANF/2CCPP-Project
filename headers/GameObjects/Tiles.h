@@ -26,11 +26,6 @@ public:
      */
     Tiles();
 
-    // getters and setters
-//    void SetCurrentTileIndex(int index){ currentTileIndex = index; };
-//
-//    int GetCurrentTileIndex(){ return currentTileIndex; };
-
     /**
      * @brief Gets the current tile.
      *
@@ -51,19 +46,6 @@ public:
             outTiles.push_back(tiles[i]);
         }
         return outTiles;
-    }
-
-    /**
-     * @brief Skips two tiles in the sequence.
-     */
-    void SkipTwoTiles(){
-        if (currentTileIndex == tiles.size() - 2){
-            currentTileIndex = 0;
-        }else if (currentTileIndex == tiles.size() - 1){
-            currentTileIndex = 1;
-        }else{
-            currentTileIndex += 2;
-        }
     }
 
     /**
@@ -97,12 +79,6 @@ public:
     }
 
     bool UseTEC(Vec2<int> position);
-
-    void SetUsingTEC(bool value);
-
-    void SetCurrentIndexWithOffset();
-
-    void PopCurrentTile();
 
 private:
     std::vector<Tile> tiles;

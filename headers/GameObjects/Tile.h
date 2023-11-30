@@ -111,6 +111,10 @@ public:
     void SetColor(Color color);
 
 private:
+    const int* shape;
+    int dimension;
+    Color color;
+    Vec2<int> position;
 
     /**
      * @brief Enumeration representing the rotation state of the tile.
@@ -123,11 +127,6 @@ private:
     };
     Rotation currentRotation;
     bool flipped = false;
-
-    const int* shape;
-    int dimension;
-    Color color;
-    Vec2<int> position;
 };
 
 /**

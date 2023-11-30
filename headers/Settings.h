@@ -11,7 +11,7 @@
 
 namespace settings
 {
-    //inline makes the linker choose a definition of these constants as the main one and link the others to it right after the pre process has finished
+    // inline makes the linker choose a definition of these constants as the main one and link the others to it right after the pre process has finished
     // constexpr = calculate at compile time (not at running time)
     // Game settings
     inline const std::string title = "Laying Grass";

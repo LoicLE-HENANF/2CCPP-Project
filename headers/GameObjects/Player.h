@@ -94,7 +94,7 @@ public:
     *
     * @return A string representing the player's score.
     */
-    std::string GetScore() const;
+    [[nodiscard]] std::string GetScore() const;
 };
 
 

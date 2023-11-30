@@ -4,7 +4,6 @@
 
 #include "../../headers/GameEngine/RaylibWrapper.h"
 #include "../../headers/Settings.h"
-#include <cassert>
 
 namespace GameEngine{
 

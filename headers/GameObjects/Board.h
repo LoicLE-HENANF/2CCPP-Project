@@ -45,14 +45,6 @@ public:
     Board& operator=(const Board& other){ return *this;}
 
     /**
-     * @brief Clears the board by removing all cells.
-     */
-    void ClearBoard(){
-        cells.clear();
-        cells.resize(width*height);
-    }
-
-    /**
      * @brief Initializes the board with players.
      *
      * @param players The Players object representing the players in the game.
@@ -80,7 +72,7 @@ public:
      *
      * @return Vec2 representing the x and y coordinates of the board position.
      */
-    Vec2<int> GetBoardPos() const {
+    [[nodiscard]] Vec2<int> GetBoardPos() const {
         return boardPos;
     };
 
@@ -109,17 +101,6 @@ public:
      */
     void Draw() const;
 
-    // getters, setters
-
-    /**
-     * @brief Sets the position of the board.
-     *
-     * @param newBoardPos The new position of the board.
-     */
-    void SetBoardPos(Vec2<int> newBoardPos){
-        boardPos = newBoardPos;
-    };
-
     /**
      * @brief Sets the size of the board.
      *
@@ -130,29 +111,6 @@ public:
         height = boardSize_.GetY();
         cells.resize(width*height);
     };
-
-    /**
-     * @brief Sets the padding of the board.
-     *
-     * @param newPadding The new padding of the board.
-     */
-    void SetBoardPadding(int newPadding){ padding = newPadding; };
-
-    /**
-     * @brief Sets the cell size of the board.
-     *
-     * @param newCellSize The new cell size of the board.
-     */
-    void SetBoardCellSize(int newCellSize){ cellSize = newCellSize; };
-
-    /**
-     * @brief Gets the size of the board.
-     *
-     * @return Vec2 representing the width and height of the board.
-     */
-    Vec2<int> GetSize() const;
-
-    // Tile placement
 
     /**
      * @brief Places a tile on the board at a specific position.

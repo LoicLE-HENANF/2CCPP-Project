@@ -44,7 +44,6 @@ add_executable(${PROJECT_NAME} main.cpp
         headers/GameEngine/RaylibWrapper.h
 
         headers/settings.h
-        headers/GameEngine/ThreadHandler.h
         headers/Utilities/Vec2.h
         headers/GameObjects/Tile.h
         headers/UI/CheckBox.h
@@ -52,7 +51,6 @@ add_executable(${PROJECT_NAME} main.cpp
         src/GameObjects/Game.cpp
         src/GameObjects/Player.cpp
         src/GameEngine/RaylibWrapper.cpp
-        src/GameEngine/ThreadHandler.cpp
         src/GameObjects/Board.cpp
         src/UI/Button.cpp
 

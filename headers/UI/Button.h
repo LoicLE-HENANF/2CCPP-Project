@@ -61,28 +61,11 @@ public:
      */
     bool DetectClick();
 
-    /**
-     * @brief Turns on the button.
-     */
-    void TurnOn(){
-        activated = true;
-    }
-
-    /**
-     * @brief Turns off the button.
-     */
-    void TurnOff(){
-        activated = false;
-    }
-
-
 private:
     std::string text;
     Color color;
     Vec2<int> buttonPos;
     Vec2<int> buttonSize;
-
-    bool activated = true;
 };
 
 

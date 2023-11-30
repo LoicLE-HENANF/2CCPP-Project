@@ -26,11 +26,6 @@ public:
     Cell();
 
     /**
-     * @brief Removes the cell from the board.
-     */
-    void Remove();
-
-    /**
      * @brief Sets the color of the cell.
      *
      * @param color The color to set for the cell.
@@ -42,7 +37,7 @@ public:
     *
     * @return The color of the cell.
     */
-    Color GetColor() const;
+    [[nodiscard]] Color GetColor() const;
 
     /**
      * @brief Marks the cell as placed on the board.
@@ -63,32 +58,18 @@ public:
      *
      * @param i The bonus value to set.
      */
-    void SetBonus(const int i);
+    void SetBonus(int i);
 
     /**
      * @brief Gets the bonus status of the cell.
      *
      * @return The bonus status of the cell.
      */
-    int GetIsBonus() const;
-
-    /**
-     * @brief Sets the taken status of the cell.
-     *
-     * @param _taken The taken status to set.
-     */
-    void SetTaken(bool _taken);
-
-    /**
-     * @brief Gets the taken status of the cell.
-     *
-     * @return True if the cell is taken, false otherwise.
-     */
-    bool GetTaken();
+    [[nodiscard]] int GetIsBonus() const;
 
     void SetIsStone(bool value);
 
-    bool IsStone() const;
+    [[nodiscard]] bool IsStone() const;
 
 private:
     Color c;

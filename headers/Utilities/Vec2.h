@@ -14,6 +14,11 @@
  */
 template <typename T>
 class Vec2 {
+
+private:
+    T x;
+    T y;
+
 public:
 
     /**
@@ -57,13 +62,8 @@ public:
      */
     void SetY(T value) { y = value;}
 
-private:
-    T x;
-    T y;
 
-    // Operator overloading
-public:
-
+    // Operators overloading
     /**
      * @brief Equality comparison operator.
      *
