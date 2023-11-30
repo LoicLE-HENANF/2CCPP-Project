@@ -171,9 +171,6 @@ int Board::PlaceTile(Tile tile, Vec2<int> position) {
     return false;
 }
 
-Vec2<int> Board::GetSize() const {
-    return {width, height};
-}
 
 bool Board::NeighboringTile(Tile tile, Vec2<int> position) {
     bool cellFound = false;
