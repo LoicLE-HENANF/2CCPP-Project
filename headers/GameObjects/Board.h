@@ -189,6 +189,8 @@ public:
 
     std::vector<int> CalculateScore(std::vector<Player> &players);
 
+    Player FindTrueWinner(const std::vector<Player>& playersToCheck);
+
 private:
     std::vector<Cell> cells;
     Vec2<int> boardPos;
@@ -228,6 +230,8 @@ private:
      * @return A reference to the Cell object.
      */
     Cell &GetCell(int x, int y);
+
+    int CountCells(Color color);
 };
 
 

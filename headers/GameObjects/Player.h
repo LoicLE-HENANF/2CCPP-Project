@@ -56,7 +56,7 @@ public:
      *
      * @return The name of the player.
      */
-    std::string GetPlayerName();
+    std::string GetName();
 
     /**
      * @brief Sets the name of the player.

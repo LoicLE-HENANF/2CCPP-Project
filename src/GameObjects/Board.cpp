@@ -403,6 +403,29 @@ std::vector<int> Board::CalculateScore(std::vector<Player> &players) {
     return playersSquareSize;
 }
 
+Player Board::FindTrueWinner(const std::vector<Player>& playersToCheck) {
+    std::vector<int> nbsOfCells;
+    for (const Player& player: playersToCheck) {
+        nbsOfCells.push_back(CountCells(player.GetColor()));
+    }
+
+    auto maxElementIndex = std::distance(nbsOfCells.begin(),std::max_element(nbsOfCells.begin(), nbsOfCells.end()));
+
+    return playersToCheck[maxElementIndex];
+}
+
+int Board::CountCells(Color color) {
+    int nbOfCells = 0;
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            if (GameEngine::ColorEquals(color, GetCell(x, y).GetColor())){
+                nbOfCells++;
+            }
+        }
+    }
+    return nbOfCells;
+}
+
 
 
 

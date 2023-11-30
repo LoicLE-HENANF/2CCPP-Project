@@ -50,7 +50,7 @@ int Players::GetTurn() const {
 }
 
 std::string Players::GetCurrentPlayerName() {
-    return players[currentPlayerIndex].GetPlayerName();
+    return players[currentPlayerIndex].GetName();
 }
 
 void Players::AddTECToCurrentPlayer() {
