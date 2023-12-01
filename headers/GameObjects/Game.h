@@ -114,6 +114,12 @@ private:
     Color* playersColor;
     const char** playersNames;
 
+    // Sizes
+    Vec2<int> buttonSize = {70,30};
+    Vec2<int> colorChoiceSize = {50,50};
+    Vec2<int> nameChoiceSize = {300,50};
+    Vec2<int> gameButtonSize = {275,30};
+
     // Positions
     Vec2<int> nextTilesPosition = {settings::screenWidth - 150, settings::boardPosition.GetY()};
     Vec2<int> nextTilesTextPosition = nextTilesPosition - Vec2<int>{0, 25};
@@ -134,13 +140,6 @@ private:
     Vec2<int> TECButtonPos = nextTilesPosition + Vec2<int>{-200,  650};
     Vec2<int> removeStoneButtonPos = nextTilesPosition + Vec2<int>{-200,  700};
     Vec2<int> skipButtonPos = nextTilesPosition + Vec2<int>{-200,  750};
-
-
-    // Sizes
-    Vec2<int> buttonSize = {70,30};
-    Vec2<int> colorChoiceSize = {50,50};
-    Vec2<int> nameChoiceSize = {300,50};
-    Vec2<int> gameButtonSize = {275,30};
 
 
     // UI elements
